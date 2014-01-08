@@ -40,7 +40,8 @@ txt="""# -*- coding: utf-8 -*-
 #       OpenAlea WebSite : http://openalea.gforge.inria.fr
 #
 ###############################################################################
-__revision__ = "$Id: $"
+from __future__ import absolute_import
+__revision__ = "$$Id: $$"
 
 from openalea.pkgit.formula import Formula
 
