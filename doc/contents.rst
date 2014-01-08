@@ -25,6 +25,8 @@ Module description
 Documentation
 =============
 
+Please pronounce "**Package It**" and not "P K G I T", "P K Git" or whatever...
+
 .. toctree::
     :maxdepth: 2
 

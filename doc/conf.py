@@ -15,7 +15,7 @@ latex_documents = [('contents', 'main.tex', project + ' documentation', authors,
 
 project = name
 
-extensions = ['sphinx.ext.mathjax', 'sphinx.ext.ifconfig','sphinx.ext.todo']
+extensions = ['sphinx.ext.mathjax', 'sphinx.ext.ifconfig','sphinx.ext.todo','sphinx.ext.autodoc']
 
 # numfig:
 # numfig_number_figures = True

@@ -1,8 +1,11 @@
-Problem and proposed solution
+
+The goal of this user guide is to explain how to use and extend PkgIt module.
+
+Packaging difficulties
 ##############################
 
-Problem
--------
+Overview
+--------
 
 The OpenAlea project contains heterogeneous components implemented in different languages.
 The packages of OpenAlea are pure Python packages but depends on PyQt and numpy, scipy and matplotlib.
@@ -24,6 +27,16 @@ Each Formula is independent from te others, in a separate file, but may contains
 Based on the set of existing Formula, it is easy to create a new one.
 
 The concept of Formula has been copied from HomeBrew, but is implemented in Python and multi-platform.
+
+Related Projects
+--------------------------
+
+* Conda http://docs.continuum.io/conda/index.html
+* Enstaller http://code.enthought.com/projects/enstaller/
+* Wheels https://pypi.python.org/pypi/wheel (PEP 376 http://www.python.org/dev/peps/pep-0376/ , PEP 427 http://www.python.org/dev/peps/pep-0427/ ,PEP 425 http://www.python.org/dev/peps/pep-0425/ ,PEP 426 http://www.python.org/dev/peps/pep-0426/ )
+* Homebrew http://brew.sh/
+* MacPorts http://www.macports.org/
+* Old OpenAlea Way http://openalea.gforge.inria.fr/wiki/doku.php?id=documentation:developper:release:windows (but it is not supported and will become obsolete.)
 
 Launch packaging process: easy_pkg
 ###################################
@@ -64,6 +77,7 @@ This command will create a file my_amazing_package.py, create the main class and
 File my_amazing_package.py:
 ::
     from openalea.pkgit.formula import Formula
+    
     class My_amazing_package(Formula):
         ...
 
