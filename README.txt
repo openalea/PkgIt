@@ -1,54 +1,59 @@
-====== OpenAlea.PkgIt ======
+About
+----------
+PkgIt is an helper tool to package OpenAlea.
 
-**Authors** : XXX
+Description
+-------------
+The OpenAlea.PkgIt package is a package to help packaging Openalea and dependencies to create releases. 
 
-**Institutes** : INRIA / CIRAD 
-
-**Status** : Python package 
-
-**License** : Cecill-C
-
-**URL** : http://openalea.gforge.inria.fr
-
-===== About =====
-
-=== Description ===
-
-OpenAlea.PkgIt is a XXX
-
-
-
-=== Content ===
-
+Content
+----------
 The OpenAlea.PkgIt package contains :
+* easy_pkg command
+* formulas
 
+Download
+----------
 
-===== Installation =====
+>>> svn co https://scm.gforge.inria.fr/svn/openalea/trunk/pkgit pkgit
 
-=== Download ===
+Installation
+------------
 
-Go to http://gforge.inria.fr/frs/?group_id=79
+>>> python setup.py install
 
-=== Requirements ===
-
+Requirements
+------------
+* Setuptools
+* SVN
+* python-requests
+* path.py
 * Scons >= 0.96.93
 * SconsX
 * OpenAlea.Deploy
 
+Utilisation
+------------
+Everything can be done by executing easy_pkg:
 
-=== Installation ===
+First, package everything:
+
+>>> easy_pkg package vplants
+
+It will package all dependencies in the local repository ./dist
+
+Then, create windows installer:
+
+>>> easy_pkg wininst vplants
+
+It will create a windows installer with what is packaged in the local repository ./dist
 
 
-=== Utilisation ===
+*easy_pkg* was created to package OpenAlea but you can package single dependency too, for example you can package pyqglviewer with the line:
 
+>>> easy_pkg package pyqglviewer
 
-<code>
-python setup.py install
-</code>
-
-
-
-===== Documentation =====
-
+Documentation
+-------------
 http://openalea.gforge.inria.fr/doc/openalea/pkgit/doc/_build/html/contents.html
 
