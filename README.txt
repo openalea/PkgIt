@@ -1,16 +1,7 @@
-About
-----------
-PkgIt is an helper tool to package OpenAlea.
-
 Description
 -------------
-The OpenAlea.PkgIt package is a package to help packaging Openalea and dependencies to create releases. 
 
-Content
-----------
-The OpenAlea.PkgIt package contains :
-* easy_pkg command
-* formulas
+The OpenAlea.PkgIt package is a package to help packaging Openalea and dependencies to create releases. 
 
 Download
 ----------
@@ -24,6 +15,7 @@ Installation
 
 Requirements
 ------------
+
 * Setuptools
 * SVN
 * python-requests
@@ -34,7 +26,8 @@ Requirements
 
 Utilisation
 ------------
-Everything can be done by executing easy_pkg:
+
+.. note :: Everything can be done by executing easy_pkg.
 
 First, package everything:
 
