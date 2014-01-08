@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -35,8 +35,8 @@ python setup.py bdist_egg
 """
 
 import sys, os
-from openalea.release.utils import sh
-from openalea.release.formula import Formula
+from openalea.pkgit.utils import sh
+from openalea.pkgit.formula import Formula
 from setuptools import find_packages
 from path import path
 

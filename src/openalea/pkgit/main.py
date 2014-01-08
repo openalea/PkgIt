@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -32,7 +32,7 @@ Then install request >> easy_install requests
 from path import path
 import os
 from collections import OrderedDict, namedtuple
-from openalea.release.utils import sh, install, checkout, url, logger
+from openalea.pkgit.utils import sh, install, checkout, url, logger
 
 FILE_DIR = path(__file__).abspath().dirname()
 
@@ -117,7 +117,7 @@ def install_rt_deps():
         
     for dependency in dependencies:
         # import formula
-        cmd_import = "from openalea.release.formulas.%s import %s" %(dependency,dependency)
+        cmd_import = "from openalea.pkgit.formulas.%s import %s" %(dependency,dependency)
         exec(cmd_import, globals(), locals())
         
         # instanciate formula
@@ -157,7 +157,7 @@ def bdist_egg_rt_deps():
         
     for dependency in dependencies:
         # import formula
-        cmd_import = "from openalea.release.formulas.%s import %s" %(dependency,dependency)
+        cmd_import = "from openalea.pkgit.formulas.%s import %s" %(dependency,dependency)
         exec(cmd_import, globals(), locals())
         
         # instanciate formula

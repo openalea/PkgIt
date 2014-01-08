@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -21,10 +21,10 @@
 __revision__ = "$Id: $"
 
 from argparse import ArgumentParser
-from openalea.release.utils import formulas, eggify_formulas, remove_temp, versions, deps
-from openalea.release.create import default_formula
-#from openalea.release.uninstall import uninstall
-from openalea.release.wininst import wininst
+from openalea.pkgit.utils import formulas, eggify_formulas, remove_temp, versions, deps
+from openalea.pkgit.create import default_formula
+#from openalea.pkgit.uninstall import uninstall
+from openalea.pkgit.wininst import wininst
 
 def main():
     version = "1.0"

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -51,7 +51,7 @@ from path import path, glob, shutil
 ###from openalea.misc.gforge_upload import Uploader
 from openalea.deploy.system_dependencies.dependency_builder import BE, download_egg
 from openalea.deploy.system_dependencies.dependency_builder import options_common, options_gforge
-from openalea.release.utils import deps, mask, import_formula
+from openalea.pkgit.utils import deps, mask, import_formula
 
 import locale
 unused, local_enc = locale.getdefaultlocale()

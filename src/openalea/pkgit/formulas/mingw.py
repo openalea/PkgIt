@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -50,8 +50,8 @@ OR with the CLI:
 Here, we install Bison-Flex too.
 """
 
-from openalea.release.formula import Formula
-from openalea.release.utils import recursive_glob_as_dict, memoize, sh, makedirs, safe_rmdir
+from openalea.pkgit.formula import Formula
+from openalea.pkgit.utils import recursive_glob_as_dict, memoize, sh, makedirs, safe_rmdir
 import os, sys
 from re import compile as re_compile
 from path import path

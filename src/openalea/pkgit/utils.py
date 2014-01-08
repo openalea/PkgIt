@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -93,7 +93,7 @@ def remove_temp(formula_name,download_too=False):
     """
     try:
         formula_name_cap = formula_name[0].capitalize() + formula_name[1:]
-        cmd_import = "from openalea.release.formulas.%s import %s" %(formula_name,formula_name_cap)
+        cmd_import = "from openalea.pkgit.formulas.%s import %s" %(formula_name,formula_name_cap)
         exec(cmd_import, globals(), locals())
     except ImportError:
         print
@@ -256,7 +256,7 @@ def mask(formula_name):
 def import_formula(formula_name):
     try:
         formula_name_cap = formula_name[0].capitalize() + formula_name[1:]
-        cmd_import = "from openalea.release.formulas.%s import %s" %(formula_name,formula_name_cap)
+        cmd_import = "from openalea.pkgit.formulas.%s import %s" %(formula_name,formula_name_cap)
         exec(cmd_import, globals(), locals())
     except ImportError:
         print
@@ -271,7 +271,7 @@ def import_formula(formula_name):
 def instanciate_formula(formula_name):
     try:
         formula_name_cap = formula_name[0].capitalize() + formula_name[1:]
-        cmd_import = "from openalea.release.formulas.%s import %s" %(formula_name,formula_name_cap)
+        cmd_import = "from openalea.pkgit.formulas.%s import %s" %(formula_name,formula_name_cap)
         exec(cmd_import, globals(), locals())
     except ImportError:
         print

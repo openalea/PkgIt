@@ -1,4 +1,4 @@
-====== OpenAlea.release ======
+====== OpenAlea.PkgIt ======
 
 **Authors** : XXX
 
@@ -14,13 +14,13 @@
 
 === Description ===
 
-OpenAlea.release is a XXX
+OpenAlea.PkgIt is a XXX
 
 
 
 === Content ===
 
-The OpenAlea.release package contains :
+The OpenAlea.PkgIt package contains :
 
 
 ===== Installation =====
@@ -50,5 +50,5 @@ python setup.py install
 
 ===== Documentation =====
 
-http://openalea.gforge.inria.fr/doc/openalea/release/doc/_build/html/contents.html
+http://openalea.gforge.inria.fr/doc/openalea/pkgit/doc/_build/html/contents.html
 

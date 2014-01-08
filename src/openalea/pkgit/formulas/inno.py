@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -21,7 +21,7 @@
 from __future__ import absolute_import
 __revision__ = "$Id: $"
 
-from openalea.release.formula import Formula
+from openalea.pkgit.formula import Formula
 
 class Inno(Formula):
     license         = "Free of charge but not public domain : http://www.jrsoftware.org/files/is/license.txt"

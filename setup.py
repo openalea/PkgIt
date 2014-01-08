@@ -18,7 +18,7 @@ for key,value in metadata.iteritems():
 # authors, authors_email, url and license
 # * version is 1.0.0 and release 1.0
 # * project must be in [openalea, vplants, alinea]
-# * name is the full name (e.g., OpenAlea.release) whereas pkg_name is only 'release'
+# * name is the full name (e.g., OpenAlea.PkgIt) whereas pkg_name is only 'PkgIt'
 
 # name will determine the name of the egg, as well as the name of 
 # the pakage directory under Python/lib/site-packages). It is also 
@@ -107,7 +107,7 @@ setup(
 
     # Declare scripts and wralea as entry_points (extensions) of your package 
     entry_points = { 
-        #'wralea' : ['release = openalea.release_wralea' if has_project else 'release = release_wralea' ],
+        #'wralea' : ['pkgit = openalea.pkgit_wralea' if has_project else 'pkgit = pkgit_wralea' ],
         'console_scripts': ['easy_pkg = openalea.pkgit.easy_pkg:main'],
         #	'wralea': wralea_entry_points
         },

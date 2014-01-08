@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -23,9 +23,9 @@ __revision__ = "$Id: $"
 txt="""# -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -42,7 +42,7 @@ txt="""# -*- coding: utf-8 -*-
 ###############################################################################
 __revision__ = "$Id: $"
 
-from openalea.release.formula import Formula
+from openalea.pkgit.formula import Formula
 
 class %s(Formula):
     version         = ""  	 # Version of the dependency (not of the formula)
@@ -55,7 +55,7 @@ class %s(Formula):
     download_url    = ""   	 # Url where to download sources (feel only if "DOWNLOAD = True")
 """
 
-from openalea.release import formula
+from openalea.pkgit import formula
 from path import path
 import sys
 import warnings

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -21,9 +21,9 @@
 from __future__ import absolute_import
 __revision__ = "$Id: $"
 
-from openalea.release.formula import Formula
-from openalea.release.utils import sh, ascii_file_replace, recursive_glob_as_dict, merge_list_dict, Pattern
-from openalea.release.formulas.mingw_rt import Mingw_rt as mingw_rt
+from openalea.pkgit.formula import Formula
+from openalea.pkgit.utils import sh, ascii_file_replace, recursive_glob_as_dict, merge_list_dict, Pattern
+from openalea.pkgit.formulas.mingw_rt import Mingw_rt as mingw_rt
 from path import path
 import sys
 from re import compile as re_compile

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -21,7 +21,7 @@
 __revision__ = "$Id: $"
 
 from argparse import ArgumentParser
-from openalea.release import install_formula
+from openalea.pkgit import install_formula
 
 def main():
     # options

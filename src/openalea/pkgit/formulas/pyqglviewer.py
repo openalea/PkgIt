@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -23,12 +23,12 @@ __revision__ = "$Id: $"
 
 import sys
 from path import path
-from openalea.release.formula import Formula
-from openalea.release.utils import recursive_copy, sh, recursive_glob_as_dict, \
+from openalea.pkgit.formula import Formula
+from openalea.pkgit.utils import recursive_copy, sh, recursive_glob_as_dict, \
 merge_list_dict, Pattern
-from openalea.release.formulas.qglviewer import Qglviewer as qglviewer
-from openalea.release.formulas.qt4 import Qt4 as qt4
-#from openalea.release.formulas.pyqt4 import pyqt4
+from openalea.pkgit.formulas.qglviewer import Qglviewer as qglviewer
+from openalea.pkgit.formulas.qt4 import Qt4 as qt4
+#from openalea.pkgit.formulas.pyqt4 import pyqt4
 
 class Pyqglviewer(Formula):
     license = "General Public License"

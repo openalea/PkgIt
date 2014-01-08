@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -65,10 +65,10 @@ copy mingw32/bin/libgcc_s_dw2-1.dll ./src/qt4/bin
 #################################
 >>> cf formula qt4_dev
 """
-from openalea.release.formula import Formula
-from openalea.release.formulas.mingw import Mingw as mingw
-from openalea.release.formulas.mingw_rt import Mingw_rt as mingw_rt
-from openalea.release.utils import uj, recursive_glob_as_dict, \
+from openalea.pkgit.formula import Formula
+from openalea.pkgit.formulas.mingw import Mingw as mingw
+from openalea.pkgit.formulas.mingw_rt import Mingw_rt as mingw_rt
+from openalea.pkgit.utils import uj, recursive_glob_as_dict, \
 recursive_copy, makedirs, Pattern, sh, eggify_formula
 from path import path, shutil
 import subprocess
@@ -252,9 +252,9 @@ examples
         os.chdir(temp_dir)
  
     def setup(self):  
-        from openalea.release.formulas.pyqt4 import Pyqt4 as pyqt4
-        from openalea.release.formulas.pyqscintilla import Pyqscintilla as pyqscintilla
-        from openalea.release.formulas.sip import Sip as sip  
+        from openalea.pkgit.formulas.pyqt4 import Pyqt4 as pyqt4
+        from openalea.pkgit.formulas.pyqscintilla import Pyqscintilla as pyqscintilla
+        from openalea.pkgit.formulas.sip import Sip as sip  
 
         pyqt4_ = pyqt4()
         pysci_ = pyqscintilla()

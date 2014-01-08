@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 # -*- python -*-
 #
-#       Formula file for OpenAlea.release
+#       Formula file for openalea.pkgit
 # 
-#       OpenAlea.release: tool for dependencies packaging
+#       openalea.pkgit: tool for dependencies packaging
 #
 #       Copyright 2013 INRIA - CIRAD - INRA
 #
@@ -21,11 +21,11 @@
 from __future__ import absolute_import
 __revision__ = "$Id: $"
 
-from openalea.release.formula import Formula
-from openalea.release.utils import recursive_glob_as_dict, merge_list_dict, Pattern
-from openalea.release.formulas.qt4 import Qt4 as qt4
-from openalea.release.formulas.pyqt4 import Pyqt4 as pyqt4
-from openalea.release.formulas.sip import Sip as sip
+from openalea.pkgit.formula import Formula
+from openalea.pkgit.utils import recursive_glob_as_dict, merge_list_dict, Pattern
+from openalea.pkgit.formulas.qt4 import Qt4 as qt4
+from openalea.pkgit.formulas.pyqt4 import Pyqt4 as pyqt4
+from openalea.pkgit.formulas.sip import Sip as sip
 
 class Qt4_dev(Formula):
     license = "General Public License V3"
