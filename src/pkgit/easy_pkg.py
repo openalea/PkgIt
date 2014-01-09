@@ -34,9 +34,9 @@ def main():
     # options
     parser = ArgumentParser(prog='easy_pkg')
     parser.add_argument('command', type=str,
-                         help='Command to launch.',choices=["package", "wininst", "create_formula","display_dependencies","display_versions"])
+                         help='Command to launch.',choices=["package", "wininst", "create","display_dependencies","display_versions"])
     parser.add_argument('package', type=str,
-                         help='''Package to work with. If you use command "create_formula", it is the name of your new formula.
+                         help='''Package to work with. If you use command "create", it is the name of your new formula.
 If you use "wininst" it can be "openalea", "vplants" or "alinea".
 If you use command "package" or "display_dependencies", it can be %s.''' %str(formula_list))
 
@@ -76,7 +76,7 @@ If you use command "package" or "display_dependencies", it can be %s.''' %str(fo
         elif args.rm_tmp:
             remove_temp(package_name)
     
-    elif command == "create_formula":
+    elif command == "create":
         default_formula(package_name)
     
     elif command == "wininst":
