@@ -12,7 +12,7 @@ Reference guide
 :mod:`pkgit.formula` module
 ===============================================
 
-Download the source file :download:`../../src/openalea/pkgit/formula.py`.
+Download the source file :download:`../../src/pkgit/formula.py`.
 
 .. automodule:: pkgit.formula
     :members:
@@ -24,7 +24,7 @@ Download the source file :download:`../../src/openalea/pkgit/formula.py`.
 :mod:`pkgit.easy_pkg` module
 ===============================================
 
-Download the source file :download:`../../src/openalea/pkgit/easy_pkg.py`.
+Download the source file :download:`../../src/pkgit/easy_pkg.py`.
 
 .. automodule:: pkgit.easy_pkg
     :members:
@@ -36,7 +36,7 @@ Download the source file :download:`../../src/openalea/pkgit/easy_pkg.py`.
 :mod:`pkgit.utils` module
 ===============================================
 
-Download the source file :download:`../../src/openalea/pkgit/utils.py`.
+Download the source file :download:`../../src/pkgit/utils.py`.
 
 .. automodule:: pkgit.utils
     :members:
@@ -49,7 +49,7 @@ Download the source file :download:`../../src/openalea/pkgit/utils.py`.
 :mod:`pkgit.wininst` module
 ===============================================
 
-Download the source file :download:`../../src/openalea/pkgit/wininst.py`.
+Download the source file :download:`../../src/pkgit/wininst.py`.
 
 .. automodule:: pkgit.wininst
     :members:
@@ -62,7 +62,7 @@ Download the source file :download:`../../src/openalea/pkgit/wininst.py`.
 :mod:`pkgit.create` module
 ===============================================
 
-Download the source file :download:`../../src/openalea/pkgit/create.py`.
+Download the source file :download:`../../src/pkgit/create.py`.
 
 .. automodule:: pkgit.create
     :members:

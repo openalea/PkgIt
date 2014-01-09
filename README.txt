@@ -27,16 +27,9 @@ Requirements
 Utilisation
 ------------
 
-<<<<<<< .mine
 **Basic usage**
 
-.. note :: Everything can be done by executing easy_pkg.
-
-=======
-.. note :: Everything can be done by executing easy_pkg.
-
->>>>>>> .r4017
-First, package everything:
+.. note:: Everything can be done by executing easy_pkg.
 
 >>> easy_pkg package vplants
 

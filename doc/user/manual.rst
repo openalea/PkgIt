@@ -80,6 +80,7 @@ To create a new formula to dependency "my_amazing_package", you have to:
 This command will create a file my_amazing_package.py, create the main class and put this file into the formula directory.
 
 File my_amazing_package.py:
+
 ::
     from pkgit.formula import Formula
     
@@ -90,8 +91,7 @@ After that, you have to fill your formula. You can watch classical use-cases.
 
 When your formula is working, you can share it in adding the file on the web repository.
 
-.. note ::
-    One dependency = One formula file
+.. note:: One dependency = One formula file
 
 Case 1: download only
 ---------------------
@@ -100,6 +100,7 @@ If installer exists yet and you don't need to build anything. Just download inst
 This is the case for Python, Numpy, Scipy, Matplotlib, Pillow, PyOpenGl, GnuPlot...
 
 Example of formula:
+
 ::
     from pkgit.formula import Formula
      
@@ -114,6 +115,7 @@ Example of formula:
         DOWNLOAD = COPY_INSTALLER = True
 
 Typical flags:
+
 ::
     DOWNLOAD = COPY_INSTALLER = True
 
@@ -123,6 +125,7 @@ Case 2: install only
 If installer exists and you need to install dependency without packaging it. (This is the case for Inno, PyWin32, R, SetupTools, SVN.) Just download installer and install it.
 
 Example of formula:
+
 ::
     from pkgit.formula import Formula
      
@@ -137,6 +140,7 @@ Example of formula:
         DOWNLOAD = INSTALL = True
 
 Typical flags:
+
 ::
     DOWNLOAD = INSTALL = True
 
@@ -149,6 +153,7 @@ Building is usually done in 3 steps "configure", "make" and "make install". Here
 This case is really particular one. You can watch the code for SIP, PyQt... but it can be terrifying...
 
 Typical flags:
+
 ::
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = True
 
@@ -158,6 +163,7 @@ Case 4: package only
 This is the case for Qhull, Qt4_dev.
 
 Exemple of Formula:
+
 ::
     from pkgit.formula import Formula
      
@@ -171,6 +177,7 @@ Exemple of Formula:
         DOWNLOAD = UNPACK = BDIST_EGG = True
 
 Typical flags:
+
 ::
     DOWNLOAD = UNPACK = BDIST_EGG = True
 
@@ -180,6 +187,7 @@ Case 5: package and post-install
 This is the case for Boost, CMake.
 
 Exemple of Formula:
+
 ::
     from pkgit.formula import Formula
      
@@ -193,6 +201,7 @@ Exemple of Formula:
         DOWNLOAD = UNPACK = BDIST_EGG = INSTALL_EGG = True
 
 Typical flags:
+
 ::
     DOWNLOAD = UNPACK = BDIST_EGG = INSTALL_EGG = True
 
@@ -202,6 +211,7 @@ Case 6: "General case" compile and package
 This is the case for PyQGLViewer, SCons, RPy2, Qt4.
 
 Exemple of Formula:
+
 ::
     import sys, os
     from pkgit.utils import sh
@@ -233,6 +243,7 @@ Exemple of Formula:
             return ret
 
 Typical flags:
+
 ::
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = True
 
@@ -240,6 +251,7 @@ Case 7: openalea/vplants/alinea
 --------------------------------
 
 This is the case for OpenAlea, Vplants, Alinea.
+
 ::
     from pkgit.formula import Formula
     from pkgit.utils import sh, checkout
@@ -253,8 +265,7 @@ This is the case for OpenAlea, Vplants, Alinea.
         authors = "Inria, INRA, CIRAD"
         description = "OpenAlea is an open source project primarily aimed at the plant research community."
         download_name  = "OpenAlea"
-        dependencies = ["mingw", "mingw_rt", "pyqt4", "numpy", "scipy", "matplotlib", 
-                      "pyqscintilla", "setuptools", "pillow", "pylsm", "pylibtiff", "pywin32"]
+        dependencies = ["mingw", "mingw_rt", "pyqt4", "numpy", "scipy", "matplotlib", "pyqscintilla", "setuptools", "pillow", "pylsm", "pylibtiff", "pywin32"]
         DOWNLOAD = BDIST_EGG = True
      
         def _download(self):
@@ -264,6 +275,7 @@ This is the case for OpenAlea, Vplants, Alinea.
             return sh("python multisetup.py bdist_egg -d %s"%(self.dist_dir,)) == 0
 
 Typical flags:
+
 ::
     DOWNLOAD = BDIST_EGG = True
 
@@ -281,13 +293,12 @@ This is the case for ann, rpy2.
 * Apply your patch where you want << def make(self): apply_patch_from_string( PATCH )  >>
 
 For example for rpy2:
+
 ::
     from pkgit.formula import Formula
     from pkgit.utils apply_patch_from_string
      
     class rpy2(Formula):
-       ...
-       ...
        ...
      
        def make(self):
@@ -305,6 +316,7 @@ Extend path
 Overload method extra_path().
 
 Exemple in SIP Formula:
+
 ::
     from path import path
     ...
@@ -318,6 +330,7 @@ Extend python path
 Overload method extra_python_paths().
 
 Exemple in SIP Formula:
+
 ::
     from path import path
     ...
@@ -399,6 +412,7 @@ Parameters
 ----------
 
 When you create a new formula, you have to fill some informations:
+
 ::
     version         = "1.0"  # Version of the dependency (not of the formula)
     description     = "This is a beautiful package"     # Description of the dependency (not of the formula)
