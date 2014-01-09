@@ -1,7 +1,7 @@
 Description
 -------------
 
-The OpenAlea.PkgIt package is a package to help packaging Openalea and dependencies to create releases. 
+The PkgIt package is a package to help packaging dependencies and so to create releases. 
 
 Download
 ----------
@@ -27,8 +27,15 @@ Requirements
 Utilisation
 ------------
 
+<<<<<<< .mine
+**Basic usage**
+
 .. note :: Everything can be done by executing easy_pkg.
 
+=======
+.. note :: Everything can be done by executing easy_pkg.
+
+>>>>>>> .r4017
 First, package everything:
 
 >>> easy_pkg package vplants
@@ -41,6 +48,9 @@ Then, create windows installer:
 
 It will create a windows installer with what is packaged in the local repository ./dist
 
+That's all!
+
+**Advance usage**
 
 *easy_pkg* was created to package OpenAlea but you can package single dependency too, for example you can package pyqglviewer with the line:
 

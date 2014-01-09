@@ -18,7 +18,7 @@ for key,value in metadata.iteritems():
 # authors, authors_email, url and license
 # * version is 1.0.0 and release 1.0
 # * project must be in [openalea, vplants, alinea]
-# * name is the full name (e.g., OpenAlea.PkgIt) whereas pkg_name is only 'PkgIt'
+# * name is the full name (e.g., PkgIt) whereas pkg_name is only 'PkgIt'
 
 # name will determine the name of the egg, as well as the name of 
 # the pakage directory under Python/lib/site-packages). It is also 
@@ -32,7 +32,7 @@ pkg_root_dir = 'src'
 pkgs = [ pkg for pkg in find_packages(pkg_root_dir)]
 top_pkgs = [pkg for pkg in pkgs if  len(pkg.split('.')) < 2]
 packages = pkgs
-package_dir = dict( [('',pkg_root_dir)] + [(namespace + "." + pkg, pkg_root_dir + "/" + pkg) for pkg in top_pkgs] )
+package_dir = dict( [('',pkg_root_dir)] + [(pkg, pkg_root_dir + "/" + pkg) for pkg in top_pkgs] )
 
 # Define global variables 
 has_scons = False
@@ -107,8 +107,8 @@ setup(
 
     # Declare scripts and wralea as entry_points (extensions) of your package 
     entry_points = { 
-        #'wralea' : ['pkgit = openalea.pkgit_wralea' if has_project else 'pkgit = pkgit_wralea' ],
-        'console_scripts': ['easy_pkg = openalea.pkgit.easy_pkg:main'],
+        #'wralea' : ['pkgit = pkgit_wralea' if has_project else 'pkgit = pkgit_wralea' ],
+        'console_scripts': ['easy_pkg = pkgit.easy_pkg:main'],
         #	'wralea': wralea_entry_points
         },
     )

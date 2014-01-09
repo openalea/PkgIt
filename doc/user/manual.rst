@@ -28,6 +28,10 @@ Based on the set of existing Formula, it is easy to create a new one.
 
 The concept of Formula has been copied from HomeBrew, but is implemented in Python and multi-platform.
 
+.. warning ::
+    Today (january 2014) Formulas work only for Windows... 
+    It will be adapted soon for other OS.
+
 Related Projects
 --------------------------
 
@@ -66,6 +70,7 @@ Extend easy_pkg: create a formula
 Easy_pkg is designed to be easily extensible. So, you can create new formulas.
 
 To create a new formula to dependency "my_amazing_package", you have to:
+
 * Create Formula file
 * Fill it
 * Share it
@@ -76,7 +81,7 @@ This command will create a file my_amazing_package.py, create the main class and
 
 File my_amazing_package.py:
 ::
-    from openalea.pkgit.formula import Formula
+    from pkgit.formula import Formula
     
     class My_amazing_package(Formula):
         ...
@@ -96,7 +101,7 @@ This is the case for Python, Numpy, Scipy, Matplotlib, Pillow, PyOpenGl, GnuPlot
 
 Example of formula:
 ::
-    from openalea.pkgit.formula import Formula
+    from pkgit.formula import Formula
      
     class Numpy(Formula):
         license         = "Numpy License"
@@ -119,7 +124,7 @@ If installer exists and you need to install dependency without packaging it. (Th
 
 Example of formula:
 ::
-    from openalea.pkgit.formula import Formula
+    from pkgit.formula import Formula
      
     class Inno(Formula):
         license         = "Free of charge but not public domain : http://www.jrsoftware.org/files/is/license.txt"
@@ -154,7 +159,7 @@ This is the case for Qhull, Qt4_dev.
 
 Exemple of Formula:
 ::
-    from openalea.pkgit.formula import Formula
+    from pkgit.formula import Formula
      
     class Qhull(Formula):
         version         = "2012.1"
@@ -176,7 +181,7 @@ This is the case for Boost, CMake.
 
 Exemple of Formula:
 ::
-    from openalea.pkgit.formula import Formula
+    from pkgit.formula import Formula
      
     class CMake(Formula):
         version        = '2.8.11.2'
@@ -199,8 +204,8 @@ This is the case for PyQGLViewer, SCons, RPy2, Qt4.
 Exemple of Formula:
 ::
     import sys, os
-    from openalea.pkgit.utils import sh
-    from openalea.pkgit.formula import Formula
+    from pkgit.utils import sh
+    from pkgit.formula import Formula
     from setuptools import find_packages
     from path import path
      
@@ -236,8 +241,8 @@ Case 7: openalea/vplants/alinea
 
 This is the case for OpenAlea, Vplants, Alinea.
 ::
-    from openalea.pkgit.formula import Formula
-    from openalea.pkgit.utils import sh, checkout
+    from pkgit.formula import Formula
+    from pkgit.utils import sh, checkout
      
     class Openalea(Formula):
         version = '1.0'
@@ -271,14 +276,14 @@ Patch a package
 This is the case for ann, rpy2.
 
 * Add your patch in the Formula directory (here the patch name is "rpy2.patch").
-* Add code << from openalea.pkgit.utils import apply_patch_from_string >> at the begining of your formula
+* Add code << from pkgit.utils import apply_patch_from_string >> at the begining of your formula
 * Write your patch << PATCH = ... >>
 * Apply your patch where you want << def make(self): apply_patch_from_string( PATCH )  >>
 
 For example for rpy2:
 ::
-    from openalea.pkgit.formula import Formula
-    from openalea.pkgit.utils apply_patch_from_string
+    from pkgit.formula import Formula
+    from pkgit.utils apply_patch_from_string
      
     class rpy2(Formula):
        ...

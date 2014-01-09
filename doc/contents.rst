@@ -5,8 +5,9 @@
 
 .. module:: pkgit
 
-OpenAlea PkgIt documentation
-#########################################################################
+####################################
+PkgIt documentation
+####################################
 
 Module description
 ==================
@@ -17,7 +18,7 @@ Module description
     :Release: |release|
     :Date: |today|
     :Author: See `Authors`_ section
-
+    
 .. topic:: Overview
 
     .. include:: user/overview.txt
@@ -25,7 +26,8 @@ Module description
 Documentation
 =============
 
-Please pronounce "**Package It**" and not "P K G I T", "P K Git" or whatever...
+.. note::
+    Please pronounce "**Package It**" and **not** "P K G I T", "P K Git" or whatever...
 
 .. toctree::
     :maxdepth: 2
