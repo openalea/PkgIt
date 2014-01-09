@@ -42,32 +42,30 @@ Related Projects
 * MacPorts http://www.macports.org/
 * Old OpenAlea Way http://openalea.gforge.inria.fr/wiki/doku.php?id=documentation:developper:release:windows (but it is not supported and will become obsolete.)
 
-Launch packaging process: easy_pkg
+Launch packaging process: pkgit
 ###################################
 
-Everything can be done by executing easy_pkg:
+.. TODO:: Complete doc!
+
+Everything can be done by executing pkgit:
 
 First, package everything:
 
->>> easy_pkg package vplants
+>>> pkgit package vplants
 
 It will package all dependencies in the local repository ./dist
 
 Then, create windows installer:
 
->>> easy_pkg wininst vplants
+>>> pkgit wininst vplants
 
 It will create a windows installer with what is packaged in the local repository ./dist
 
 
-*easy_pkg* was created to package OpenAlea but you can package single dependency too, for example you can package pyqglviewer with the line:
-
->>> easy_pkg package pyqglviewer
-
-Extend easy_pkg: create a formula
+Extend pkgit: create a formula
 ########################################
 
-Easy_pkg is designed to be easily extensible. So, you can create new formulas.
+pkgit is designed to be easily extensible. So, you can create new formulas.
 
 To create a new formula to dependency "my_amazing_package", you have to:
 
@@ -75,7 +73,7 @@ To create a new formula to dependency "my_amazing_package", you have to:
 * Fill it
 * Share it
 
->>> easy_pkg create my_amazing_package
+>>> pkgit create my_amazing_package
 
 This command will create a file my_amazing_package.py, create the main class and put this file into the formula directory.
 
@@ -279,7 +277,7 @@ Typical flags:
 ::
     DOWNLOAD = BDIST_EGG = True
 
-Extend easy_pkg: Specials methods
+Extend pkgit: Specials methods
 #################################
 
 Patch a package
@@ -341,7 +339,7 @@ Exemple in SIP Formula:
 How Formulas works
 ###################
 
-When you launch command easy_pkg package, the corresponding formula is instantiated and some methods are called.
+When you launch command pkgit package, the corresponding formula is instantiated and some methods are called.
 
 Each main method is associated to a flag. If the flag is set to True, the method can run. By default, every flags are set to False.
 
@@ -426,7 +424,7 @@ When you create a new formula, you have to fill some informations:
 Repositories
 ------------
 
-Easy_pkg will create repositories.
+pkgit will create repositories.
 
 Temporary repositories:
 

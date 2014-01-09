@@ -34,6 +34,30 @@ logger = get_logger()
 # Formula                                  #
 ############################################
 class Formula(object):
+    """
+    This class is the abstract class of all formulas.
+    
+    To create a formula, simply derive from this one, put it in directory 'formulas'
+    and overload necessary parameters and methods.
+    
+    Attributes:
+        
+        * version:         Version of the dependency (not of the formula)
+        * description:     Description of the dependency (not of the formula)
+        * homepage:        Url of home-page of the dependency (not of the formula)
+        * license:         License of the dependency (not of the formula)
+        * authors:         Authors of the dependency (not of the formula)
+        * dependencies:    List of dependencies of the formula
+        * download_name:   Name of the local archive
+        * download_url:    Url where to download sources (feel only if "DOWNLOAD = True")
+        
+        * __packagename__: Only for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
+        * required_tools:  TODO
+        * working_path:    Current working path
+    
+    :warning: __init__ method create directories in disk.
+    """
+    
     version         = "1.0"  # Version of the dependency (not of the formula)
     description     = ""     # Description of the dependency (not of the formula)
     homepage        = ""     # Url of home-page of the dependency (not of the formula)
@@ -42,8 +66,7 @@ class Formula(object):
     dependencies    = ""     # List of dependencies of the formula
     download_name   = ""     # Name of the local archive
     download_url    = None   # Url where to download sources (feel only if "DOWNLOAD = True")
-    # Only for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
-    __packagename__ = None
+    __packagename__ = None   # Only for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
     required_tools  = None
     working_path  = os.getcwd()
 
@@ -67,16 +90,12 @@ class Formula(object):
         self.setup_out_name = path(self.eggdir)/"setup.py"
         self.use_cfg_login  = False #unused for the moment
         
-        makedirs(self._get_src_path())
-        makedirs(self._get_install_path())
-        makedirs(self.sourcedir)
-        makedirs(self._get_dl_path())
-        makedirs(self.dist_dir)
-        makedirs(self.eggdir)
-        makedirs(self.installdir)
-        
-    def default_substitutions_setup_py(self):
+        self._make_default_dirs()
+
+    def _default_substitutions_setup_py(self):
         """
+        Default dict fill setup.py to create egg.
+        
         :return: default dict to fill "setup.py" files
         """
         # if package is python and yet installed
@@ -122,20 +141,12 @@ class Formula(object):
 
     def get_dependencies(self):
         """
-        :return: list of dependencies of the formula 
+        :return: list of dependencies of the formula. If doesn't have, return "".
         """
         if self.dependencies is None:
             self.dependencies = ""
         return list(self.dependencies)
-    
-    @property
-    def name(self):
-        return self.__class__.__name__
-    
-    @classmethod
-    def egg_name(cls):
-        return cls.__name__.split("egg_")[-1]
-        
+           
     def _download(self):
         if self.DOWNLOAD:
             logger.debug("==DOWNLOAD==") 
@@ -183,45 +194,7 @@ class Formula(object):
             logger.debug("Unpack %s" %ret)
             return ret 
         return True
-    
-    # def _permanent_extend_sys_path(self):
-        #### Do NOT USE "REG ADD..." !!!
-        # """
-        # Warnings: this method extend PERMANENTLY Path for WINDOWS (and only windows) and need a REBOOT of the computer
-        
-        # more here:
-        # http://fr.wikipedia.org/wiki/Variable_d%27environnement#.3CPATH.3E_pour_l.27emplacement_des_ex.C3.A9cutables
-        # and here:
-        # http://technet.microsoft.com/fr-fr/library/cc742162%28v=ws.10%29.aspx
-        
-        # Modifie register... So, please use it carefully...
-        
-        ### TODO: test it...
-        # """
-        # exp = self.extra_paths()
-        # if exp is not None:
-            ### _permanent_extend_sys_path not tested...
-            # warnnings.warn("You need to restart the computer to really extend the Path!")
-            # cmd = 'REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /d "%PATH%;%s" /f', %exp
-            # return sh(cmd) == 0
-        ### nothing to add in sys path
-        # return True
             
-    # def _permanent_extend_python_path(self):
-        # """
-        # See _permanent_extend_sys_path
-        
-        # Same for PYTHON_PATH and not PATH
-        # """
-        # exp = self.extra_python_paths()
-        # if exp is not None:
-            ### _permanent_extend_python_path not tested...
-            # warnnings.warn("You need to restart the computer to really extend the Python_Path!")
-            # cmd = 'REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Python_path /d "%PYTHON_PATH%;%s" /f', %exp
-            # return sh(cmd) == 0
-        ### nothing to add in sys path
-        # return True
-        
     def _extend_sys_path(self):
         # TODO : check if it works...
         exp = self.extra_paths()
@@ -342,7 +315,7 @@ class Formula(object):
         with open( self.setup_in_name, "r") as input, \
              open( self.setup_out_name, "w") as output:
              
-            conf = self.default_substitutions_setup_py()
+            conf = self._default_substitutions_setup_py()
             conf.update(self.setup())
             conf = dict( (k,repr(v)) for k,v in conf.iteritems() )
             template = TemplateStr(input.read())
@@ -359,21 +332,7 @@ class Formula(object):
             logger.debug("Bdist_egg %s" %ret)
             return ret
         return True
-        
-    @in_dir("eggdir")
-    @try_except
-    def _upload_egg(self):
-        return True
-        # if not self.options["login"] or not self.options["passwd"]:
-            # self.use_cfg_login = True
-            # ret = self.upload_egg()
-            # if not ret:
-                # warnings.warn("No login or passwd provided, skipping egg upload")
-                # logger.warn( "No login or passwd provided, skipping egg upload" )
-                # return Later
-            # return ret
-        # return self.upload_egg()
-    
+           
     @in_dir("dldir") 
     @try_except    
     def _copy_installer(self):
@@ -395,29 +354,91 @@ class Formula(object):
         return True
 
     def unpack(self):
+        """
+        Unpack previously download sources from "download" repository into "source" repository.
+        
+        Works with ZIP, TGZ and TAR formats.
+        
+        Can be overloaded.
+        
+        :return:  True if success, else False
+        """
         return utils_unpack(self.archname, self.sourcedir)
             
     def setup(self):
+        """
+        Return a dict to complete setup.py to create egg.
+        
+        Can be (and MUST be in many cases) overloaded.
+        
+        :return:  dict()
+        """
         return(dict())
 
     # -- The ones you can override are these ones --
     def copy_installer(self):
+        """
+        Copy a previously downloaded installer file in dist repository.
+        
+        Can be overloaded.
+        
+        :return:  True
+        """
         shutil.copy(self.download_name, path(self.dist_dir)/self.download_name)
         return True
     
     def extra_paths(self):
+        """
+        List paths to add to Windows PATH.
+        
+        Can be overloaded.
+        
+        :return: None
+        """
         return None
         
     def extra_python_paths(self):
+        """
+        List paths to add to Windows PYTHONPATH.
+        
+        Can be overloaded.
+        
+        :return: None
+        """
         return None 
         
     def install(self):
+        """
+        Install a previously downloaded file. Works only with file ".exe" and ".msi".
+        
+        Can be overloaded.
+        
+        :return:  True if success, else False
+        """
         return util_install(self.download_name)
 
     def configure(self):
+        """
+        Use it to launch command "configure" in the building logic "configure", "make", "make install".
+        
+        Actually do nothing!
+        
+        Can be (and MUST be in many cases) overloaded.
+        
+        :return: True
+        """
         return True
         
     def make(self):
+        """
+        Launch command "make" in the building logic "configure", "make", "make install".
+        
+        Use command mingw32-make
+        
+        Can be (and MUST be in many cases) overloaded.
+        
+        :return: True if success, else False
+        """
         try:
             opt = str(self.options["jobs"])
         except:
@@ -437,17 +458,47 @@ class Formula(object):
         return sh( cmd ) == 0
 
     def make_install(self):
+        """
+        Launch command "make install" in the building logic "configure", "make", "make install".
+        
+        Use command mingw32-make install
+        
+        Can be (and MUST be in many cases) overloaded.
+        
+        :return: True if success, else False
+        """
         return sh("mingw32-make install") == 0
 
     def _glob_egg(self):
+        """
+        Search egg
+        """
         eggs = glob.glob( path(self.dist_dir)/(self.egg_name()+"*.egg") )
         return None if not eggs else eggs[0]    
         
     def bdist_egg(self):
+        """
+        Build egg.
+        
+        Use command python setup.py bdist_egg
+        
+        Can be overloaded.
+        
+        :return: True if success, else False
+        """
         return sh(sys.executable + " setup.py bdist_egg -d %s"%(self.dist_dir,)) == 0
         
     def install_egg(self):
-        # Try to install egg (to call after bdist_egg)
+        """
+        Try to install egg after packaging.
+        
+        Use command alea_install -H None -f . mypackage.egg
+        
+        Can be overloaded.
+        
+        :return: True if success, else False
+        """
+        
         egg_search = self.egg_name() + "*"
         egg = glob.glob( path(".")/egg_search )
         if egg:
@@ -457,39 +508,96 @@ class Formula(object):
         cmd = "alea_install -H None -f . %s" %egg
         return sh(cmd) == 0
 
-    def upload_egg(self):
-        if not self.use_cfg_login:
-            opts = self.options["login"], self.options["passwd"], \
-                    self.egg_name(), "\"ThirdPartyLibraries\"", "vplants" if not self.options["release"] else "openalea"
-            return sh(sys.executable + " setup.py egg_upload --yes-to-all --login %s --password %s --release %s --package %s --project %s"%opts) == 0
-        else:
-            opts = self.egg_name(), "\"ThirdPartyLibraries\"", "vplants" if not self.options["release"] else "openalea"
-            return sh(sys.executable + " setup.py egg_upload --yes-to-all --release %s --package %s --project %s"%opts) == 0
+    # @in_dir("eggdir")
+    # @try_except
+    # def _upload_egg(self):
+        # if not self.options["login"] or not self.options["passwd"]:
+            # self.use_cfg_login = True
+            # ret = self.upload_egg()
+            # if not ret:
+                # warnings.warn("No login or passwd provided, skipping egg upload")
+                # logger.warn( "No login or passwd provided, skipping egg upload" )
+                # return Later
+            # return ret
+        # return self.upload_egg()
+        
+    # def upload_egg(self):
+        # if not self.use_cfg_login:
+            # opts = self.options["login"], self.options["passwd"], \
+                    # self.egg_name(), "\"ThirdPartyLibraries\"", "vplants" if not self.options["release"] else "openalea"
+            # return sh(sys.executable + " setup.py egg_upload --yes-to-all --login %s --password %s --release %s --package %s --project %s"%opts) == 0
+        # else:
+            # opts = self.egg_name(), "\"ThirdPartyLibraries\"", "vplants" if not self.options["release"] else "openalea"
+            # return sh(sys.executable + " setup.py egg_upload --yes-to-all --release %s --package %s --project %s"%opts) == 0
             
     def conf_dict(self):
         """
-        Use it for inno_setup. Cf. openalea.deploy.makeWinInstaller
+        Use it to configure inno_setup during "pkgit --wininst".
+        
+        Cf. openalea.deploy.makeWinInstaller
+        
+        Can be overloaded if you want to wininst.
         
         :return: dict of configuration to generate windows installer with inno setup
         """
         return dict()
+        
+    def _make_default_dirs(self):
+        """
+        Create default directories:
+        * source
+        * install
+        * download
+        * egg
+        * ...
+        """
+        makedirs(self._get_src_path())
+        makedirs(self._get_install_path())
+        makedirs(self.sourcedir)
+        makedirs(self._get_dl_path())
+        makedirs(self.dist_dir)
+        makedirs(self.eggdir)
+        makedirs(self.installdir)
     
-    #################################
-    ## Come from InstalledPackageEggBuilder
-    #################################
     @property
     def package(self):
+        """
+        Import corresponding package.
+        
+        :return: imported package
+        """
         return __import__(self.packagename)
 
     @property
     def packagename(self):
+        """
+        :return: self.__packagename__ or egg_name (str)
+        """
         return self.__packagename__ or self.egg_name()
+        
+    @property
+    def name(self):
+        """
+        Name of the package to work with.
+        
+        :return: name (str)
+        """
+        return self.__class__.__name__
+    
+    @classmethod
+    def egg_name(cls):
+        """
+        Name of the corresponding egg.
+        
+        :return: name (str)
+        """
+        return cls.__name__.split("egg_")[-1]
 
     def _filter_packages(self, pkgs):
         parpkg = self.packagename + "."
         return [ p for p in pkgs if (p == self.packagename or p.startswith(parpkg))]
 
-    def find_packages(self):
+    def _find_packages(self):
         from setuptools import find_packages
         install_dir = path(self.package.__file__).abspath().dirname()
         pkgs   = find_packages( path(install_dir)/os.pardir )
@@ -497,7 +605,12 @@ class Formula(object):
         return pkgs
 
     def find_packages_and_directories(self):
-        pkgs = self.find_packages()
+        """
+        Find packages thanks to setuptools and then fix corresponding directories names.
+        
+        :return: list(packages, dict(packages:directories))
+        """
+        pkgs = self._find_packages()
         dirs = {}
         install_dir = path(self.package.__file__).abspath().dirname()
         base = (path(install_dir)/os.pardir).abspath()
@@ -508,20 +621,20 @@ class Formula(object):
     #################################
     ## Get PATHs
     #################################
-    def get_working_path(self):
+    def _get_working_path(self):
         return self.working_path
         
     def _get_dl_path(self):
-        return path(self.get_working_path())/"download"
+        return path(self._get_working_path())/"download"
     
     def _get_src_path(self):
-        return path(self.get_working_path())/"src"
+        return path(self._get_working_path())/"src"
     
     def _get_install_path(self):
-        return path(self.get_working_path())/"install"
+        return path(self._get_working_path())/"install"
         
     def _get_egg_path(self):
-        return path(self.get_working_path())/"egg"
+        return path(self._get_working_path())/"egg"
         
     def _get_dist_path(self):
-        return path(self.get_working_path())/"dist"
+        return path(self._get_working_path())/"dist"

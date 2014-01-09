@@ -108,7 +108,7 @@ setup(
     # Declare scripts and wralea as entry_points (extensions) of your package 
     entry_points = { 
         #'wralea' : ['pkgit = pkgit_wralea' if has_project else 'pkgit = pkgit_wralea' ],
-        'console_scripts': ['easy_pkg = pkgit.easy_pkg:main'],
+        'console_scripts': ['pkgit = pkgit.easy_pkg:main'],
         #	'wralea': wralea_entry_points
         },
     )

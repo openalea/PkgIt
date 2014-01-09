@@ -27,27 +27,21 @@ Requirements
 Utilisation
 ------------
 
-**Basic usage**
+.. TODO:: Complete doc!
 
-.. note:: Everything can be done by executing easy_pkg.
+.. note:: Everything can be done by executing pkgit.
 
->>> easy_pkg package vplants
+>>> pkgit package vplants
 
 It will package all dependencies in the local repository ./dist
 
 Then, create windows installer:
 
->>> easy_pkg wininst vplants
+>>> pkgit wininst vplants
 
 It will create a windows installer with what is packaged in the local repository ./dist
 
 That's all!
-
-**Advance usage**
-
-*easy_pkg* was created to package OpenAlea but you can package single dependency too, for example you can package pyqglviewer with the line:
-
->>> easy_pkg package pyqglviewer
 
 Documentation
 -------------
