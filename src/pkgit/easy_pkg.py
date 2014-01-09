@@ -36,9 +36,9 @@ def main():
     parser.add_argument('command', type=str,
                          help='Command to launch.',choices=["package", "wininst", "create","display_dependencies","display_versions"])
     parser.add_argument('package', type=str,
-                         help='''Package to work with. If you use command "create", it is the name of your new formula.
-If you use "wininst" it can be "openalea", "vplants" or "alinea".
-If you use command "package" or "display_dependencies", it can be %s.''' %str(formula_list))
+                         help='''Package to work with. If you use command "--create", it is the name of your new formula.
+If you use "--wininst" it can be "openalea", "vplants" or "alinea".
+Else, it can be %s.''' %str(formula_list))
 
     parser.add_argument('-v', '--version', action='version', version='%s'%version)
     

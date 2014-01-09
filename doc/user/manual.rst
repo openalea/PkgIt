@@ -75,7 +75,7 @@ To create a new formula to dependency "my_amazing_package", you have to:
 * Fill it
 * Share it
 
->>> easy_pkg create_formula my_amazing_package
+>>> easy_pkg create my_amazing_package
 
 This command will create a file my_amazing_package.py, create the main class and put this file into the formula directory.
 
