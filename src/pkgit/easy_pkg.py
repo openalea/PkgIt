@@ -27,6 +27,12 @@ from pkgit.create import default_formula
 from pkgit.wininst import wininst
 
 def main():
+    """
+    Command PkgIt.
+    
+    Permit to package modules thanks to formulas. Main commands are --package, --wininst, --create (package existing formula, create windows installer, create new formula).
+    """
+
     version = "1.0"
     formula_list = formulas()
     formula_list = str(formula_list)[1:-1]
@@ -35,13 +41,7 @@ def main():
     parser = ArgumentParser(prog='pkgit', description="""Permit to package modules thanks to formulas. Main commands are
 --package, --wininst, --create (package existing formula, create windows installer, create new formula).""")
 
-    # parser.add_argument('command', type=str,
-                         # help='Command to launch.',choices=["package", "wininst", "create","display_dependencies","display_versions"])
-                         
-    # parser.add_argument('package', type=str,
-                         # help='''Package to work with. If you use command "--create", it is the name of your new formula.
-# If you use "--wininst" it can be "openalea", "vplants" or "alinea".
-# Else, it can be %s.''' %str(formula_list))
+
 
     parser.add_argument('-v', '--version', action='version', version='%s'%version)
     

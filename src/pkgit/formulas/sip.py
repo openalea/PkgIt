@@ -31,7 +31,6 @@ class Sip(Formula):
     download_url = "http://downloads.sourceforge.net/project/pyqt/sip/sip-4.15.2/sip-4.15.2.zip"
     download_name  = "sip.zip"
     version = "4.15.2"
-    required_tools = ['bisonflex']
     dependencies = ['bisonflex'] 
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = True
 
@@ -82,6 +81,11 @@ class Sip(Formula):
         self.patch_sip_config()
         return ret
                 
+    def setup(self):
+        return dict( 
+                    INSTALL_REQUIRES = ["bisonflex"],
+                    ) 
+                    
     def patch_sip_config(self):
         # Patching sipconfig.py so that its
         # paths point to the qt4 egg path we are building.

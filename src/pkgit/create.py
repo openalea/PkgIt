@@ -27,7 +27,7 @@ txt="""# -*- coding: utf-8 -*-
 # 
 #       pkgit: tool for dependencies packaging
 #
-#       Copyright 2013 INRIA - CIRAD - INRA
+#       Copyright 2014 INRIA - CIRAD - INRA
 #
 #       File author(s):
 #
@@ -62,6 +62,17 @@ import sys
 import warnings
 
 def default_formula(name):
+    """
+    Create an empty formula.
+    
+    Don't forget to fill it after creation...
+    
+    When your new formula works, you can share it in adding your file to the repo of pkgit.
+    
+    :warning: Please use name without space, accent or any special character! 
+    
+    :param name: name of the formula to create.
+    """
     name = str(name).lower()
     name = is_correct(name)
     formulapath = path(formula.__file__).abspath().splitpath()[0]
@@ -72,9 +83,15 @@ def default_formula(name):
     f.write(text)
     f.close()
     
-    print("Formula %s created %s !"%(classname,filename))
+    print("Formula %s created %s !"%(classname,filename.abspath()))
     
 def is_correct(name):
+    """
+    Check if the word contain spaces, accent or other special characters
+    
+    :param name: name to check.
+    :return: name if it is correct, else sys.exit() !
+    """
     if " " in name:
         warnings.warn("Don't use space in the name of your formula")
         sys.exit()

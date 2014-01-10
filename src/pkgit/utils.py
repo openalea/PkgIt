@@ -353,7 +353,7 @@ def in_dir(directory):
             logger.info(message)
             os.chdir(d_)
             ret = f(self, *args, **kwargs)
-            os.chdir(self.get_working_path())
+            os.chdir(self._get_working_path())
             return ret
         wrapper.__name__ = f.__name__
         return wrapper

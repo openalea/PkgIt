@@ -51,9 +51,21 @@ class Formula(object):
         * download_name:   Name of the local archive
         * download_url:    Url where to download sources (feel only if "DOWNLOAD = True")
         
-        * __packagename__: Only for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
-        * required_tools:  TODO
-        * working_path:    Current working path
+    Flags to set to True if necessary:
+    
+        * DOWNLOAD 
+        * UNPACK 
+        * INSTALL 
+        * CONFIGURE 
+        * MAKE 
+        * MAKE_INSTALL 
+        * BDIST_EGG 
+        * COPY_INSTALLER 
+        * INSTALL_EGG
+        
+    Special attribute:
+    
+        * __packagename__: Only usefull for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
     
     :warning: __init__ method create directories in disk.
     """
@@ -67,8 +79,7 @@ class Formula(object):
     download_name   = ""     # Name of the local archive
     download_url    = None   # Url where to download sources (feel only if "DOWNLOAD = True")
     __packagename__ = None   # Only for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
-    required_tools  = None
-    working_path  = os.getcwd()
+    _working_path  = os.getcwd()
 
     DOWNLOAD = UNPACK = INSTALL = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = COPY_INSTALLER = INSTALL_EGG = False
     
@@ -121,7 +132,7 @@ class Formula(object):
                    ZIP_SAFE             = False,
                    PYTHON_MODS          = None,
                    PACKAGE_DATA         = {},
-                   INSTALL_REQUIRES     = self.required_tools,
+                   INSTALL_REQUIRES     = None,
                    PACKAGES             = packages,
                    PACKAGE_DIRS         = package_dirs,
                    DATA_FILES           = data_files,
@@ -622,7 +633,7 @@ class Formula(object):
     ## Get PATHs
     #################################
     def _get_working_path(self):
-        return self.working_path
+        return self._working_path
         
     def _get_dl_path(self):
         return path(self._get_working_path())/"download"

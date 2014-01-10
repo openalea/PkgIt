@@ -36,7 +36,6 @@ class Cgal(Formula):
     #download_url = "https://gforge.inria.fr/frs/download.php/30390/CGAL-4.0.zip"
     download_url = "https://gforge.inria.fr/frs/download.php/32358/CGAL-"+version+".zip"
     download_name  = "cgal.zip"
-    required_tools = ["cmake"]
     dependencies = ["cmake"]
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = True
     
@@ -65,6 +64,7 @@ class Cgal(Formula):
                     LIB_DIRS         = {'lib' : path(self.sourcedir)/'lib' },
                     INC_DIRS         = {'include' : path(self.sourcedir)/'include' },
                     BIN_DIRS         = {'bin' : path(self.sourcedir)/'bin' },
+                    INSTALL_REQUIRES = ["cmake"],
                     ) 
                     
 def create(*args, **kwds):
