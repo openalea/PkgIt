@@ -7,10 +7,15 @@ Packaging difficulties
 Overview
 --------
 
-The OpenAlea project contains heterogeneous components implemented in different languages.
-The packages of OpenAlea are pure Python packages but depends on PyQt and numpy, scipy and matplotlib.
+Many projects contain heterogeneous components implemented in different languages (python, C++,...). 
+Deploy this projects can be very difficult: how to know where a c++ library is installed on a computer?
+Moreover if we don't know if the architecture of the machine is Windows, Linux or Mac OS...
+
+For example, the packages of OpenAlea are pure Python packages but depends on PyQt and numpy, scipy and matplotlib.
 The VPlants packages are mainly in C++ and Python and have dependencies on other C++ libraries like Qt, Boost, CGAL, eigen...
 The Alinea packages depends also on R, Fortran compilers.
+
+The goal is to transform everything in egg (cf. Python eggs). Indeed, once a library is installed like a egg, it is really easy to find where are sources, headers...
 
 To release frequently all these packages and the dependencies on different OS, we need to automate the construction of binary packages,
 and to share the work between different expert, knowing the subtilities of each OS or working on new problems arising with new release of some dependencies.
@@ -22,7 +27,7 @@ Each dependency or package will be describe in a Formula.
 
 A Formula file contains all the information needed to download, 
 build, package a library on different OS (Windows, Linux and Mac OS X). 
-Each Formula is independent from te others, in a separate file, but may contains dependencies on other Formulas.
+Each Formula is independent from the others, in a separate file, but may contains dependencies on other Formulas.
 
 Based on the set of existing Formula, it is easy to create a new one.
 
@@ -60,6 +65,13 @@ Then, create windows installer:
 >>> pkgit wininst vplants
 
 It will create a windows installer with what is packaged in the local repository ./dist
+
+.. note::
+    We used pkgit to package OpenAlea the 10th january 2014. To have more details, please read:
+
+    .. toctree::
+
+        use.rst
 
 
 Extend pkgit: create a formula
@@ -233,7 +245,7 @@ Typical flags:
 ::
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = True
 
-Case 7: openalea/vplants/alinea
+Case 7: Meta-packages hosted on gforge: openalea/vplants/alinea
 --------------------------------
 
 This is the case for OpenAlea, Vplants, Alinea.
@@ -298,6 +310,8 @@ Extend path
 
 Overload method extra_path().
 
+.. note:: Is called in method "configure". So Check than flag CONFIGURE is set to True.
+
 Exemple in SIP Formula:
 ::
     from path import path
@@ -310,6 +324,8 @@ Extend python path
 ---------------------
 
 Overload method extra_python_paths().
+
+.. note:: Is called in method "configure". So Check than flag CONFIGURE is set to True.
 
 Exemple in SIP Formula:
 ::

@@ -33,19 +33,18 @@ Download the source file :download:`../../src/pkgit/easy_pkg.py`.
     :show-inheritance:
     :synopsis:
     
-:mod:`pkgit.utils` module
+:mod:`pkgit.create` module
 ===============================================
 
-Download the source file :download:`../../src/pkgit/utils.py`.
+Download the source file :download:`../../src/pkgit/create.py`.
 
-.. automodule:: pkgit.utils
+.. automodule:: pkgit.create
     :members:
     :undoc-members:
     :inherited-members:
     :show-inheritance:
-    :synopsis:
-
-
+    :synopsis:    
+    
 :mod:`pkgit.wininst` module
 ===============================================
 
@@ -58,13 +57,12 @@ Download the source file :download:`../../src/pkgit/wininst.py`.
     :show-inheritance:
     :synopsis:
 
-
-:mod:`pkgit.create` module
+:mod:`pkgit.utils` module
 ===============================================
 
-Download the source file :download:`../../src/pkgit/create.py`.
+Download the source file :download:`../../src/pkgit/utils.py`.
 
-.. automodule:: pkgit.create
+.. automodule:: pkgit.utils
     :members:
     :undoc-members:
     :inherited-members:
