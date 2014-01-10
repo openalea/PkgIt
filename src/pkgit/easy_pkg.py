@@ -80,7 +80,7 @@ def main():
     if args.disp_deps is not None:
         print deps(args.disp_deps)
         
-    if args.disp_versions is not None:
+    if args.disp_versions:
         version_list = versions()
         for ver in version_list:
         	print ver
