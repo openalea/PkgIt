@@ -52,7 +52,7 @@ class Mingw_rt(Formula):
     def setup(self):
         return dict( 
                     VERSION  = self.version,
-                    LIB_DIRS = {"lib":self.install_dll_dir},
+                    LIB_DIRS = {"lib":str(self.install_dll_dir)},
                     INC_DIRS = None,
                     BIN_DIRS = None,
                     )             

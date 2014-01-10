@@ -57,7 +57,7 @@ from re import compile as re_compile
 from path import path
 import subprocess
 import time
-
+  
 class Mingw(Formula):
     download_url = "http://downloads.sourceforge.net/project/mingw/Installer/mingw-get-setup.exe?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmingw%2F%3Fsource%3Ddirectory&ts=1380884282&use_mirror=freefr"
     download_name = "mingw-get-setup.exe"
@@ -77,13 +77,14 @@ class Mingw(Formula):
         Try to remove what is not necessary.
         For example, when installing gcc, it installs binutils. A big part of binutils is useless.
         """
-    
+        
         cmd_prefix = "mingw-get install "
         libs = ["gcc-fortran", "gcc-g++", "gmp", "mpfr", "libz", "msys-bison", "msys-flex", "gcc", "mingw32-make"]
         libs += ["binutils", "mingw-runtime", "pthreads", "iconv", "gcc-core", "libiconv"]
         for lib in libs:
             cmd = cmd_prefix + lib
             sh(cmd)
+            print(cmd)
         
         '''
         # Remove useless packages:
@@ -100,6 +101,14 @@ class Mingw(Formula):
         
         return True 
 
+    def extra_paths(self):
+        """
+        .. todo:: Replace "path set by hand" by "automatic path"
+        """
+        
+        bin_path = "C:\\MinGW\\bin"
+        return str(bin_path)
+        
     def setup(self):
         mingwbase = self.get_path()
         if not path(mingwbase).exists():
@@ -111,7 +120,7 @@ class Mingw(Formula):
         data = []
         for dir in subd:
             dat = recursive_glob_as_dict(path(mingwbase)/dir, "*", strip_keys=True, prefix_key=dir).items()         
-            data += [ (d, [str(f) for f in t if not f.endswith(".dll")]) for d,t in dat]
+            data += [ (str(d), [str(f) for f in t if not f.endswith(".dll")]) for d,t in dat]
         bindirs = {"bin": str(self.get_bin_path())}
         incdirs = {"include": str(path(mingwbase)/"include")}   
         #libdirs = {"lib": str(path(mingwbase/"lib")}  
