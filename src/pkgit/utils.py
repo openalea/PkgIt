@@ -351,6 +351,8 @@ def in_dir(directory):
             d_ = rgetattr(self, directory)
             message = "Changing to %s for %s" %(d_,f.__name__)
             logger.info(message)
+            if not path(d_).exists():
+                makedirs(d_)
             os.chdir(d_)
             ret = f(self, *args, **kwargs)
             os.chdir(self._get_working_path())

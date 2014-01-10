@@ -112,7 +112,7 @@ class Formula(object):
         # if package is python and yet installed
         try:
             packages, package_dirs = self.find_packages_and_directories()
-            install_dir = path(self.package.__file__).abspath().dirname()
+            install_dir = str(path(self.package.__file__).abspath().dirname())
             # py_modules = recursive_glob(self.install_dir, Pattern.pymod)
             data_files = recursive_glob_as_dict(install_dir,
                         ",".join(["*.example","*.txt",Pattern.pyext,"*.c",".1"])).items()
@@ -141,12 +141,12 @@ class Formula(object):
                    BIN_DIRS             = None,
                   )
             
-        lib = path(self.sourcedir)/'lib'
-        inc = path(self.sourcedir)/'include'
-        bin = path(self.sourcedir)/'bin'
-        if lib.exists(): d['LIB_DIRS'] = {'lib' : lib }
-        if inc.exists(): d['INC_DIRS'] = {'include' : inc }
-        if bin.exists(): d['BIN_DIRS'] = {'bin' : bin }
+        lib = str(path(self.sourcedir)/'lib')
+        inc = str(path(self.sourcedir)/'include')
+        bin = str(path(self.sourcedir)/'bin')
+        if path(lib).exists(): d['LIB_DIRS'] = {'lib' : lib }
+        if path(inc).exists(): d['INC_DIRS'] = {'include' : inc }
+        if path(bin).exists(): d['BIN_DIRS'] = {'bin' : bin }
         
         return d
 
