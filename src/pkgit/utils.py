@@ -212,7 +212,7 @@ def direct_deps(formula_name, without=list()):
     :return: list of dependencies included formula_name (not recursif!). (list)
     """
     parent = import_formula(formula_name)
-    children = parent.dependencies
+    children = list(parent.dependencies)
     
     if len(without) > 0:
         for dep in without:
