@@ -52,7 +52,7 @@ class Bisonflex(Formula):
                 # as inside the BISFLEXDIR.
                 rel_direc = path(i).relpath(BISFLEXDIR).replace("\\","/")
                 file_ = unix_style_join( rel_direc, f)        
-                data_files.append( ("share" if rel_direc == "." else path("share")/rel_direc,[path(file_).abspath()]) )
+                data_files.append( ("share" if rel_direc == "." else str(path("share")/rel_direc),[str(path(file_).abspath())]) )
         os.chdir(OLDDIR)
         
         return dict( 
