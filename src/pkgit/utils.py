@@ -35,24 +35,26 @@ from .patch import fromfile, fromstring
 from setuptools.package_index import PackageIndex as pi
 import logging
 
-def eggify_formulas(formula_name, dest_dir=None, dry_run=False):
+def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False):
     """
     Eggify formula and deps recursively
     :param formula_name: string name of the formula
     :param dest_dir: directory where to put the egg when it is created
     :return: True if success, else False
     """
-    formula_list = deps(formula_name)
+    formula_list = deps(formula_name, without=without)
     logger.debug("----------------------------------------------")
     logger.debug("-----------Will eggify formulas %s-----------------"%str(formula_list))
     logger.debug("----------------------------------------------")
+    print("Will eggify formulas %s"%str(formula_list))
     ret = True
     
-    for formula in formula_list:
-        formula, ret_ = eggify_formula(formula, dest_dir=dest_dir, dry_run=dry_run)
-        ret = ret & ret_
-        
-    return ret
+    if not dry_run:   
+        for formula in formula_list:
+            formula, ret_ = eggify_formula(formula, dest_dir=dest_dir, dry_run=dry_run)
+            ret = ret & ret_
+            
+        return ret
                 
 def eggify_formula(formula_name, dest_dir=None, dry_run=False):
     """
@@ -176,24 +178,33 @@ def who_deps(formula_name):
                 who.append(form_name)
     return who
     
-def direct_deps(formula_name):
-	"""
-	:param formula_name: name of formula to get dependencies. (str)
-	:return: list of dependencies included formula_name (not recursif!). (list)
-	"""
-	parent = import_formula(formula_name)
-	children = parent.dependencies
-	return children
+def direct_deps(formula_name, without=list()):
+    """
+    :param formula_name: name of formula to get dependencies. (str)
+    :param without: deps that you want to omit. (list)
+    :return: list of dependencies included formula_name (not recursif!). (list)
+    """
+    parent = import_formula(formula_name)
+    children = parent.dependencies
+    
+    if len(without) > 0:
+        for dep in without:
+            if dep in children:
+                children.remove(dep)
+    
+    return children
 	
-def deps(formula_name, recursif=True):
+def deps(formula_name, without=list(), recursif=True):
 	"""
 	:param formula_name: name of formula to get dependencies. (str)
+    :param without: deps that you want to omit. (list)
 	:param recursif: if False return direct dependencies. If True return recursive dependencies. (bool)
 	:return: list of dependencies included formula_name. (list)
 	"""
+    
 	if not recursif:
 		formula_list = [formula_name]
-		for dep in direct_deps(formula_name):
+		for dep in direct_deps(formula_name, without=without):
 			index = formula_list.index(formula_name)
 			new_name = dep
 			formula_list.insert(index,new_name)
@@ -213,7 +224,7 @@ def deps(formula_name, recursif=True):
 				deps.pop(index)
 				deps.insert(0,formula_to_check)
 
-			new_deps = direct_deps(formula_to_check)
+			new_deps = direct_deps(formula_to_check, without=without)
 			if new_deps is not None:
 				if len(new_deps) > 0:
 					if isinstance(new_deps, str):

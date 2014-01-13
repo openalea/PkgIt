@@ -49,6 +49,7 @@ def main():
     # parser.add_argument('-i', '--install', help="!!Doesn't work yet!!")
     parser.add_argument('-w', '--wininst', help="Create Windows installer for formula WININST.")
     parser.add_argument('-c', '--create', help="Create a new formula named CREATE.")
+    parser.add_argument('--without', help="Omit to package WITHOUT and WITHOUT's dependencies. Works with --package")
     parser.add_argument('--disp_deps', help="Display dependencies of formula named DISP_DEPS.")
     parser.add_argument('--disp_versions', action="store_true", default=False, help="Display all formulas available and versions of packages.")
     
@@ -61,16 +62,16 @@ def main():
     # parser.add_argument('--force-build', default="False", help="Build even if already built.")
     # parser.add_argument('--force', default="False", help="Force all: download, install and build")
     
-    parser.add_argument('--dest-dir', default=None, help="copy result to DIR. Works with --package option")
+    parser.add_argument('--dest-dir', default=None, help="copy result to DIR. Works with --package")
     # parser.add_argument('--download-dir', default="", help="download package to DIR")
     # parser.add_argument('--install-dir', default="", help="install package to DIR")
     # parser.add_argument('--src-dir', default="", help="unpack archive to DIR")
     # parser.add_argument('--build-dir', default="", help="build package to DIR")
     # parser.add_argument('-d', '--dir', default=".", help="Working DIR in which package will be download, installed, unpacked, built...")
-    parser.add_argument('--rm-tmp',action="store_const", const=True, default=False, help="Remove temporary files after packaging(except download). Works with --package option")
-    parser.add_argument('--rm-tmp-all',action="store_const", const=True, default=False, help="Remove all temporary files after packaging. Works with --package option")
+    parser.add_argument('--rm-tmp',action="store_const", const=True, default=False, help="Remove temporary files after packaging(except download). Works with --package")
+    parser.add_argument('--rm-tmp-all',action="store_const", const=True, default=False, help="Remove all temporary files after packaging. Works with --package")
     
-    parser.add_argument('--dry-run',action="store_const", const=True, default=False, help="Don't do anything. Works with --package option")
+    parser.add_argument('--dry-run',action="store_const", const=True, default=False, help="Don't do anything. Works with --package")
     
     args = parser.parse_args()
 
@@ -85,6 +86,19 @@ def main():
         for ver in version_list:
         	print ver
    
+    
+    """
+    Transform str of deps into python list.
+    ex: "mingw,qt4,ann" --> ["mingw", "qt4", "ann"]
+    """
+    without = list()
+    if args.without is not None:    
+        without = list()
+        if len(str(args.without).split(",")) > 1:
+            for i in str(args.without).split(","):
+                without.insert(0,i)
+        else: without.insert(0,args.without)
+   
    
     # Package Process
     if args.package is not None:
@@ -92,7 +106,8 @@ def main():
         dry_run = False
         if args.dry_run:
             dry_run = True
-        eggify_formulas(args.package, dest_dir=dest_dir, dry_run=dry_run)
+        
+        eggify_formulas(args.package, dest_dir=dest_dir, without=without, dry_run=dry_run)
         if args.rm_tmp_all:
             remove_temp(args.package, True)
         elif args.rm_tmp:
