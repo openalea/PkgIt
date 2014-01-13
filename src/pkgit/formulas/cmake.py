@@ -31,7 +31,7 @@ class Cmake(Formula):
     download_name  = "cmake.zip"
     license        = "Copyright 2000-2009 Kitware, Inc., Insight Software Consortium"
     authors        = "Bill Hoffman, Ken Martin, Brad King, Dave Cole, Alexander Neundorf, Clinton Stimpson..."
-    DOWNLOAD = UNPACK = BDIST_EGG = INSTALL_EGG = True
+    DOWNLOAD = UNPACK = BDIST_EGG = POST_INSTALL = True
     
     def setup(self):
         return dict(BIN_DIRS = {'bin' : path(self.sourcedir)/'bin' },

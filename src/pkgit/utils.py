@@ -88,6 +88,33 @@ def eggify_formula(formula_name, dest_dir=None, dry_run=False):
         
         logger.debug("Formula %s success : %s" %(formula_name,ret))
         return formula, ret
+        
+def post_install(formula_name, dest_dir=None, dry_run=False):
+    """
+    Install a formula after packaged it if necessary
+    """
+    formula = instanciate_formula(formula_name)
+    if not formula.packaged():
+        formula, ret = eggify_formula(formula_name, dest_dir=dest_dir, dry_run=dry_run)
+    formula.POST_INSTALL = True
+    formula._post_install()
+    
+def packaged(formula_name):
+    formula = instanciate_formula(formula_name)
+    ret, name = formula.packaged()
+    
+    new_name = ""
+    if isinstance(name, list):
+        for n in name:
+            new_name = new_name + " " + n
+    else:
+        new_name = name
+        
+    if ret:
+        print(formula_name + " yet packaged with name " + new_name )
+    else:
+        print(formula_name + " NOT packaged")
+    return ret
 
 def remove_temp(formula_name,download_too=False):
     """

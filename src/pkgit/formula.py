@@ -61,7 +61,7 @@ class Formula(object):
         * MAKE_INSTALL 
         * BDIST_EGG 
         * COPY_INSTALLER 
-        * INSTALL_EGG
+        * POST_INSTALL
         
     Special attribute:
     
@@ -81,7 +81,7 @@ class Formula(object):
     __packagename__ = None   # Only for package like Pillow which use another name for import (<<import Pil>> and not <<import Pillow>>)
     _working_path  = os.getcwd()
 
-    DOWNLOAD = UNPACK = INSTALL = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = COPY_INSTALLER = INSTALL_EGG = False
+    DOWNLOAD = UNPACK = INSTALL = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = COPY_INSTALLER = POST_INSTALL = False
     
     def __init__(self,**kwargs):
         logger.debug("__init__ %s" %self.__class__)
@@ -356,11 +356,11 @@ class Formula(object):
         
     @in_dir("dist_dir") 
     @try_except  
-    def _install_egg(self):
-        if self.INSTALL_EGG:
-            logger.debug("==INSTALL_EGG==") 
-            ret = self.install_egg()
-            logger.debug("Install_egg %s" %ret)
+    def _post_install(self):
+        if self.POST_INSTALL:
+            logger.debug("==POST INSTALL==") 
+            ret = self.post_install()
+            logger.debug("Post Install %s" %ret)
             return ret
         return True
 
@@ -499,11 +499,13 @@ class Formula(object):
         """
         return sh(sys.executable + " setup.py bdist_egg -d %s"%(self.dist_dir,)) == 0
         
-    def install_egg(self):
+    def post_install(self):
         """
-        Try to install egg after packaging.
+        Try to install egg, exe or msi after packaging.
         
-        Use command alea_install -H None -f . mypackage.egg
+        Search an egg, then an exe, then a msi.
+        
+        If it is an egg, use command alea_install -H None -f . mypackage.egg
         
         Can be overloaded.
         
@@ -514,10 +516,31 @@ class Formula(object):
         egg = glob.glob( path(".")/egg_search )
         if egg:
             egg = egg[0]
+            cmd = "alea_install -H None -f . %s" %egg
+            return sh(cmd) == 0
         else: 
-            return False
-        cmd = "alea_install -H None -f . %s" %egg
-        return sh(cmd) == 0
+            #
+            name_search = "*" + self.name + "*.exe"
+            name = glob.glob( path(".")/name_search )
+            if not name:
+                name_search = "*" + self.name + "*.msi"
+                name = glob.glob( path(".")/name_search )
+            
+            if name:
+                name = name[0]
+                return util_install(name)
+                
+        return False
+    
+    def packaged(self):
+        """
+        :return: True if not yet packaged in dist repo. Else False
+        """
+        name_search = "*" + self.name + "*"
+        name = glob.glob( path(self.dist_dir)/name_search )
+        if name:
+            return True, name
+        return False, ""
 
     # @in_dir("eggdir")
     # @try_except

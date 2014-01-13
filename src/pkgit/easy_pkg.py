@@ -21,7 +21,7 @@
 __revision__ = "$Id: $"
 
 from argparse import ArgumentParser
-from pkgit.utils import formulas, eggify_formulas, remove_temp, versions, deps
+from pkgit.utils import formulas, eggify_formulas, remove_temp, versions, deps, packaged
 from pkgit.create import default_formula
 #from pkgit.uninstall import uninstall
 from pkgit.wininst import wininst
@@ -46,9 +46,10 @@ def main():
     parser.add_argument('-v', '--version', action='version', version='%s'%version)
     
     parser.add_argument('-p', '--package', help="Package formula named PACKAGE. Available formulas are: %s." %str(formula_list))
-    # parser.add_argument('-i', '--install', help="!!Doesn't work yet!!")
+    parser.add_argument('-i', '--install', help="!!Doesn't work yet!!")
     parser.add_argument('-w', '--wininst', help="Create Windows installer for formula WININST.")
     parser.add_argument('-c', '--create', help="Create a new formula named CREATE.")
+    parser.add_argument('-y', '--packaged', help="Display if formula is yet packaged.")
     parser.add_argument('--without', help="Omit to package WITHOUT and WITHOUT's dependencies. Works with --package")
     parser.add_argument('--disp_deps', help="Display dependencies of formula named DISP_DEPS.")
     parser.add_argument('--disp_versions', action="store_true", default=False, help="Display all formulas available and versions of packages.")
@@ -119,6 +120,9 @@ def main():
         # print "Uninstall All OpenAlea for the moment..."
         # print "todo: uninstall just selected package"
         # uninstall() 
+        
+    if args.packaged is not None:
+        packaged(args.packaged)
         
 if __name__ == '__main__':
     main()

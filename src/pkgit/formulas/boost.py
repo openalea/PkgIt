@@ -42,7 +42,7 @@ class Boost(Formula):
     authors = "Boost contributors"
     description = "Windows gcc libs and includes of Boost"
     homepage = "http://www.boost.org/"
-    DOWNLOAD = UNPACK = MAKE_INSTALL = BDIST_EGG = INSTALL_EGG = True
+    DOWNLOAD = UNPACK = MAKE_INSTALL = BDIST_EGG = POST_INSTALL = True
 
     def __init__(self, **kwargs):
         super(Boost, self).__init__(**kwargs)
