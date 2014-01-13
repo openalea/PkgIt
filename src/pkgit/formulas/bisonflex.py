@@ -27,7 +27,7 @@ from path import path
 import os
 
 class Bisonflex(Formula):
-    dependencies = "mingw"
+    dependencies = ["mingw"]
     version      = "?.?.?"
     BDIST_EGG = True
     

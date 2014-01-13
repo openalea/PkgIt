@@ -30,7 +30,7 @@ class Dateutil(Formula):
     homepage        = "http://labix.org/python-dateutil"     # Url of home-page of the dependency (not of the formula)
     license         = "BSD"     # License of the dependency (not of the formula)
     authors         = "Gustavo Niemeyer"     # Authors of the dependency (not of the formula)
-    dependencies    = ""     # List of dependencies of the formula
+    dependencies    = []     # List of dependencies of the formula
     download_name   = "dateutil.tgz"     # Name of the local archive
     download_url    = "https://pypi.python.org/packages/source/p/python-dateutil/python-dateutil-"+version+".tar.gz"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
     DOWNLOAD = UNPACK = BDIST_EGG = True 

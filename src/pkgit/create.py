@@ -51,7 +51,7 @@ class %s(Formula):
     homepage        = ""     # Url of home-page of the dependency (not of the formula)
     license         = ""     # License of the dependency (not of the formula)
     authors         = ""     # Authors of the dependency (not of the formula)
-    dependencies    = ""     # List of dependencies of the formula
+    dependencies    = []     # List of dependencies of the formula
     download_name   = ""     # Name of the local archive
     download_url    = ""   	 # Url where to download sources (feel only if "DOWNLOAD = True")
 """
