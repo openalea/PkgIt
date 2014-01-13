@@ -79,7 +79,7 @@ class Mingw(Formula):
         """
         
         cmd_prefix = "mingw-get install "
-        libs = ["gcc-fortran", "gcc-g++", "gmp", "mpfr", "libz", "msys-bison", "msys-flex", "gcc", "mingw32-make"]
+        libs = ["gcc-fortran", "gcc-g++", "gmp", "mpfr", "zlib", "libz", "msys-bison", "msys-flex", "gcc", "mingw32-make"]
         libs += ["binutils", "mingw-runtime", "pthreads", "iconv", "gcc-core", "libiconv"]
         for lib in libs:
             cmd = cmd_prefix + lib
