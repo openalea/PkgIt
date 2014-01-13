@@ -35,7 +35,7 @@ class Qhull(Formula):
     
     def setup(self):
         return dict(
-                    LIB_DIRS         = {'lib' : path(self.sourcedir)/'build' },
-                    INC_DIRS         = {'include' : path(self.sourcedir)/'eg' },
-                    BIN_DIRS         = {'bin' : path(self.sourcedir)/'bin' },
+                    LIB_DIRS         = {'lib' : str(path(self.sourcedir)/'build') },
+                    INC_DIRS         = {'include' : str(path(self.sourcedir)/'eg') },
+                    BIN_DIRS         = {'bin' : str(path(self.sourcedir)/'bin') },
                     )

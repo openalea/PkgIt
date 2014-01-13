@@ -22,11 +22,11 @@ from __future__ import absolute_import
 __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
-from pkgit.utils import checkout
+from pkgit.utils import checkout, sh
 from path import path
 
 class Plantgl(Formula):
-    version         = "1.0"  	 # Version of the dependency (not of the formula)
+    version         = "1.1.dev"  	 # Version of the dependency (not of the formula)
     description     = "OpenAlea is an open source project primarily aimed at the plant research community."     # Description of the dependency (not of the formula)
     homepage        = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"     # Url of home-page of the dependency (not of the formula)
     license         = "Cecill-C License"     # License of the dependency (not of the formula)

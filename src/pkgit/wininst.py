@@ -522,17 +522,7 @@ def configure_inno_setup_without_args(appname, appversion, dependencies, runtime
     detect, testVars = funcs["generate_pascal_test_install_code"](dependencies)
     testingBody, reportingBody = funcs["generate_pascal_detect_env_body"](dependencies, testVars, appname)
     installationBody = funcs["generate_pascal_deploy_body"](dependencies, testVars, step)
-    print 48
-    print "*******************************************************"
-    print "*******************************************************"
-    print "*******************************************************"
-    print 1, detect, testVars
-    print 2, funcs["generate_pascal_test_install_code"](dict([('python', [16, u'C:\\temp_working_dir\\dist\\thirdpart\\python-2.7.5.msi', None]),]))
-    print 3, dependencies
-    print "*******************************************************"
-    print "*******************************************************"
-    print "*******************************************************"
-    print 50
+
     modeStr = "" if runtime else "dev"
     s = template.substitute(APPNAME=appname,
                             APPVERSION=appversion,
