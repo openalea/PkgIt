@@ -49,10 +49,10 @@ class Ann(Formula):
         return sh("mingw32-make win32-g++") == 0
         
     def setup(self):
-        return dict(DATA_FILES = [('doc' , [path(self.sourcedir)/'doc'/'ANNmanual.pdf'] )],
-                    LIB_DIRS   = {'lib' : path(self.sourcedir)/'lib' },
-                    INC_DIRS   = {'include' : path(self.sourcedir)/'include' },
-                    BIN_DIRS   = {'bin' : path(self.sourcedir)/'bin' },
+        return dict(DATA_FILES = [('doc' , [str(path(self.sourcedir)/'doc'/'ANNmanual.pdf')] )],
+                    LIB_DIRS   = {'lib' : str(path(self.sourcedir)/'lib' )},
+                    INC_DIRS   = {'include' : str(path(self.sourcedir)/'include') },
+                    BIN_DIRS   = {'bin' : str(path(self.sourcedir)/'bin') },
                     )
                     
 PATCH = """Only in .: ann_mgw.patch

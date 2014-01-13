@@ -41,7 +41,7 @@ class Bisonflex(Formula):
 
         # GET DATA FILES (share directory and subdirs)
         OLDDIR = os.getcwd()
-        BISFLEXDIR = path(bison_path)/"share".abspath()
+        BISFLEXDIR = (path(bison_path)/"share").abspath()
         BISFLEXDIR = str(BISFLEXDIR).replace("\\", "/")
         os.chdir(BISFLEXDIR)
         raw_files = os.walk(BISFLEXDIR)
