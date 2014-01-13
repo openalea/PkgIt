@@ -54,15 +54,25 @@ Launch packaging process: pkgit
 
 Everything can be done by executing pkgit:
 
-First, package everything:
+Package everything you want:
 
->>> pkgit package vplants
+>>> pkgit --package mingw
+>>> pkgit --package ann
+>>> pkgit --package cgal
+>>> pkgit --package vplants
+>>> ...
 
 It will package all dependencies in the local repository ./dist
 
-Then, create windows installer:
+To omit a dependency, use option --without. Following line will package mingw_rt without packaging mingw (use it if you laready packaged mingw earlier).
 
->>> pkgit wininst vplants
+>>> pkgit --package mingw_rt --without mingw
+
+For some formulas, you can create windows installer (OpenAlea, VPlants and Alinea only for the moment):
+
+>>> pkgit --wininst openalea
+>>> pkgit --wininst vplants --without openalea
+>>> pkgit --wininst alinea --without vplants,openalea
 
 It will create a windows installer with what is packaged in the local repository ./dist
 
