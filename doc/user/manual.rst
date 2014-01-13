@@ -47,12 +47,20 @@ Related Projects
 * MacPorts http://www.macports.org/
 * Old OpenAlea Way http://openalea.gforge.inria.fr/wiki/doku.php?id=documentation:developper:release:windows (but it is not supported and will become obsolete.)
 
-Launch packaging process: pkgit
-###################################
+Install a formula
+##################
 
-.. TODO:: Complete doc!
+PkgIt command with option -i, --install will check if you already have packaged your formula (and packaged it if necessary) and then will install it.
 
-Everything can be done by executing pkgit:
+>>> pkgit --install mingw
+>>> pkgit -i ann
+>>> pkgit -i cgal
+>>> ...
+
+Package a formula
+##################
+
+Everything can be done by executing pkgit!
 
 Package everything you want:
 
@@ -68,6 +76,9 @@ To omit a dependency, use option --without. Following line will package mingw_rt
 
 >>> pkgit --package mingw_rt --without mingw
 
+Create Windows installer
+########################
+
 For some formulas, you can create windows installer (OpenAlea, VPlants and Alinea only for the moment):
 
 >>> pkgit --wininst openalea
@@ -76,14 +87,15 @@ For some formulas, you can create windows installer (OpenAlea, VPlants and Aline
 
 It will create a windows installer with what is packaged in the local repository ./dist
 
-.. note::
-    We used pkgit to package OpenAlea the 10th january 2014. To have more details, please read:
+OpenAlea exemple
+################
 
-    .. toctree::
+We used pkgit to package OpenAlea the 10th january 2014. To have more details, please read:
 
-        use.rst
+.. toctree::
 
-
+    use.rst
+        
 Extend pkgit: create a formula
 ########################################
 
