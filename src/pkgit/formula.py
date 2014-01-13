@@ -102,6 +102,9 @@ class Formula(object):
         self.use_cfg_login  = False #unused for the moment
         
         self._make_default_dirs()
+        
+        if self.packaged()[0] is True:
+            DOWNLOAD = UNPACK = INSTALL = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = COPY_INSTALLER = False
 
     def _default_substitutions_setup_py(self):
         """

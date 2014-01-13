@@ -94,7 +94,7 @@ def post_install(formula_name, dest_dir=None, dry_run=False):
     Install a formula after packaged it if necessary
     """
     formula = instanciate_formula(formula_name)
-    if not formula.packaged():
+    if not formula.packaged()[0]:
         formula, ret = eggify_formula(formula_name, dest_dir=dest_dir, dry_run=dry_run)
     formula.POST_INSTALL = True
     formula._post_install()

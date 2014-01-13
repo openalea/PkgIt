@@ -21,7 +21,7 @@
 __revision__ = "$Id: $"
 
 from argparse import ArgumentParser
-from pkgit.utils import formulas, eggify_formulas, remove_temp, versions, deps, packaged
+from pkgit.utils import formulas, eggify_formulas, remove_temp, versions, deps, packaged, post_install
 from pkgit.create import default_formula
 #from pkgit.uninstall import uninstall
 from pkgit.wininst import wininst
@@ -46,7 +46,7 @@ def main():
     parser.add_argument('-v', '--version', action='version', version='%s'%version)
     
     parser.add_argument('-p', '--package', help="Package formula named PACKAGE. Available formulas are: %s." %str(formula_list))
-    parser.add_argument('-i', '--install', help="!!Doesn't work yet!!")
+    parser.add_argument('-i', '--install', help="Package formula named INSTALL if necessary and install it.")
     parser.add_argument('-w', '--wininst', help="Create Windows installer for formula WININST.")
     parser.add_argument('-c', '--create', help="Create a new formula named CREATE.")
     parser.add_argument('-y', '--packaged', help="Display if formula is yet packaged.")
@@ -123,6 +123,9 @@ def main():
         
     if args.packaged is not None:
         packaged(args.packaged)
+    
+    if args.install is not None:
+        post_install(args.install)
         
 if __name__ == '__main__':
     main()
