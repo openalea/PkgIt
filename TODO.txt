@@ -1,0 +1,14 @@
+
+First
+#####
+
+* Add option --without to bypass packaging of a formula. Ex: >>> pkgit -p openalea --without qt4
+* Add auto-detect if package is yet packaged
+
+Secondly
+########
+
+* Ubuntu support
+* Mac Os X support
+* MacPort support
+* HomeBrew support
