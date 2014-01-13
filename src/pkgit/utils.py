@@ -80,7 +80,7 @@ def eggify_formula(formula_name, dest_dir=None, dry_run=False):
         ret = ret & formula._make_install()
         ret = ret & formula._bdist_egg()
         ret = ret & formula._copy_installer()
-        ret = ret & formula._install_egg()
+        ret = ret & formula._post_install()
         
         print ""
         print "Formula %s success : %s ==============================" %(formula_name,ret)
