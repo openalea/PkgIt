@@ -96,8 +96,6 @@ If one package doesn't work, you can get old package from gforge.
     
     * boost
     * cgal
-    * cmake
-    * pyparsing
     * pyqglviewer
     * rpy2
     

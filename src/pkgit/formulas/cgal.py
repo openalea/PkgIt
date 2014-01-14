@@ -61,9 +61,9 @@ class Cgal(Formula):
     def setup(self):
         return dict( 
                     VERSION          = self.version,
-                    LIB_DIRS         = {'lib' : path(self.sourcedir)/'lib' },
-                    INC_DIRS         = {'include' : path(self.sourcedir)/'include' },
-                    BIN_DIRS         = {'bin' : path(self.sourcedir)/'bin' },
+                    LIB_DIRS         = {'lib' : str(path(self.sourcedir)/'lib') },
+                    INC_DIRS         = {'include' : str(path(self.sourcedir)/'include') },
+                    BIN_DIRS         = {'bin' : str(path(self.sourcedir)/'bin') },
                     INSTALL_REQUIRES = ["cmake"],
                     ) 
                     
