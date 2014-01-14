@@ -54,7 +54,7 @@ class Boost(Formula):
         print "Make install"
     
         # it is possible to bootstrap boost if no bjam.exe is found:
-        if not path(self.sourcedir)/"bjam.exe".exists() :
+        if not (path(self.sourcedir)/"bjam.exe").exists() :
             print "Call bootstrap.bat"
             #mingw_path = r"c:/Python27/Lib/site-packages/mingw-5.2-py2.7-win32.egg/" 
             #mingw_path = r"c:/MinGW/" 
@@ -75,7 +75,7 @@ class Boost(Formula):
                            "[ version.check-jam-version 3 1 17 ] || ( [ os.name ] != NT )",
                            "[ version.check-jam-version 3 1 17 ] && ( [ os.name ] != NT )")
 
-        paths = self.installdir, path(sys.prefix)/"include", path(sys.prefix)/"libs"
+        paths = str(self.installdir), str(path(sys.prefix)/"include"), str(path(sys.prefix)/"libs")
         cmd = "bjam --prefix=%s --without-test --layout=system"
         cmd += " variant=release link=shared threading=multi runtime-link=shared toolset=gcc"
         cmd += " include=%s library-path=%s install"
