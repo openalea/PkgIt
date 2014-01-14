@@ -34,9 +34,9 @@ class Cmake(Formula):
     DOWNLOAD = UNPACK = BDIST_EGG = POST_INSTALL = True
     
     def setup(self):
-        return dict(BIN_DIRS = {'bin' : path(self.sourcedir)/'bin' },
+        return dict(BIN_DIRS = {'bin' : str(path(self.sourcedir)/'bin') },
                     LIB_DIRS = None,
-                    INC_DIRS = {'share' : path(self.sourcedir)/'share' },
+                    INC_DIRS = {'share' : str(path(self.sourcedir)/'share') },
                     )
     def extra_paths(self):
         return path(self.sourcedir)
