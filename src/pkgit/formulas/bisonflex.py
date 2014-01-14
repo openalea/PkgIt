@@ -28,7 +28,7 @@ import os
 
 class Bisonflex(Formula):
     dependencies = ["mingw"]
-    version      = "?.?.?"
+    version      = "2.4.1"
     BDIST_EGG = True
     
     def setup(self):

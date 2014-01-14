@@ -85,13 +85,21 @@ Package dependencies and VPlants
 
 .. note::
     If you already packaged OpenAlea and you don't want to do it again, so you can add option --without openalea.
+    
+.. note::
+    You need to install OpenAlea.misc before bdist_egg for VPlants
 
 If one package doesn't work, you can get old package from gforge.
 
 .. warning::
     Following formulas doesn't works. So please download old version on GForge and put them in repo C:\\temp_pkgit\\dist\\thirdpart.
     
-    * ann
+    * boost
+    * cgal
+    * cmake
+    * pyparsing
+    * pyqglviewer
+    * rpy2
     
     .. TODO:: List exactly what is not working
 

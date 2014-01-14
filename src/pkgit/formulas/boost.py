@@ -96,7 +96,7 @@ class Boost(Formula):
             se = version_re.search(txt)
             if se:
                 version = se.groups()[0]
-        lib_dirs    = {"lib": self.install_lib_dir}
+        lib_dirs    = {"lib": str(self.install_lib_dir)}
         return dict( 
                     VERSION          = version,                 
                     LIB_DIRS         = lib_dirs,
