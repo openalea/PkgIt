@@ -42,7 +42,7 @@ class Rpy2(Formula):
         from setuptools import find_packages
         return dict(URL          = self.homepage,
                     PACKAGES     = find_packages(self.installdir,"rpy2"),
-                    PACKAGE_DIRS = { "rpy2": path(self.installdir)/"rpy2" },
+                    PACKAGE_DIRS = { "rpy2": str(path(self.installdir)/"rpy2") },
                     VERSION      = self.version+".rev"+self.revision,
                     PACKAGE_DATA = {'' : [Pattern.pyext]},
                     LIB_DIRS     = None,
