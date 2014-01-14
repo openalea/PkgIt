@@ -97,7 +97,7 @@ If one package doesn't work, you can get old package from gforge.
     * boost
     * cgal
     * pyqglviewer
-    * rpy2
+    * rpy2 (apply_patch_from_string pb?)
     
     .. TODO:: List exactly what is not working
 
