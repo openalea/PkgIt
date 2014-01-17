@@ -31,8 +31,8 @@ class Numpy(Formula):
     license         = "Numpy License"
     authors         = "(c) Numpy Developers"
     description     = "NumPy is the fundamental package for scientific computing with Python."    
-    version         = "1.7.1"
+    version         = "1.8.0"
     homepage        = "http://www.numpy.org/"
-    download_url    = "http://freefr.dl.sourceforge.net/project/numpy/NumPy/1.7.1/numpy-1.7.1-win32-superpack-python2.7.exe"
+    download_url    = "http://freefr.dl.sourceforge.net/project/numpy/NumPy/" + version + "/numpy-" + version + "-win32-superpack-python2.7.exe"
     download_name   = "numpy.exe"
     DOWNLOAD = COPY_INSTALLER = True

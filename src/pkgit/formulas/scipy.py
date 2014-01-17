@@ -31,8 +31,8 @@ class Scipy(Formula):
     license         = "Scipy License"
     authors         = "(c) Enthought"
     description     = "Scipy is a Python-based ecosystem of open-source software for mathematics, science, and engineering."
-    version         = "0.12.0"       
+    version         = "0.13.2"       
     homepage        = "http://www.scipy.org/"
-    download_url    = "http://freefr.dl.sourceforge.net/project/scipy/scipy/0.12.0/scipy-0.12.0-win32-superpack-python2.7.exe"
+    download_url    = "http://freefr.dl.sourceforge.net/project/scipy/scipy/" + version + "/scipy-" + version + "-win32-superpack-python2.7.exe"
     download_name   = "scipy.exe"
     DOWNLOAD = COPY_INSTALLER = True

@@ -30,9 +30,9 @@ class Matplotlib(Formula):
     # So, we download the installer and copy it.
     license         = "Python Software Foundation License Derivative - BSD Compatible."
     authors         = "Matplotlib developers"
-    version         = "1.3.0"
+    version         = "1.3.1"
     homepage        = "http://matplotlib.org/"
-    download_url    = "https://downloads.sourceforge.net/project/matplotlib/matplotlib/matplotlib-"+version+"/matplotlib-1.3.0.win32-py2.7.exe"
+    download_url    = "https://downloads.sourceforge.net/project/matplotlib/matplotlib/matplotlib-"+version+"/matplotlib-" + version + ".win32-py2.7.exe"
     download_name   = "matplotlib.exe"
     description     = "Matplotlib is a python 2D plotting library."  
     DOWNLOAD = COPY_INSTALLER = True
