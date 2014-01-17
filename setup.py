@@ -5,7 +5,60 @@ import sys
 import os
 
 from setuptools import setup, find_packages
-from openalea.deploy.metainfo import read_metainfo
+
+def read_metainfo(filename, section='metainfo', verbose=False):
+    """
+    read_metainfo come from:
+    from openalea.deploy.metainfo import read_metainfo
+    """
+
+    """Parse a section in a given file using ConfigParser module
+
+    This function read a file (called `filename`), which must have a format 
+    compatible with ConfigParser::
+
+        [metainfo]
+        option1 = string1
+        option2 = string2
+        ...
+
+    Then, it parses the section [metainfo] that must be present and returns a dictionary
+    containing all these options.
+
+    :param filename: a filename with ConfigParser format
+    :param section: a section to look for in the file
+    :mode sphinx: a string in ["sphinx", "setup"] to return different information
+
+    :Example:
+
+        read_metainfo('metainfo.ini', metainfo='metainfo')
+
+    :author: Thomas Cokelaer <Thomas Cokelaer __at__ sophis inria fr>
+    """
+    compulsary_words = ['project','version','authors','package','release']
+    green =  lambda x: x
+
+    if verbose:
+        print green('Reading metainfo ')
+    import ConfigParser 
+    config = ConfigParser.RawConfigParser()
+    res = config.read(filename)
+    if len(res)==0:
+        raise IOError("Input file %s does not seem to exist" % filename)
+
+    metadata = {}
+
+    for option in config.options(section):
+        if verbose:
+            print green('...%s: %s' % (option, config.get(section, option)))
+        metadata[option] = config.get(section, option)
+
+    for word in compulsary_words:
+        if word not in metadata.keys():
+            raise ValueError('%s field not found in metainfo.ini' % word)
+
+    return metadata
+
 
 # Reads the metainfo file
 metadata = read_metainfo('metainfo.ini', verbose=True)
@@ -49,15 +102,9 @@ else:
     inc_dirs = None
     bin_dirs = None
 
-# List of top level wralea packages (directories with __wralea__.py) 
-#wralea_entry_points = ['%s = %s'%(pkg,namespace + '.' + pkg) for pkg in top_pkgs]
-
 # dependencies to other eggs
-setup_requires = ['openalea.deploy']
-if("win32" in sys.platform):
-    install_requires = []
-else:
-    install_requires = []
+setup_requires = []
+install_requires = []
 
 # web sites where to find eggs
 dependency_links = ['http://openalea.gforge.inria.fr/pi']
@@ -106,11 +153,7 @@ setup(
     # postinstall_scripts = ['',],
 
     # Declare scripts and wralea as entry_points (extensions) of your package 
-    entry_points = { 
-        #'wralea' : ['pkgit = pkgit_wralea' if has_project else 'pkgit = pkgit_wralea' ],
-        'console_scripts': ['pkgit = pkgit.easy_pkg:main'],
-        #	'wralea': wralea_entry_points
-        },
+    entry_points = { 'console_scripts': ['pkgit = pkgit.easy_pkg:main'],},
     )
 
 

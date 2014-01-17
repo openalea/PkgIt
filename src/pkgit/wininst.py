@@ -49,7 +49,7 @@ import subprocess
 from path import path, glob, shutil
 
 ###from openalea.misc.gforge_upload import Uploader
-from openalea.deploy.system_dependencies.dependency_builder import BE, download_egg
+from openalea.deploy.system_dependencies.dependency_builder import BE
 from openalea.deploy.system_dependencies.dependency_builder import options_common, options_gforge
 from pkgit.utils import deps, mask, import_formula
 
@@ -670,98 +670,6 @@ def parse_arguments():
 
 optionsThatCanBeInConf = set(["eggGlobs", "setup"])
     
-def oldmain():
-    #print __path__
-    #sys.exit(-1)
-    args = parse_arguments()
-    
-    if "PROJECT" in args.outDir:
-        args.outDir = args.outDir.replace("PROJECT", args.project+"_"+sys.platform+"_"+args.pyMaj+"."+args.pyMin)
-    else:
-        args.outDir = path(args.outDir)/(args.project+"_"+sys.platform+"_"+args.pyMaj+"."+args.pyMin)
-    args.tpp_eggDir = args.tpp_eggDir or args.srcDir
-    print args.srcDir #.encode("latin_1")
-    
-    prepare_working_dir(args.outDir, no_del=True)
-    
-    # -- Find the configuration file
-    confFile  = args.confFile or path(__file__).splitpath()[0]/(args.project+"_conf.py")        
-    confDict  = read_conf_file(confFile)    
-    
-    #   -- funcs will contain function overrides read from confFile --
-    funcs = dict( (fname, f) for fname, f in globals().iteritems() if isinstance(f, types.FunctionType) )
-    funcs.update(dict( (fname, f) for fname, f in confDict.iteritems() if isinstance(f, types.FunctionType)))    
-    #   -- vars will contain vars read from confFile --    
-    thirdPartyPackages = confDict["thirdPartyPackages"]
-    appname            = confDict["APPNAME"]
-    appversion         = confDict["APPVERSION"]
-    
-    args.eggGlobs = args.eggGlobs or confDict["eggGlobs"]
-    args.setup    = args.setup or confDict["setup"]
-                            
-    # -- Fix the egg globs to include python version and architecture dependency.
-    args.eggGlobs = map(make_stitcher(args.eggDir, args.pyMaj, args.pyMin), args.eggGlobs.split("|"))
-    print "The following project egg globs will be used:", args.eggGlobs
-        
-    # -- Filter the dependencies to process according to the type of installer (for runtimes or devtools)
-    # -- The dict points from package names to package info [bitmask, installer_path, test_script_path]
-    dependencies = OrderedDict( (pk, [mask_, None, None]) for pk, (mask_,) in thirdPartyPackages  \
-                                if processInstaller(mask, args.runtime) )
-
-    # Configure BE for gforge operations
-    BE.set_options( vars(args) )
-                                
-    # -- if args.fetch_online is True, this means that we will look for eggs on PYPI and GForge.
-    #   - if args.gforge is True, we add private gforge packages.
-    #   - TODO! Be smart and don't download if already here!
-    if args.fetch_online:
-        dldir = path(args.outDir)/"dl_eggs"
-        prepare_working_dir(dldir, no_del=True)
-        # if args.gforge:
-            # add_private_gforge_repositories(args.login, args.passwd)
-        for egg, info in dependencies.iteritems():
-            if not bt(info[0], EGG):
-                continue
-            gb = glob.glob( path(dldir)/("*"+egg+"*") )
-            if len(gb): # yep, this is fragile
-                print "%s egg already downloaded!"%egg, gb[0]
-                info[1] = gb[0]
-                continue
-            if bt(info[0], EGG) or bt(info[0], ZIPDIST) or bt(info[0], EXEDIST):
-                info[1] = download_egg(egg, dldir)
-                print "Online egg %s downloaded to %s"%(egg, info[1])
-
-    # -- find out the installers to package for this mega installer --
-    # will complete dependencies if they have no info[1].
-    ok = find_installer_files(args.tpp_eggDir, args.srcDir, args.pyMaj, args.pyMin, args.arch, 
-                              dependencies)                            
-                            
-    if not ok:
-        sys.exit(-1)
-        
-    # -- find out package testing python module names for the packages that need to be tested
-    print "Gathering paths to testing scripts..."
-    for pk, info in dependencies.iteritems():
-        test    = path(__path__)/(pk+"_test.py") if bt(info[0],TEST_ME) else None
-        info[2] = test
-        print "\tWill install %s for %s"%(test,pk)
-
-    proj_egg_pths = get_project_eggs(args.arch, args.eggGlobs, args.outDir, args.srcDir)
-    gen = configure_inno_setup(appname, appversion, dependencies, args, funcs, proj_egg_pths)
-    print "Done, please check the generated file:", gen
-    
-    print "Now compiling",    
-    if subprocess.call("iscc.exe "+gen, shell=True, env=os.environ):
-        return False
-        
-    if args.upload:
-        print "Uploading the installer ",
-        if args.release:
-            print "to openalea"
-            upload( path(args.outDir)/"Output"/(appname+"*-Installer-*"), args.project, args.login, args.passwd, "openalea")
-        else:
-            print "to vplants"
-            upload( path(args.outDir)/"Output"/(appname+"*-Installer-*"), args.project, args.login, args.passwd, "vplants")
 
 def main():
     #print __path__
@@ -934,6 +842,3 @@ def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDi
     print "Now compiling",    
     if subprocess.call("iscc.exe "+gen, shell=True, env=os.environ):
         return False
-    
-if __name__ == "__main__":
-    main()
