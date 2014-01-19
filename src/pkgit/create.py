@@ -83,7 +83,7 @@ def default_formula(name):
     f.write(text)
     f.close()
     
-    print("Formula %s created %s !"%(classname,filename.abspath()))
+    print("Formula %s created %s !"%(classname,filename))
     
 def is_correct(name):
     """

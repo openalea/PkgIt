@@ -76,7 +76,7 @@ begin
         WizardForm.ProgressGauge.Position := WizardForm.ProgressGauge.Position + incr;
     end;
 
-    WizardForm.StatusLabel.Caption:='Installing OpenAlea ';
+    WizardForm.StatusLabel.Caption:='Installing OpenAleaLab ';
     WizardForm.ProgressGauge.Position := 85;
     WizardForm.Update();    
     InstallEgg( 'OpenAlea.Deploy', '-H None -i ' + MyTempDir() + ' -f ' + MyTempDir());
