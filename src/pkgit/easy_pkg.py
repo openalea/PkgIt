@@ -51,8 +51,8 @@ def main():
     parser.add_argument('-c', '--create', help="Create a new formula named CREATE.")
     parser.add_argument('-y', '--packaged', help="Display if formula is yet packaged.")
     parser.add_argument('--without', help="Omit to package WITHOUT and WITHOUT's dependencies. Works with --package")
-    parser.add_argument('--disp_deps', help="Display dependencies of formula named DISP_DEPS.")
-    parser.add_argument('--disp_versions', action="store_true", default=False, help="Display all formulas available and versions of packages.")
+    parser.add_argument('--deps', help="Display dependencies of formula named DISP_DEPS.")
+    parser.add_argument('--versions', action="store_true", default=False, help="Display all formulas available and versions of packages.")
     
     # parser.add_argument('--no-download',dest='dl' , default="False", help="Don't download any packages, just install the ones already downloaded")
     # parser.add_argument('--no-install',dest='inst' , default="False", help="Download and unpack all packages, but don't actually install them.")
@@ -79,10 +79,10 @@ def main():
     if args.create is not None:
         default_formula(args.create)
       
-    if args.disp_deps is not None:
-        print deps(args.disp_deps)
+    if args.deps is not None:
+        print deps(args.deps)
         
-    if args.disp_versions:
+    if args.versions:
         version_list = versions()
         for ver in version_list:
         	print ver

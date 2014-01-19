@@ -20,7 +20,6 @@
 ###############################################################################
 __revision__ = "$Id: $"
 
-
 # The point of this file is to create an inno setup script to install openalea/vplants
 # on a machine without having to rely on an internet connection during installation
 # while leveraging the power off eggs for later updates.
@@ -39,7 +38,6 @@ __revision__ = "$Id: $"
 # BTW think of this module as a root-level class. It behaves mostly like a class excepted I didn't
 # encapsulate it inside a class.
 
-import argparse
 from collections import OrderedDict
 import os
 import string
@@ -48,14 +46,10 @@ import types
 import subprocess
 from path import path, glob, shutil
 
-###from openalea.misc.gforge_upload import Uploader
-from openalea.deploy.system_dependencies.dependency_builder import BE
-from openalea.deploy.system_dependencies.dependency_builder import options_common, options_gforge
 from pkgit.utils import deps, mask, import_formula
 
 import locale
 unused, local_enc = locale.getdefaultlocale()
-
 
 err = sys.stderr.write
 
@@ -178,9 +172,6 @@ python_package_ti_template_egg    = python_package_test_template+python_package_
 python_package_ti_template_zipdist= python_package_test_template+python_package_install_template_zipdist
 python_package_ti_template_msi    = python_package_test_template+python_package_install_template_msi
 
-
-
-
 def prepare_working_dir(instDir, no_del=False):
     if path(instDir).exists():
         if no_del:
@@ -244,8 +235,6 @@ def find_installer_files(tpp_eggDir, srcDir, pyMaj, pyMin, arch, dependencies):
             info[1] = ef
             print "\tWill install %s"%ef        
     return ok
-
-
         
 def get_project_eggs(arch, globs, outDir, srcDir):
     # real egg names have the project prefix eg, "OpenAlea", "VPlants".
@@ -285,7 +274,6 @@ def generate_inno_installer_setup_group(setup):
         final += k + "=" + src + "\n"
     return final
     
-
 # -- ATTENTION PLEASE -- must be run after "copy eggs" and "get_installer_files"<
 def generate_inno_installer_files_group(dependencies, egg_pths):
     final = ""
@@ -343,8 +331,6 @@ def generate_pascal_test_install_code(dependencies):
                 final+=template.substitute(PACKAGE=pk,
                                            PACKAGE_INSTALLER=path(info[1]).basename() )                        
     return final, testVariables
-
-
     
 def generate_pascal_detect_env_body(dependencies, testVars, appname):
     testReportingPascalTemplate = StrictTemplate(
@@ -384,7 +370,6 @@ def generate_pascal_detect_env_body(dependencies, testVars, appname):
                                                                     APPNAME=appname)
     return testing, reporting
             
- 
 def generate_pascal_deploy_body(dependencies, testVars, step):
     installationPascalTemplate = StrictTemplate(
 """
@@ -433,75 +418,6 @@ end;""")
     code = tmpl.substitute(EGGMAXID=eggmaxid)
     return code
     
-def configure_inno_setup(appname, appversion, dependencies, args, funcs, egg_pths):
-    print "Configuring inno script...",
-    f = open( path(__path__)/"template_win_inst.iss.in")
-    s = f.read()
-    f.close()
-
-    print 40
-    template = StrictTemplate(s)
-    eggnum = len(egg_pths)
-    print 42
-    eggArrayInit = ""
-    for i, e in enumerate(egg_pths):
-        eggArrayInit+="Eggs[%i] := '%s';\n"%(i, e) 
-    print 44
-    s='\n'+"#"*80+'\n'
-    print s+eggArrayInit+s
-    print 46
-    step = int(100./(eggnum+len(dependencies)))    
-    detect, testVars = funcs["generate_pascal_test_install_code"](dependencies)
-    print 48
-    print "*******************************************************"
-    print "*******************************************************"
-    print "*******************************************************"
-    print detect
-    print "*******************************************************"
-    print "*******************************************************"
-    print "*******************************************************"
-    print 50
-    testingBody, reportingBody = funcs["generate_pascal_detect_env_body"](dependencies, testVars, appname)
-    installationBody = funcs["generate_pascal_deploy_body"](dependencies, testVars, step)
-    print 52
-    modeStr = "" if args.runtime else "dev"
-    s = template.substitute(APPNAME=appname,
-                            APPVERSION=appversion,
-                            INSTTYPE=modeStr.upper(),
-                            SETUP_CONF=funcs["generate_inno_installer_setup_group"](args.setup),
-                            #configure Python Major and Minor
-                            PYTHONMAJOR=args.pyMaj,
-                            PYTHONMINOR=args.pyMin,
-                            #the pascal booleans that store if this or that package is installed or not.
-                            TEST_VARIABLES=reduce(lambda x,y: x+", "+y, testVars.itervalues(), "dummy"),
-                            #the files that will be packed by the installer.
-                            INSTALLER_FILES=funcs["generate_inno_installer_files_group"](dependencies, egg_pths),
-                            #configure number of eggs
-                            EGGMAXID=str(eggnum-1),
-                            #configure the initialisation of egg array
-                            EGGINIT=eggArrayInit,
-                            #configure other pascal code
-                            STEP=step,
-                            #configure the functions that detect and install packages
-                            INSTALL_AND_DETECTION_CODE=detect,
-                            #configure the body of DetectEnv that tests
-                            TEST_VAR_RESULTS=testingBody,
-                            #configure the body of DetectEnv that reports
-                            REPORT_VAR_RESULTS=reportingBody,
-                            INSTALL_APP_BODY=funcs["generate_pascal_install_code"](str(eggnum-1)),
-                            #configure the body of Deploy that installs the dependencies
-                            DEPLOY_BODY=installationBody,
-                            #Code to run on post install
-                            POSTINSTALLCODE=funcs["generate_pascal_post_install_code"](egg_pths),                            
-                            )
-    print 54
-    fpath = path(args.outDir)/appname+"_installer_"+modeStr+".iss"
-    f = open( fpath, "w" )
-    f.write(s.encode(local_enc))
-    f.close()
-    print "ok", "ok", "ok"
-    return fpath
-
 def configure_inno_setup_without_args(appname, appversion, dependencies, runtime, pyMaj, pyMin, setup, outDir, funcs, egg_pths):
     print "Configuring inno script...",
     f = open( path(__path__)/"template_win_inst.iss.in")
@@ -570,187 +486,7 @@ def make_stitcher( eggDir, pyMaj, pyMin):
             return path(eggDir)/eggName
         part = path(eggName).splitext()
         return path(eggDir)/(part[0]+pyfix+part[1])
-    return __stitch_egg_names
-
-def processInstaller(mask, runtimeMode):
-    if (runtimeMode==True and bt(mask, RUNTIME)) or (runtimeMode==False and bt(mask, DEVELOP)):
-        return True
-    return False                                   
-   
-   
-def upload(installer, project, login, passwd, repository):
-        pass
-        """
-        parser = argparse.ArgumentParser()
-        # here we need to have the destination names in agreement with prototype of Uploader class
-        parser.add_argument("--project", default=repository)
-        parser.add_argument("--package", default="FullInstall")
-        parser.add_argument("--release", default=project)
-        parser.add_argument("--login",   default=login)
-        parser.add_argument("--password", default=passwd)
-        parser.add_argument("--mode",    default="add")
-        parser.add_argument("--dry-run",  default=False)
-        parser.add_argument("--glob",     default=installer)
-        parser.add_argument("--non-interactive", action="store_true", default=True)
-
-        opts = parser.parse_args("")
-        upld = Uploader(opts)
-        return upld.run()"""
-        
-######################
-# MAIN AND RELATIVE  #
-######################
-   
-def read_conf_file(confFile, as_globals=False):
-        print "Reading conf file:", confFile, "...",
-        if as_globals:
-            ret = globals()
-            execfile(confFile, globals())            
-        else:
-            d = {} 
-            ret = d
-            execfile(confFile, globals(), d)
-        print "done"
-        return ret
-   
-def epilog():
-    msg="""
-python makeWinInstaller conf=vplants.conf pyMaj=2 pyMin=6 srcDir=%HOMEPATH%\\Downloads\\ eggGlobs="VPlants*.egg|Openalea*.egg" runtime=True arch=x86
-
-
-python makeWinInstaller conf=openalea.conf pyMaj=2 pyMin=7 srcDir=%HOMEPATH%\\Downloads\\ eggGlobs="Openalea*.egg" runtime=False arch=x86_64
-
-python makeWinInstaller.py conf=alinea_conf.py srcDir=%DISTBASE%\\..\\thirdPartyPackages eggDir=%DISTBASE%\\al26 arch=x86 
-    setup="{'LicenseFile':r'%DISTBASE%\\..\\..\\vplants\\src\\release_0_9\\vplants_meta\\license.txt'}"
-
-You can have multiple globs, just use: eggGlobs="Openalea*.egg|Vplants*.egg".
-The glob will be mangled with to incorporate python version information so you
-should NOT write "Openalea*py2.6.egg" because it will be done automatically.
-"""
-    return msg
-
-def _parse_dict_string(d_str):
-    return eval(d_str) if not isinstance(d_str, dict) else d_str
-
-def _parse_unicode_abspath(path):
-    return path(unicode(path, encoding=local_enc)).abspath()
-
-def parse_arguments():
-    parser = argparse.ArgumentParser(description="Create InnoSetup installers for Windows, for Openalea, VPlants and Alinea",
-                                     epilog = epilog(),
-                                     formatter_class=argparse.RawDescriptionHelpFormatter,)
-    
-    default = str(sys.version_info.major)
-    parser.add_argument("--pyMaj", "-P", default=default, help="Major python version (default = %s)."%default, type=str)
-    default = str(sys.version_info.minor)
-    parser.add_argument("--pyMin", "-p", default=default, help="Minor python version (default = %s)."%default, type=str)
-    default = path(os.getcwd()).abspath()/"eggs"/"thirdparty"
-    parser.add_argument("--srcDir", "-s", default=default, help=u"Directory to look for third party installers or eggs (default = %s)."%default, type=_parse_unicode_abspath)
-    default = path(os.getcwdu()).abspath()/"output"/"PROJECT"
-    parser.add_argument("--outDir", "-o", default=default, help=u"Directory to put output (default=%s)."%default, type=path)
-    parser.add_argument("--eggGlobs", "-b", default=None, help="Pattern to match the PROJECT egg names (is not defined in CONFFILE). Use '|' to specify many patterns.")
-    default = path(os.getcwdu()).abspath()/"eggs"/"PROJECT"
-    parser.add_argument("--eggDir", "-e", default=default, help=u"Directory where we will look for the PROJECT eggs (default = %s)"%default, type=path)
-    parser.add_argument("--tpp-eggDir", "-t", default=None, help="Directory where we will look for the third party eggs (default = srcDir)", type=path)
-    parser.add_argument("--devel", "-d", action="store_const", const=False, default=True, help="Build Development Toolkit or Runtime (default=runtime)", dest="runtime")
-    parser.add_argument("--fetch-online", "-f", action="store_const", const=True, default=False, help="Download eggs from online repositories and use them.")
-    default = "win32" #if not is_64bits_python() else "win64"  
-    parser.add_argument("--arch", "-a", default=default, help="Build installer for this arch (default=%s)"%default, choices=["x86", "x86_64"])
-    parser.add_argument("--setup", "-m", default={}, help="Additinnal values to complete InnoSetup conf file. (example :%s) "%str({'LicenseFile':'c:\\pthtolicensefile'}), 
-                        type=_parse_dict_string)
-    parser.add_argument("--confFile", "-c", default=None, help="Configuration file for to build with", type=path)
-    parser.add_argument("project", default="openalea", help="Which project to build installer for")###, choices=["openalea", "vplants", "alinea"]
-    parser = options_common(parser)
-    parser = options_gforge(parser)
-    parser.add_argument("--upload", "-u", action="store_const", const=True, default=False, 
-                        help="Upload result to gforge ")     
-    parser.add_argument("--release", "-r", action="store_const", const=True, default=False, 
-                        help="If 'upload' is specified, uploads to openalea repository instead of private vplants.") 
-    return parser.parse_args()
-
-optionsThatCanBeInConf = set(["eggGlobs", "setup"])
-    
-
-def main():
-    #print __path__
-    #sys.exit(-1)
-    args = parse_arguments()
-
-    args.outDir = path(args.outDir)/(args.project+"_"+sys.platform+"_"+args.pyMaj+"."+args.pyMin)
-    args.tpp_eggDir = args.tpp_eggDir or args.srcDir
-    print args.srcDir #.encode("latin_1")
-    
-    prepare_working_dir(args.outDir, no_del=True)
-    
-    # -- Find the configuration file
-    ###confFile  = args.confFile or path(__file__).splitpath()[0]/(args.project+"_conf.py")        
-    ###confDict = read_conf_file(confFile)    
-    formula = import_formula(args.project)()
-    confDict = formula.conf_dict()
-    
-    #   -- funcs will contain function overrides read from confFile --
-    funcs = dict( (fname, f) for fname, f in globals().iteritems() if isinstance(f, types.FunctionType) )
-    funcs.update(dict( (fname, f) for fname, f in confDict.iteritems() if isinstance(f, types.FunctionType)))    
-    #   -- vars will contain vars read from confFile --    
-    ###thirdPartyPackages = confDict["thirdPartyPackages"]
-    ###appname            = confDict["APPNAME"]
-    ###appversion         = confDict["APPVERSION"]
-    
-    thirdPartyPackages = deps(args.project)
-    todelete = list()
-    for dep in thirdPartyPackages:
-        if "openalea" in dep:
-            todelete.append(dep)
-        if "vplants" in dep:
-            todelete.append(dep)
-        if "alinea" in dep:
-            todelete.append(dep)
-            
-    if "vplants" in args.project:
-        todelete = todelete + deps("openalea")
-    if "alinea" in args.project:
-        todelete = todelete + deps("vplants")
-        
-    for dep in todelete:
-        if dep in thirdPartyPackages:
-            thirdPartyPackages.remove(dep)
-
-    appname             = args.project
-    appversion          = import_formula(args.project).version
-    
-    ###args.eggGlobs = args.eggGlobs or confDict["eggGlobs"]
-    ###args.setup    = args.setup or confDict["setup"]
-    args.eggGlobs = args.eggGlobs
-    args.setup    = args.setup
-                            
-    # -- Fix the egg globs to include python version and architecture dependency.
-    args.eggGlobs = map(make_stitcher(args.eggDir, args.pyMaj, args.pyMin), args.eggGlobs.split("|"))
-    print "The following project egg globs will be used:", args.eggGlobs
-
-    # -- Filter the dependencies to process according to the type of installer (for runtimes or devtools)
-    # -- The dict points from package names to package info [bitmask, installer_path, test_script_path]
-    ###dependencies = OrderedDict( (pk, [mask, None, None]) for pk, (mask,) in thirdPartyPackages  \
-    ###                            if processInstaller(mask, args.runtime) )
-    dependencies = OrderedDict( (pk.split("formula")[0], [mask(pk), None, None]) for pk in thirdPartyPackages )
-                                
-    # Configure BE for gforge operations
-    BE.set_options( vars(args) )
-     
-    # -- find out the installers to package for this mega installer --
-    # will complete dependencies if they have no info[1].
-    ok = find_installer_files(args.tpp_eggDir, args.srcDir, args.pyMaj, args.pyMin, args.arch, 
-                              dependencies)                            
-                            
-    if not ok:
-        sys.exit(-1)
-        
-    proj_egg_pths = get_project_eggs(args.arch, args.eggGlobs, args.outDir, args.srcDir)
-    gen = configure_inno_setup(appname, appversion, dependencies, args, funcs, proj_egg_pths)
-    print "Done, please check the generated file:", gen
-    
-    print "Now compiling",    
-    if subprocess.call("iscc.exe "+gen, shell=True, env=os.environ):
-        return False
+    return __stitch_egg_names                        
 
 def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDir=None, pyMaj=None, pyMin=None, eggGlobs="*.egg", setup={}, arch="win32", runtime=True):
     """

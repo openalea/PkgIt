@@ -22,8 +22,13 @@ from __future__ import absolute_import
 __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
-from pkgit.utils import checkout
+from pkgit.utils import checkout, sh
 from path import path
+
+"""
+C:\temp_working_dir>pkgit -p oalab --without openalea,plantgl,lpy,mtg,setuptools,ipython --dry-run
+"""
+
 
 class Oalab(Formula):
     version         = "0.1"  	 # Version of the dependency (not of the formula)
@@ -38,10 +43,15 @@ class Oalab(Formula):
     
     def __init__(self,**kwargs):
         super(Oalab, self).__init__(**kwargs)
-        self.dist_dir = path(self._get_dist_path())/"openalea"/"oalab"
+        self.dist_dir = path(self._get_dist_path())/"openalea"
         
     def _download(self):
         return checkout(self.download_url, self.eggdir)
 
     def bdist_egg(self):
-        return sh("python setup.py build bdist_egg -d %s"%(self.dist_dir,)) == 0
+        cmd = "python setup.py build bdist_egg -d %s"%(self.dist_dir,)
+        print cmd
+        return sh(cmd) == 0
+        
+    def _configure_script(self):
+        return True

@@ -26,7 +26,7 @@ from pkgit.utils import sh, checkout, StrictTemplate
 from path import path
 
 class Vplants(Formula):
-    version = '1.1.dev'
+    version = '1.1'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
     # download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/branches/release_1_0"
     download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk"

@@ -22,7 +22,7 @@ from __future__ import absolute_import
 __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
-from pkgit.utils import checkout
+from pkgit.utils import checkout, sh
 from path import path
 
 class Lpy(Formula):
@@ -31,17 +31,22 @@ class Lpy(Formula):
     homepage        = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"     # Url of home-page of the dependency (not of the formula)
     license         = "Cecill-C License"     # License of the dependency (not of the formula)
     authors         = "Inria, INRA, CIRAD"     # Authors of the dependency (not of the formula)
-    dependencies    = [] # List of dependencies of the formula
+    dependencies    = ["plantgl"] # List of dependencies of the formula
     download_name   = "lpy"     # Name of the local archive
     download_url    = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk/lpy"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
     DOWNLOAD = BDIST_EGG = True
     
     def __init__(self,**kwargs):
         super(Lpy, self).__init__(**kwargs)
-        self.dist_dir = path(self._get_dist_path())/"openalea"/"lpy"
+        self.dist_dir = path(self._get_dist_path())/"openalea"
         
     def _download(self):
         return checkout(self.download_url, self.eggdir)
 
     def bdist_egg(self):
-        return sh("python setup.py build bdist_egg -d %s"%(self.dist_dir,)) == 0
+        cmd = "python setup.py build bdist_egg -d %s"%(self.dist_dir,)
+        print cmd
+        return sh(cmd) == 0
+        
+    def _configure_script(self):
+        return True

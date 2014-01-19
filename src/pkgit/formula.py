@@ -343,6 +343,14 @@ class Formula(object):
             logger.debug("==BDIST_EGG==") 
             ret = self._configure_script()     
             ret = ret & self.bdist_egg()
+            
+            if not ret:
+                # If bdist_egg create an empty egg, remove empty egg
+                egg = self._glob_egg()
+                if egg is not None:
+                    egg.removedirs()
+                    logger.warnings("Can't eggify. Remove %s"%egg) 
+
             logger.debug("Bdist_egg %s" %ret)
             return ret
         return True
