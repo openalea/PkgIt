@@ -490,17 +490,21 @@ def make_stitcher( eggDir, pyMaj, pyMin):
 
 def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDir=None, pyMaj=None, pyMin=None, eggGlobs="*.egg", setup={}, arch="win32", runtime=True):
     """
-    :project: openalea, vplants or alinea
+    :project: openalea, vplants, alinea or oalab
     :srcDir: source third part dir
     :eggDir: egg openalea/vplants/alinea dir
     :outDir: output dir (result)
 
     :warning: get all eggs in eggDir! So if you wininst alinea, it will package openalea+vplants+alinea but only dependencies for alinea!
     """
+    # if not srcDir:
+        # srcDir = path(".").abspath()/"dist"/"thirdpart"
+    # if not eggDir:
+        # eggDir = path(".").abspath()/"dist"/project
     if not srcDir:
-        srcDir = path(".").abspath()/"dist"/"thirdpart"
+        srcDir = path(".").abspath()/"dist"/"test"
     if not eggDir:
-        eggDir = path(".").abspath()/"dist"/project
+        eggDir = path(".").abspath()/"dist"/"test"
     if not outDir:
         outDir = path(srcDir).abspath()/".."/"result"
     if not pyMaj:
@@ -548,6 +552,8 @@ def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDi
             print "remove " + dep
             
     appname             = project
+    if project == "oalab":
+        appname = "openalealab"
     appversion          = import_formula(project).version
                             
     # -- Fix the egg globs to include python version and architecture dependency.
@@ -558,10 +564,7 @@ def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDi
     # -- The dict points from package names to package info [bitmask, installer_path, test_script_path]
     ###dependencies = OrderedDict( (pk, [mask, None, None]) for pk, (mask,) in thirdPartyPackages  \
     ###                            if processInstaller(mask, args.runtime) )
-    dependencies = OrderedDict( (pk.split("formula")[0], [mask(pk), None, None]) for pk in thirdPartyPackages )
-                                
-    # Configure BE for gforge operations
-    ###BE.set_options( vars(args) )
+    dependencies = OrderedDict( (pk, [mask(pk), None, None]) for pk in thirdPartyPackages )
      
     # -- find out the installers to package for this mega installer --
     # will complete dependencies if they have no info[1].

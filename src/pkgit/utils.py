@@ -35,7 +35,7 @@ from .patch import fromfile, fromstring
 from setuptools.package_index import PackageIndex as pi
 import logging
 
-def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False):
+def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, force=False):
     """
     Eggify formula and deps recursively
     :param formula_name: string name of the formula
@@ -51,12 +51,12 @@ def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False):
     
     if not dry_run:   
         for formula in formula_list:
-            formula, ret_ = eggify_formula(formula, dest_dir=dest_dir, dry_run=dry_run)
+            formula, ret_ = eggify_formula(formula, dest_dir=dest_dir, dry_run=dry_run, force=force)
             ret = ret & ret_
             
         return ret
                 
-def eggify_formula(formula_name, dest_dir=None, dry_run=False):
+def eggify_formula(formula_name, dest_dir=None, dry_run=False, force=False):
     """
     Eggify only one formula
     :param formula_name: string name of the formula
@@ -70,6 +70,8 @@ def eggify_formula(formula_name, dest_dir=None, dry_run=False):
         logger.debug("Formula %s" %(formula_name))
         if dest_dir is not None:
             formula.dist_dir = path(dest_dir).abspath()
+        if force:
+            formula.force = True
         
         ret = True
         ret = ret & formula._download()

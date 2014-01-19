@@ -30,7 +30,7 @@ class Ipython(Formula):
     homepage        = "http://ipython.org"     # Url of home-page of the dependency (not of the formula)
     license         = "BSD license"     # License of the dependency (not of the formula)
     authors         = "P\'erez, Fernando and Granger, Brian E."     # Authors of the dependency (not of the formula)
-    dependencies    = ["setuptools"]     # List of dependencies of the formula
+    dependencies    = ["python","setuptools"]     # List of dependencies of the formula
     download_name   = "ipython.zip"     # Name of the local archive
     download_url    = "https://pypi.python.org/packages/source/i/ipython/ipython-"+version+".zip"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
     DOWNLOAD = UNPACK = BDIST_EGG = True 

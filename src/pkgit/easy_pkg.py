@@ -61,7 +61,7 @@ def main():
     # parser.add_argument('--force-download', default="False", help="Download even if already downloaded.")
     # parser.add_argument('--force-install', default="False", help="Install even if already installed.")
     # parser.add_argument('--force-build', default="False", help="Build even if already built.")
-    # parser.add_argument('--force', default="False", help="Force all: download, install and build")
+    parser.add_argument('--force', action="store_const", const=True, default=False, help="Force packaging. Works with --package")
     
     parser.add_argument('--dest-dir', default=None, help="copy result to DIR. Works with --package")
     # parser.add_argument('--download-dir', default="", help="download package to DIR")
@@ -105,10 +105,13 @@ def main():
     if args.package is not None:
         dest_dir = args.dest_dir
         dry_run = False
+        force = False
         if args.dry_run:
             dry_run = True
+        if args.force:
+            force = True
         
-        eggify_formulas(args.package, dest_dir=dest_dir, without=without, dry_run=dry_run)
+        eggify_formulas(args.package, dest_dir=dest_dir, without=without, dry_run=dry_run, force=force)
         if args.rm_tmp_all:
             remove_temp(args.package, True)
         elif args.rm_tmp:

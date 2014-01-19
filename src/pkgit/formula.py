@@ -100,10 +100,11 @@ class Formula(object):
         self.setup_in_name  = path(__file__).abspath().dirname()/"setup.py.in"
         self.setup_out_name = path(self.eggdir)/"setup.py"
         self.use_cfg_login  = False #unused for the moment
+        self.force          = False #Set to True t force re-download, re-build, re-package
         
         self._make_default_dirs()
         
-        if self.packaged()[0] is True:
+        if (self.packaged()[0] is True) and (not self.force):
             DOWNLOAD = UNPACK = INSTALL = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = COPY_INSTALLER = False
 
     def _default_substitutions_setup_py(self):
@@ -172,7 +173,7 @@ class Formula(object):
                 return True    
             dir=self._get_dl_path()
             # If already downloaded : do nothing
-            if self.download_name in os.listdir(dir):
+            if (self.download_name in os.listdir(dir)) and (not self.force):
                 message = "%s already downloaded!" %self.download_name
                 logger.debug(message) 
                 return True
@@ -195,7 +196,7 @@ class Formula(object):
                 ret = True
             if path(self.sourcedir).exists():
                 # If already unpacked and size > 0 : do nothing
-                if path(self.sourcedir).getsize() > 0:
+                if (path(self.sourcedir).getsize() > 0) and (not self.force):
                     message =  'already unpacked in %s' %repr(self.sourcedir)
                     logger.debug(message)
                     ret = True
