@@ -24,7 +24,7 @@ __revision__ = "$Id: $"
 from pkgit.formula import Formula
 from pkgit.utils import sh
 from pkgit.formulas.qt4 import Qt4 as qt4
-from path import path, shutil
+from openalea.core.path import path, shutil
 
 class Qscintilla(Formula):
     version = "2.6.2"

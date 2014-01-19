@@ -70,7 +70,7 @@ from pkgit.formulas.mingw import Mingw as mingw
 from pkgit.formulas.mingw_rt import Mingw_rt as mingw_rt
 from pkgit.utils import uj, recursive_glob_as_dict, \
 recursive_copy, makedirs, Pattern, sh, eggify_formula
-from path import path, shutil
+from openalea.core.path import path, shutil
 import subprocess
 import ConfigParser
 import time

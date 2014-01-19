@@ -26,7 +26,7 @@ from pkgit.utils import option_to_python_path, option_to_sys_path, sh
 from pkgit.formulas.qt4 import Qt4 as qt4
 from pkgit.formulas.sip import Sip as sip_
 import sys, os
-from path import path, shutil
+from openalea.core.path import path, shutil
 
 class Pyqt4(Formula):
     homepage        = "http://www.riverbankcomputing.com/software/pyqt/intro"

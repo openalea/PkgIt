@@ -22,7 +22,7 @@ __revision__ = "$Id: $"
 
 import sys, os
 import datetime
-from path import path, glob, shutil
+from openalea.core.path import path, glob, shutil
 from .utils import unpack as utils_unpack
 from .utils import install as util_install
 from .utils import in_dir, try_except, TemplateStr, sh, sj, makedirs

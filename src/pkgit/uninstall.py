@@ -24,7 +24,7 @@ __revision__ = "$Id: $"
 # main is "uninstall_all_windows()" function
 # works only for windows
 
-from path import path
+from openalea.core.path import path
 import os, sys
 from platform import platform
 

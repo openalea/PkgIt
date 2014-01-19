@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import checkout, sh
-from path import path
+from openalea.core.path import path
 
 class Lpy(Formula):
     version         = "1.1" 	 # Version of the dependency (not of the formula)

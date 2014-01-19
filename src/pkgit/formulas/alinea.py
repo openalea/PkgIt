@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import sh, checkout
-from path import path
+from openalea.core.path import path
 
 class Alinea(Formula):
     version = '1.1'

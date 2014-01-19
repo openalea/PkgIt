@@ -43,7 +43,7 @@ import re
 # cStringIO doesn't support unicode in 2.5
 from StringIO import StringIO
 import urllib2
-from path import path
+from openalea.core.path import path
 from os import unlink
 from optparse import OptionParser
 import sys

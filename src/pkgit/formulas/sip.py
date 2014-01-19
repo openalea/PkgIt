@@ -25,7 +25,7 @@ from pkgit.formula import Formula
 from pkgit.utils import sh, option_to_sys_path, apply_patch_from_string
 from pkgit.formulas.qt4 import Qt4 as qt4
 import sys, os
-from path import path, shutil
+from openalea.core.path import path, shutil
 
 class Sip(Formula):
     download_url = "http://downloads.sourceforge.net/project/pyqt/sip/sip-4.15.2/sip-4.15.2.zip"
@@ -96,7 +96,7 @@ class Sip(Formula):
         
         header = """
 import re
-from path import path
+from openalea.core.path import path
 
 # HACK paths
 qtdev = os.environ.get('QTDIR') if 'QTDIR' in os.environ else r'%s'

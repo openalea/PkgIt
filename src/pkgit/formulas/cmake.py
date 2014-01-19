@@ -22,7 +22,7 @@ from __future__ import absolute_import
 __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
-from path import path
+from openalea.core.path import path
 
 class Cmake(Formula):
     version        = '2.8.11.2'

@@ -27,7 +27,7 @@ from pkgit.formulas.qt4 import Qt4 as qt4
 from pkgit.formulas.qscintilla import Qscintilla as qscintilla
 from pkgit.formulas.pyqt4 import Pyqt4 as pyqt4
 import sys
-from path import path
+from openalea.core.path import path
 
 class Pyqscintilla(Formula):
     download_url = None 

@@ -6,7 +6,7 @@
 # 3) launch what is here:
 
 import os
-from path import path
+from openalea.core.path import path
 
 di = os.listdir(".")
 di = [d for d in di if path(d).isdir()]

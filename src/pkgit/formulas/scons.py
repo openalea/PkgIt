@@ -38,7 +38,7 @@ import sys, os
 from pkgit.utils import sh
 from pkgit.formula import Formula
 from setuptools import find_packages
-from path import path
+from openalea.core.path import path
 
 class Scons(Formula):
     license         = "MIT license"

@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.formulas.mingw import Mingw as mingw
-from path import path
+from openalea.core.path import path
 import os
 
 class Bisonflex(Formula):

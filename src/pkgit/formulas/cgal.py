@@ -25,7 +25,7 @@ from pkgit.formula import Formula
 from pkgit.utils import sh
 from pkgit.formulas.boost import Boost as boost
 from pkgit.formulas.mingw import Mingw as mingw
-from path import path
+from openalea.core.path import path
 
 class Cgal(Formula):
     license = "GNU Lesser Public License"

@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import checkout, sh
-from path import path
+from openalea.core.path import path
 
 """
 C:\temp_working_dir>pkgit -p oalab --without openalea,plantgl,lpy,mtg,setuptools,ipython --dry-run
