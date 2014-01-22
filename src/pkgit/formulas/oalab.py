@@ -36,7 +36,7 @@ class Oalab(Formula):
     homepage        = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"     # Url of home-page of the dependency (not of the formula)
     license         = "Cecill-C License"     # License of the dependency (not of the formula)
     authors         = "Inria, INRA, CIRAD"     # Authors of the dependency (not of the formula)
-    dependencies    = ["ipython", "openalea", "plantgl", "lpy", "mtg"]  ## +Pandas   # List of dependencies of the formula
+    dependencies    = ["ipython", "openalea", "plantgl", "lpy", "mtg", "configobj"]  ## +Pandas   # List of dependencies of the formula
     download_name   = "oalab"     # Name of the local archive
     download_url    = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk/oalab"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
     DOWNLOAD = BDIST_EGG = True

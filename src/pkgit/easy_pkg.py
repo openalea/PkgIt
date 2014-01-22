@@ -26,13 +26,8 @@ from pkgit.create import default_formula
 #from pkgit.uninstall import uninstall
 from pkgit.wininst import wininst
 
-def main():
-    """
-    Command PkgIt.
-    
-    Permit to package modules thanks to formulas. Main commands are --package, --wininst, --create (package existing formula, create windows installer, create new formula).
-    """
 
+def parse():
     version = "1.0"
     formula_list = formulas()
     formula_list = str(formula_list)[1:-1]
@@ -40,8 +35,6 @@ def main():
     # options
     parser = ArgumentParser(prog='pkgit', description="""Permit to package modules thanks to formulas. Main commands are
 --package, --wininst, --create (package existing formula, create windows installer, create new formula).""")
-
-
 
     parser.add_argument('-v', '--version', action='version', version='%s'%version)
     
@@ -73,7 +66,15 @@ def main():
     parser.add_argument('--rm-tmp-all',action="store_const", const=True, default=False, help="Remove all temporary files after packaging. Works with --package")
     
     parser.add_argument('--dry-run',action="store_const", const=True, default=False, help="Don't do anything. Works with --package")
+    return parser
     
+def main(argv=None):
+    """
+    Command PkgIt.
+    
+    Permit to package modules thanks to formulas. Main commands are --package, --wininst, --create (package existing formula, create windows installer, create new formula).
+    """
+    parser = parse()
     args = parser.parse_args()
 
     if args.create is not None:
