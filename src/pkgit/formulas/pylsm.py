@@ -41,11 +41,13 @@ class Pylsm(Formula):
     @property 
     @with_original_sys_path
     def package(self):
-        return __import__(self.packagename)
+        return __import__("pylsm")
     
     def setup(self):
         pth = self.package.__path__[0]
         for p in pth.split("\\"):
             if ".egg" in p:
                 self.version = p.split("-")[1]+"_1" # we have a patched version
-        return dict( VERSION = self.version )      
+        return dict( LIB_DIRS = {"pylsm" : str(pth)},
+                      VERSION  = self.version, )
+                    

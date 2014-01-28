@@ -535,11 +535,19 @@ def apply_patch_from_file(patchfile):
     p = fromfile(patchfile)
     return p.apply()   
     
-def apply_patch_from_string(patchstring):
+def apply_patch_from_string(patchstring, root=None):
     """ Apply patch from string
     """
     p = fromstring(patchstring)
-    return p.apply()  
+    
+    print "****"
+    if p is False:
+        print "Can't patch!"
+    else:
+        print p.apply(root=root)
+    print "****"
+    
+    return p
 
 def get_dirs():
     """ Return list of directories to create.
@@ -605,7 +613,7 @@ def checkout(url, dir=None):
 def set_windows_env():
     """ Set window environment path
     """
-    cmd = "set PATH=%PATH%;%INNO_PATH%;%SVN_PATH%;%PYTHON_PATH%;%PYTHON_PATH%\Scripts"
+    cmd = "set PATH=%INNO_PATH%;%SVN_PATH%;%PYTHON_PATH%;%PYTHON_PATH%\Scripts;%PATH%"
     return sh(cmd) == 0
 '''
 def unpack(arch, where):
@@ -777,7 +785,7 @@ def merge_list_dict(li):
     d = defaultdict(list)
     for k, v in li:
         d[k].extend(v)
-    return dict( (k, sj(v)) for k,v in d.iteritems() )
+    return dict( (str(k), str(sj(v))) for k,v in d.iteritems() )
     
 # -- Glob and regexp patterns --
 class Pattern:

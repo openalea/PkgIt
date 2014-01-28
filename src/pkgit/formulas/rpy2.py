@@ -36,7 +36,8 @@ class Rpy2(Formula):
     authors         = "Laurent Gautier"
     description     = "Unofficial Windows gcc libs and includes of rpy2"
     dependencies    = ["r"]
-    DOWNLOAD = UNPACK = MAKE = MAKE_INSTALL = BDIST_EGG = True
+    # DOWNLOAD = UNPACK = 
+    MAKE = MAKE_INSTALL = BDIST_EGG = True
 
     def setup(self):
         from setuptools import find_packages
@@ -51,14 +52,17 @@ class Rpy2(Formula):
                     )
         
     def make(self):
-        apply_patch_from_string( PATCH )
+        # apply_patch_from_string( PATCH )
         
-        sys.path.append("C:\\Program Files\\R\\R-2.15.3")
-        sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin")
-        sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin\\i386")
-        sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin\\i386\\R")
-        sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin\\i386\\R.exe")
-        print sys.path
+        # sys.path.append("C:\\Program Files\\R\\R-2.15.3")
+        # sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin")
+        # sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin\\i386")
+        # sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin\\i386\\R")
+        # sys.path.append("C:\\Program Files\\R\\R-2.15.3\\bin\\i386\\R.exe")
+        cmd = "set R_HOME=C:\\Program Files\\R\\R-2.15.3\\bin\\i386\\"
+        cmd = "set PATH=R_HOME;%PATH%"
+        sh(cmd)
+        
         cmd = sys.executable + ' setup.py build_ext --compiler=mingw32'
         print cmd
         return sh(cmd) == 0

@@ -87,7 +87,7 @@ class Boost(Formula):
         
     def setup(self):
         version_re  = re_compile("^.*BOOST_VERSION\s:\s([\d\.]{4,8}).*$", re.MULTILINE|re.DOTALL)
-        incs = recursive_glob_as_dict( self.install_inc_dir, Pattern.qtinc, strip_keys=True, prefix_key="include", dirs=True).items()
+        incs = recursive_glob_as_dict( str(self.install_inc_dir), Pattern.qtinc, strip_keys=True, prefix_key="include", dirs=True).items()
         inc_dirs = merge_list_dict( incs )
         # get the version from Jamroot file
         version = "UNKNOWN"        

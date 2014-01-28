@@ -456,3 +456,103 @@ Temporary repositories:
 Result repository:
 
 * dist (where eggs or installers are finally put)
+
+Status today (january 2014)
+###########################
+
+===============  ===========  ===============================================  ===============================================================================================================================
+  Formula         version      Status                                           Solution
+===============  ===========  ===============================================  ===============================================================================================================================
+alinea            1.1          ok
+ann               1.1.2        not working (PATCH part 2 pb)                    Please download https://gforge.inria.fr/frs/download.php/30729/ann-1.1.2-win32.egg
+bisonflex         2.4.1        ok
+boost             1.48.0       ok
+cgal              4.2          ok
+cmake             2.8.11.2     ok
+configobj         4.7.2        ok
+dateutil          2.2          ok
+gnuplot           4.6.3        ok
+inno              5.5.3        ok
+ipython           1.1.0        ok
+lpy               1.1          ok
+matplotlib        1.3.1        ok
+mingw             5.1.4_4c     ok
+mingw_rt          5.1.4_4c     ok
+mtg               1.1          ok
+numpy             1.8.0        ok
+oalab             0.1          ok
+openalea          1.1          ok
+pillow            2.1.0        ok
+plantgl           1.1          ok
+pygments          1.6          ok
+pylsm             0.1-r34      ok
+pyopengl          3.0.2        ok
+pyparsing         1.5.7        ok
+pyqglviewer       0.11         not working (cf qt4)                             Nothing to do. Everything is in qt4 egg.
+pyqscintilla      1.0          not working (cf qt4)                             Nothing to do. Everything is in qt4 egg.
+pyqt4             4.10.3       not working (cf qt4)                             Nothing to do. Everything is in qt4 egg.
+python            2.7.6        ok
+pywin             218          ok
+qglviewer         1.0          not working (cf qt4)                             
+qhull             2012.1       Version 2012 doesn't work with PlantGL.          Please download version 2003.1: https://gforge.inria.fr/frs/download.php/27630/qhull-2003.1-win32.egg
+qscintilla        2.6.2        ok
+qt4               4.8.5        not working                                      Please download https://gforge.inria.fr/frs/download.php/30725/qt4-4.7.4-py2.7-win32.egg
+qt4_dev           4.8.5        not working (cf qt4)                             Please download https://gforge.inria.fr/frs/download.php/30726/qt4_dev-4.7.4-py2.7-win32.egg
+r                 2.15.3       ok
+rpy2              2.3.6        not working (problem with R_HOME?)               Please download https://gforge.inria.fr/frs/download.php/30731/rpy2-2.3.revf075a4291e9c-py2.7.egg  
+scipy             0.13.2       ok
+scons             2.3.0        ok
+setuptools        0.6c11       ok
+sip               4.15.2       ok
+skimage           0.9.3        ok
+svn               1.8.5        ok
+vplants           1.1          ok
+===============  ===========  ===============================================  ===============================================================================================================================
+
+Determining the layout of your Qt installation...
+c:\python27\lib\site-packages\qt4_dev-4.8.5-py2.7-win32.egg\bin\qmake.exe -o qtd
+irs.mk qtdirs.pro
+mingw32-make -f qtdirs.mk release
+mingw32-make -f qtdirs.mk.Release
+mingw32-make[1]: Entering directory `C:/temp2/src/pyqt4'
+g++ -c -pipe -O2 -frtti -fexceptions -mthreads -Wall -Wextra -DUNICODE -DQT_DLL
+-DQT_NO_DEBUG -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAV
+E_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -DQT_NEEDS_QMAIN -I"..\..\..\python2
+7\lib\site-packages\qt4_dev-4.8.5-py2.7-win32.egg\include\QtCore" -I"..\..\..\py
+thon27\lib\site-packages\qt4_dev-4.8.5-py2.7-win32.egg\include" -I"..\..\..\pyth
+on27\lib\site-packages\qt4_dev-4.8.5-py2.7-win32.egg\include\ActiveQt" -I"releas
+e" -I"..\..\..\python27\lib\site-packages\qt4_dev-4.8.5-py2.7-win32.egg\mkspecs\
+default" -o release\qtdirs.o qtdirs.cpp
+g++ -Wl,-s -mthreads -Wl,-subsystem,windows -o release\qtdirs.exe release/qtdirs
+.o  -L"c:\python27\lib\site-packages\qt4_dev-4.8.5-py2.7-win32.egg\lib" -lmingw3
+2 -lqtmain -lQtCore4
+mingw32-make[1]: Leaving directory `C:/temp2/src/pyqt4'
+release\qtdirs.exe
+Error: Unable to find the qmake configuration file
+C:/temp_working_dir/src/qt4\mkspecs\**Unknown**\qmake.conf. Use the QMAKESPEC
+environment variable to specify the correct platform.
+
+Patch Makefile
+
+Traceback (most recent call last):
+  File "c:\openalea\openalea_trunk\pkgit\src\pkgit\utils.py", line 377, in wrapp
+er
+    ret = f(self, *args, **kwargs)
+  File "c:\openalea\openalea_trunk\pkgit\src\pkgit\formula.py", line 293, in _co
+nfigure
+    ret = self.configure()
+  File "c:\openalea\openalea_trunk\pkgit\src\pkgit\utils.py", line 475, in wrapp
+er
+    ret = f(self, *args, **kwargs)
+  File "c:\openalea\openalea_trunk\pkgit\src\pkgit\utils.py", line 447, in wrapp
+er
+    ret = f(self, *args, **kwargs)
+  File "c:\openalea\openalea_trunk\pkgit\src\pkgit\formulas\pyqt4.py", line 64,
+in configure
+    self.patch_pyqt_config()
+  File "c:\openalea\openalea_trunk\pkgit\src\pkgit\formulas\pyqt4.py", line 112,
+ in patch_pyqt_config
+    shutil.copyfile("Makefile", "Makefile.old")
+  File "C:\Python27\lib\shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: 'Makefile'

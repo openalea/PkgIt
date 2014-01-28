@@ -13,8 +13,8 @@ Prepare your computer
     
     You can change your PATH to add Python doing:
     
-    >>> set path=%path%;C:\Python27;C:\Python27\Scripts
-    >>> reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /t REG_EXPAND_SZ /d ^%path^% /f
+    >>> set PATH=C:\Python27;C:\Python27\Scripts;%PATH%
+    >>> reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /t REG_EXPAND_SZ /d ^%PATH^% /f
 
 Package dependencies and OpenAlea
 ---------------------------------
@@ -24,24 +24,23 @@ Package dependencies and OpenAlea
 If one package doesn't work, you can get old package from gforge.
 
 .. warning::
-    Following formulas doesn't works. So please download old version on GForge and put them in repo C:\\temp_pkgit\\dist\\thirdpart.
+    Following formulas doesn't work. So please download old version on GForge and put them in repo C:\\temp_pkgit\\dist\\thirdpart.
     
     * **Qhull** 2012.1 doesn't work with PlantGL (todo: download Qhull 2003.1).
-    * **Qt4**, **Qt4_dev**, Qscintilla, PyQscintilla doesn't works (todo: download qt4 and qt4_dev).
-    * **pylsm** doesn't work (check why... And download pylsm).
+    * **Qt4**, **Qt4_dev**, Qscintilla, PyQscintilla doesn't work (todo: download qt4 and qt4_dev).
     
     Indeed, you can download by hand Qhull, Qt4, Qt4_dev and pylsm, put them into C:\\temp_pkgit\\dist\\thirdpart and launch command:
     
-    >>> pkgit -p openalea --without qhull,qt4,qt4_dev,qscintilla,pyqscintilla,sip,pylsm
+    >>> pkgit -p openalea --without qhull,qt4,qt4_dev,qscintilla,pyqscintilla,sip
     
     .. note::
         
-        * Sometimes mingw and mingw_rt formulas doesn't works: problem with "mingw-get" command. 
+        * Sometimes mingw and mingw_rt formulas doesn't work: problem with "mingw-get" command. 
         
         You can add mingw-get in your PATH doing:
             
-        >>> set path=%path%;C:\MinGW\bin
-        >>> reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /t REG_EXPAND_SZ /d ^%path^% /f
+        >>> set PATH=C:\MinGW\bin;%PATH%
+        >>> reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /t REG_EXPAND_SZ /d ^%PATH^% /f
 
 .. note::
 
@@ -92,10 +91,8 @@ Package dependencies and VPlants
 If one package doesn't work, you can get old package from gforge.
 
 .. warning::
-    Following formulas doesn't works. So please download old version on GForge and put them in repo C:\\temp_pkgit\\dist\\thirdpart.
+    Following formulas doesn't work. So please download old version on GForge and put them in repo C:\\temp_pkgit\\dist\\thirdpart.
     
-    * boost
-    * cgal
     * pyqglviewer
     * rpy2 (apply_patch_from_string pb?)
     

@@ -113,7 +113,13 @@ class Qt4(Formula):
         cmd = "setx QMAKESPEC win32-g++"
         print cmd
         sh(cmd)
+        cmd = "set QMAKESPEC=win32-g++"
+        print cmd
+        sh(cmd)
         cmd = "setx QTDIR %s" %self.installdir
+        print cmd
+        sh(cmd)
+        cmd = "set QTDIR=%s" %self.installdir
         print cmd
         sh(cmd)
 
@@ -157,7 +163,7 @@ examples
             makedirs(pth)
             
         # Copy mingw dll
-        # More here: http://qt-project.org/wiki/Building_Qt_Desktop_for_Windows_with_MinGW
+        # More informations here: http://qt-project.org/wiki/Building_Qt_Desktop_for_Windows_with_MinGW
         mingw_bin_path = mingw().get_bin_path()
         shutil.copy(path(mingw_bin_path)/"mingwm10.dll", path(self.sourcedir)/"bin")    
         shutil.copy(path(mingw_bin_path)/"libgcc_s_dw2-1.dll", path(self.sourcedir)/"bin")    
@@ -232,22 +238,6 @@ examples
         eggify_formula("pyqt4")
         eggify_formula("qscintilla")
         eggify_formula("pyqscintilla")
-        
-        # cmd = "easy_pkg package sip"
-        # print "---------" + cmd
-        # sh(cmd)
-        
-        # cmd = "easy_pkg package pyqt4"
-        # print "---------" + cmd
-        # sh(cmd)
-        
-        # cmd = "easy_pkg package qscintilla"
-        # print "---------" + cmd
-        # sh(cmd)
-        
-        # cmd = "easy_pkg package pyqscintilla"
-        # print "---------" + cmd
-        # sh(cmd)
         
         os.chdir(temp_dir)
  

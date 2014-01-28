@@ -25,6 +25,7 @@ from pkgit.formula import Formula
 from pkgit.utils import sh, apply_patch_from_string
 #from pkgit.utils import apply_patch_from_file
 from openalea.core.path import path
+import os
 
 #PATCH_DIR = path(__file__).abspath().dirname()
 
@@ -35,14 +36,18 @@ class Ann(Formula):
     license = "GNU Lesser Public License"
     authors = "Copyright (c) 1997-2010 University of Maryland and Sunil Arya and David Mount"
     description = "Windows gcc libs and headers of ANN"
-    download_name  = "ann.zip"
-    DOWNLOAD = UNPACK = MAKE_INSTALL = BDIST_EGG = True
+    download_name  = "ann_" + version + ".zip"
+    DOWNLOAD = False
+    UNPACK = MAKE_INSTALL = BDIST_EGG = True
     
     def unpack(self):
         ret = super(Ann, self).unpack()
-        print PATCH
-        apply_patch_from_string(PATCH)
-        # apply_patch_from_file(path(PATCH_DIR)/"ann_mgw.patch")
+        root = str(path(self.sourcedir)/"..")
+        print "Apply PATCH part1"
+        apply_patch_from_string(PATCH, root=root)
+        print "Apply PATCH part2"
+        apply_patch_from_string(PATCH2, root=root)
+        self.sourcedir = path(self.sourcedir)/'ann_%s'%self.version
         return ret
 
     def make_install(self):
@@ -55,10 +60,9 @@ class Ann(Formula):
                     BIN_DIRS   = {'bin' : str(path(self.sourcedir)/'bin') },
                     )
                     
-PATCH = """Only in .: ann_mgw.patch
-diff -abur ..\ann_1.1.2/ann2fig/Makefile ./ann2fig/Makefile
+PATCH = """diff -abur ..\ann_1.1.2/ann2fig/Makefile ./ann_1.1.2/ann2fig/Makefile
 --- ..\ann_1.1.2/ann2fig/Makefile	2012-03-22 15:37:56.852259200 +0100
-+++ ./ann2fig/Makefile	2012-03-23 12:12:55.759431900 +0100
++++ ./ann_1.1.2/ann2fig/Makefile	2012-03-23 12:12:55.759431900 +0100
 @@ -47,7 +47,7 @@
  #	ANN2FIG		name of executable
  #-----------------------------------------------------------------------------
@@ -79,7 +83,7 @@ diff -abur ..\ann_1.1.2/ann2fig/Makefile ./ann2fig/Makefile
  # configuration definitions
 diff -abur ..\ann_1.1.2/include/ANN/ANN.h ./include/ANN/ANN.h
 --- ..\ann_1.1.2/include/ANN/ANN.h	2012-03-22 15:37:56.985507200 +0100
-+++ ./include/ANN/ANN.h	2012-03-23 12:16:09.801756400 +0100
++++ ./ann_1.1.2/include/ANN/ANN.h	2012-03-23 12:16:09.801756400 +0100
 @@ -59,7 +59,7 @@
  #ifndef ANN_H
  #define ANN_H
@@ -89,28 +93,9 @@ diff -abur ..\ann_1.1.2/include/ANN/ANN.h ./include/ANN/ANN.h
    //----------------------------------------------------------------------
    // For Microsoft Visual C++, externally accessible symbols must be
    // explicitly indicated with DLL_API, which is somewhat like "extern."
-diff -abur ..\ann_1.1.2/Make-config ./Make-config
---- ..\ann_1.1.2/Make-config	2012-03-22 15:37:57.078780800 +0100
-+++ ./Make-config	2012-03-23 12:10:03.985677900 +0100
-@@ -76,6 +76,15 @@
- 	"MAKELIB = ar ruv" \
- 	"RANLIB = true"
- 
-+#					Win32 using g++
-+win32-g++:
-+	$(MAKE) targets \
-+	"ANNLIB = libANN.a" \
-+	"C++ = g++" \
-+	"CFLAGS = -O3 -DANN_NO_RANDOM" \
-+	"MAKELIB = ar ruv" \
-+	"RANLIB = ranlib"
-+
- #					Mac OS X using g++
- macosx-g++:
- 	$(MAKE) targets \
 diff -abur ..\ann_1.1.2/Makefile ./Makefile
 --- ..\ann_1.1.2/Makefile	2012-03-22 15:37:57.105430400 +0100
-+++ ./Makefile	2012-03-23 13:26:46.055555200 +0100
++++ ./ann_1.1.2/Makefile	2012-03-23 13:26:46.055555200 +0100
 @@ -42,6 +42,7 @@
  default:
  	@echo "Enter one of the following:"
@@ -134,7 +119,7 @@ diff -abur ..\ann_1.1.2/Makefile ./Makefile
  #-----------------------------------------------------------------------------
 diff -abur ..\ann_1.1.2/sample/Makefile ./sample/Makefile
 --- ..\ann_1.1.2/sample/Makefile	2012-03-22 15:37:57.411900800 +0100
-+++ ./sample/Makefile	2012-03-23 12:12:21.159679900 +0100
++++ ./ann_1.1.2/sample/Makefile	2012-03-23 12:12:21.159679900 +0100
 @@ -49,7 +49,7 @@
  #		ANNSAMP		name of sample program
  #-----------------------------------------------------------------------------
@@ -155,7 +140,7 @@ diff -abur ..\ann_1.1.2/sample/Makefile ./sample/Makefile
  # configuration definitions
 diff -abur ..\ann_1.1.2/src/Makefile ./src/Makefile
 --- ..\ann_1.1.2/src/Makefile	2012-03-22 15:37:57.838294400 +0100
-+++ ./src/Makefile	2012-03-23 12:08:25.766132800 +0100
++++ ./ann_1.1.2/src/Makefile	2012-03-23 12:08:25.766132800 +0100
 @@ -56,7 +56,7 @@
  $(LIBDIR)/$(ANNLIB): $(OBJECTS)
  	$(MAKELIB) $(ANNLIB) $(OBJECTS)
@@ -167,7 +152,7 @@ diff -abur ..\ann_1.1.2/src/Makefile ./src/Makefile
  # Make object files
 diff -abur ..\ann_1.1.2/test/Makefile ./test/Makefile
 --- ..\ann_1.1.2/test/Makefile	2012-03-22 15:37:57.958217600 +0100
-+++ ./test/Makefile	2012-03-23 12:11:46.820302300 +0100
++++ ./ann_1.1.2/test/Makefile	2012-03-23 12:11:46.820302300 +0100
 @@ -51,7 +51,7 @@
  #		ANNTEST		name of test program
  #-----------------------------------------------------------------------------
@@ -187,4 +172,24 @@ diff -abur ..\ann_1.1.2/test/Makefile ./test/Makefile
  #-----------------------------------------------------------------------------
  # configuration definitions
 
+"""
+PATCH2 = """diff -abur ..\ann_1.1.2/Make-config ./Make-config
+--- ..\ann_1.1.2/Make-config	2012-03-22 15:37:57.958217600 +0100
++++ ./ann_1.1.2/Make-config	2012-03-23 12:11:46.820302300 +0100
+@@ -76,6 +76,15 @@
+ 	"MAKELIB = ar ruv" \
+ 	"RANLIB = true"
+ 
++#					Win32 using g++
++win32-g++:
++	$(MAKE) targets \
++	"ANNLIB = libANN.a" \
++	"C++ = g++" \
++	"CFLAGS = -O3 -DANN_NO_RANDOM" \
++	"MAKELIB = ar ruv" \
++	"RANLIB = ranlib"
++
+ #					Mac OS X using g++
+ macosx-g++:
+ 	$(MAKE) targets \
 """
