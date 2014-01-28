@@ -597,13 +597,12 @@ class Formula(object):
         * egg
         * ...
         """
-        makedirs(self._get_src_path())
-        makedirs(self._get_install_path())
-        makedirs(self.sourcedir)
-        makedirs(self._get_dl_path())
-        makedirs(self.dist_dir)
-        makedirs(self.eggdir)
-        makedirs(self.installdir)
+        dirs = [self._get_src_path(), self._get_install_path(), self.sourcedir, self._get_dl_path(),\
+                self.dist_dir, self.eggdir, self.installdir]
+        for dir in dirs:
+            makedirs(dir)
+        
+        logger.debug("makedirs %s" %str(dirs))
     
     @property
     def package(self):
