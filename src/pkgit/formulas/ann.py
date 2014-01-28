@@ -23,11 +23,8 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import sh, apply_patch_from_string
-#from pkgit.utils import apply_patch_from_file
 from openalea.core.path import path
 import os
-
-#PATCH_DIR = path(__file__).abspath().dirname()
 
 class Ann(Formula):
     version = '1.1.2'

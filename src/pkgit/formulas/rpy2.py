@@ -36,8 +36,7 @@ class Rpy2(Formula):
     authors         = "Laurent Gautier"
     description     = "Unofficial Windows gcc libs and includes of rpy2"
     dependencies    = ["r"]
-    # DOWNLOAD = UNPACK = 
-    MAKE = MAKE_INSTALL = BDIST_EGG = True
+    DOWNLOAD = UNPACK = MAKE = MAKE_INSTALL = BDIST_EGG = True
 
     def setup(self):
         from setuptools import find_packages
