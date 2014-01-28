@@ -32,4 +32,4 @@ class Pandas(Formula):
     dependencies    = []     # List of dependencies of the formula
     download_url  = "https://pypi.python.org/packages/2.7/p/pandas/pandas-" + version + ".win32-py2.7.exe"     # Name of the local archive
     download_name    = "pandas.exe"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
-    DOWNLOAD = INSTALL = True 
+    DOWNLOAD = COPY_INSTALLER = True 
