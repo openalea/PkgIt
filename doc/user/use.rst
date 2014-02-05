@@ -19,6 +19,10 @@ Prepare your computer
 Package dependencies and OpenAlea
 ---------------------------------
 
+>>> pkgit -package openalea
+
+Or
+
 >>> pkgit -p openalea
 
 If one package doesn't work, you can get old package from gforge.
@@ -64,6 +68,10 @@ If one package doesn't work, you can get old package from gforge.
 Build Windows installer
 -----------------------
 
+>>> pkgit --wininst openalea
+
+Or
+
 >>> pkgit -w openalea
 
 Get result (OpenAlea)
@@ -95,9 +103,6 @@ If one package doesn't work, you can get old package from gforge.
     
     * pyqglviewer
     * rpy2 (apply_patch_from_string pb?)
-    
-    .. TODO:: List exactly what is not working
-
 
 .. note::
 

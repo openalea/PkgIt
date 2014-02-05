@@ -357,7 +357,7 @@ Exemple in SIP Formula:
         def extra_python_paths(self):
             return self.sourcedir, path(self.sourcedir)/"siplib"
 
-How Formulas works
+How Formulas work
 ###################
 
 When you launch command pkgit package, the corresponding formula is instantiated and some methods are called.
