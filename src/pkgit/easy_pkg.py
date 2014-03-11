@@ -43,7 +43,7 @@ def parse():
     parser.add_argument('-w', '--wininst', help="Create Windows installer for formula WININST.")
     parser.add_argument('-c', '--create', help="Create a new formula named CREATE.")
     parser.add_argument('-y', '--packaged', help="Display if formula is yet packaged.")
-    parser.add_argument('--without', help="Omit to package WITHOUT and WITHOUT's dependencies. Works with --package")
+    parser.add_argument('--without', help="Omit to package WITHOUT and WITHOUT's dependencies. If you use '--without all' omit all dependencies. Works with --package")
     parser.add_argument('--deps', help="Display dependencies of formula named DISP_DEPS.")
     parser.add_argument('--versions', action="store_true", default=False, help="Display all formulas available and versions of packages.")
     
