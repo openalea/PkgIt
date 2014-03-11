@@ -42,7 +42,10 @@ def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, fo
     :param dest_dir: directory where to put the egg when it is created
     :return: True if success, else False
     """
-    formula_list = deps(formula_name, without=without)
+    if without == "all":
+        formula_list = [formula_name]
+    else:
+        formula_list = deps(formula_name, without=without)
     logger.debug("----------------------------------------------")
     logger.debug("-----------Will eggify formulas %s-----------------"%str(formula_list))
     logger.debug("----------------------------------------------")
