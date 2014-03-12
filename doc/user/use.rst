@@ -61,7 +61,7 @@ If one package doesn't work, you can get old package from gforge.
 
     And then package OpenAlea by hand doing:
 
-    >>> python multisetup.py clean build develop bdist_egg -d C:\temp_pkgit\dist\openalea
+    >>> python multisetup.py clean build install bdist_egg -d C:\temp_pkgit\dist\openalea
     
 .. note:: Don't forget that a file formula.py in C:\\temp_pkgit is helpful for debugging.
 
@@ -119,7 +119,7 @@ If one package doesn't work, you can get old package from gforge.
 
     And then package VPlants by hand doing:
 
-    >>> python multisetup.py clean build develop bdist_egg -d C:\temp_pkgit\dist\vplants
+    >>> python multisetup.py clean build install bdist_egg -d C:\temp_pkgit\dist\vplants
     
 .. note:: Don't forget that a file formula.py in C:\\temp_pkgit is helpful for debugging.
 
