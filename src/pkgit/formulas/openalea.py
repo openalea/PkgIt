@@ -27,7 +27,7 @@ from openalea.core.path import path
 
 ## Name is openalea_formula and not openalea to avoid namespace conflict!
 class Openalea(Formula):
-    version = '1.1'
+    version = '1.0'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
     # download_url = "https://scm.gforge.inria.fr/svn/openalea/branches/release_1_0"
     download_url = "https://scm.gforge.inria.fr/svn/openalea/trunk"

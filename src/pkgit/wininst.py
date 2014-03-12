@@ -497,14 +497,14 @@ def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDi
 
     :warning: get all eggs in eggDir! So if you wininst alinea, it will package openalea+vplants+alinea but only dependencies for alinea!
     """
-    # if not srcDir:
-        # srcDir = path(".").abspath()/"dist"/"thirdpart"
-    # if not eggDir:
-        # eggDir = path(".").abspath()/"dist"/project
     if not srcDir:
-        srcDir = path(".").abspath()/"dist"/"test"
+        srcDir = path(".").abspath()/"dist"/"thirdpart"
     if not eggDir:
-        eggDir = path(".").abspath()/"dist"/"test"
+        eggDir = path(".").abspath()/"dist"/project
+    # if not srcDir:
+        # srcDir = path(".").abspath()/"dist"/"test"
+    # if not eggDir:
+        # eggDir = path(".").abspath()/"dist"/"test"
     if not outDir:
         outDir = path(srcDir).abspath()/".."/"result"
     if not pyMaj:
