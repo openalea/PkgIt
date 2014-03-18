@@ -35,8 +35,8 @@ class Openalea(Formula):
     authors = "Inria, INRA, CIRAD"
     description = "OpenAlea is an open source project primarily aimed at the plant research community."
     download_name  = "OpenAlea"
-    dependencies = ["python", "pywin", "mingw", "mingw_rt", "qt4", "numpy", "scipy", "matplotlib", 
-                  "pyqscintilla", "setuptools", "pillow", "pylsm", "svn", "dateutil", "ipython", "inno"]#"pylibtiff", 
+    dependencies = ["python", "ipython", "setuptools", "pywin", "mingw", "mingw_rt", "qt4", "numpy", "scipy", "matplotlib", 
+                  "pyqscintilla", "pillow", "pylsm", "svn", "dateutil", "ipython", "inno"]#"pylibtiff", 
     DOWNLOAD = BDIST_EGG = True
 
     def __init__(self,**kwargs):
@@ -47,7 +47,7 @@ class Openalea(Formula):
         return checkout(self.download_url, self.eggdir)
 
     def bdist_egg(self):
-        return sh("python multisetup.py clean build develop bdist_egg -d %s"%(self.dist_dir,)) == 0
+        return sh("python multisetup.py clean build install bdist_egg -d %s"%(self.dist_dir,)) == 0
         
     def conf_dict(self):
         """

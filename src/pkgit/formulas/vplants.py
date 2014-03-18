@@ -26,7 +26,7 @@ from pkgit.utils import sh, checkout, StrictTemplate
 from openalea.core.path import path
 
 class Vplants(Formula):
-    version = '1.1'
+    version = '1.0'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
     # download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/branches/release_1_0"
     download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk"
@@ -47,7 +47,7 @@ class Vplants(Formula):
         return checkout(self.download_url, self.eggdir)
 
     def bdist_egg(self):
-        return sh("python multisetup.py clean build develop bdist_egg -d %s"%(self.dist_dir,)) == 0
+        return sh("python multisetup.py clean build install bdist_egg -d %s"%(self.dist_dir,)) == 0
     
     def conf_dict(self):
         """

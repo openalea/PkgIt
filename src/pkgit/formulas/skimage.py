@@ -30,7 +30,7 @@ class Skimage(Formula):
     license         = 'Modified BSD'     # License of the dependency (not of the formula)
     authors         = "Stefan van der Walt"     # Authors of the dependency (not of the formula)
     dependencies    = ["scipy"]     # List of dependencies of the formula
-    download_name   = "scikit-image.exe"     # Name of the local archive
+    download_name   = "skimage.exe"     # Name of the local archive
     download_url    = "http://www.lfd.uci.edu/~gohlke/pythonlibs/v92jt8xn/scikit-image-%s.win32-py2.7.exe" % version  	 # Url where to download sources (feel only if "DOWNLOAD = True")
     DOWNLOAD = COPY_INSTALLER = True
     
