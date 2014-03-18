@@ -24,6 +24,7 @@ numpy             1.8.0        ok
 oalab             0.1          ok
 openalea          1.0          ok
 opencv            2.1.8        ok
+pandas            0.13.0       ok
 pillow            2.1.0        ok
 plantgl           2.16.1       ok
 pygments          1.6          ok
