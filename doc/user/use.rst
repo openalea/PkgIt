@@ -25,7 +25,7 @@ Or
 
 >>> pkgit -p openalea
 
-If one package doesn't work, you can get old package from gforge.
+If one package doesn't work, you can get old package from gforge and put it inside repository C:\\temp_pkgit\\dist\\thirdpart.
 
 .. warning::
     Following formulas doesn't work. So please download old version on GForge and put them in repo C:\\temp_pkgit\\dist\\thirdpart.
