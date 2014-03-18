@@ -1,0 +1,53 @@
+Status today (march 2014)
+###########################
+
+===============  ===========  ===============================================  ===============================================================================================================================
+  Formula         version      Status                                           Solution
+===============  ===========  ===============================================  ===============================================================================================================================
+alinea            1.0          ok
+ann               1.1.2        not working (PATCH part 2 pb)                    Please download https://gforge.inria.fr/frs/download.php/30729/ann-1.1.2-win32.egg
+bisonflex         2.4.1        ok
+boost             1.48.0       ok
+cgal              4.2          ok
+cmake             2.8.11.2     ok
+configobj         4.7.2        ok
+dateutil          2.2          ok
+gnuplot           4.6.3        ok
+inno              5.5.3        ok
+ipython           1.2.1        ok
+lpy               2.1.0        ok
+matplotlib        1.3.1        ok
+mingw             5.1.4_4c     ok
+mingw_rt          5.1.4_4c     ok
+mtg               1.0          ok
+numpy             1.8.0        ok
+oalab             0.1          ok
+openalea          1.0          ok
+opencv            2.1.8        ok
+pillow            2.1.0        ok
+plantgl           2.16.1       ok
+pygments          1.6          ok
+pylsm             0.1-r34      ok
+pyopengl          3.0.2        ok
+pyparsing         1.5.7        ok
+pyqglviewer       0.11         not working (cf qt4)                             Nothing to do. Everything is in qt4 egg.
+pyqscintilla      1.0          not working (cf qt4)                             Nothing to do. Everything is in qt4 egg.
+pyqt4             4.10.3       not working (cf qt4)                             Nothing to do. Everything is in qt4 egg.
+python            2.7.6        ok
+pywin             218          ok
+pyzmq             14.1.0       ok
+qglviewer         1.0          not working (cf qt4)                             
+qhull             2011.2       Version 2012 doesn't work with PlantGL.          Please download version 2003.1: https://gforge.inria.fr/frs/download.php/27630/qhull-2003.1-win32.egg
+qscintilla        2.6.2        ok
+qt4               4.8.5        not working                                      Please download https://gforge.inria.fr/frs/download.php/30725/qt4-4.7.4-py2.7-win32.egg
+qt4_dev           4.8.5        not working (cf qt4)                             Please download https://gforge.inria.fr/frs/download.php/30726/qt4_dev-4.7.4-py2.7-win32.egg
+r                 2.15.3       ok
+rpy2              2.3.6        not working (problem with R_HOME?)               Please download https://gforge.inria.fr/frs/download.php/30731/rpy2-2.3.revf075a4291e9c-py2.7.egg  
+scipy             0.13.2       ok
+scons             2.3.0        ok
+setuptools        0.6c11       ok
+sip               4.15.2       ok
+skimage           0.9.3        ok
+svn               1.8.5        ok
+vplants           1.0          ok
+===============  ===========  ===============================================  ===============================================================================================================================
