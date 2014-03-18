@@ -57,6 +57,8 @@ PkgIt command with option -i, --install will check if you already have packaged 
 >>> pkgit -i cgal
 >>> ...
 
+.. note:: Don't forget that a file formula.py in current directory is helpful for debugging.
+
 Package a formula
 ##################
 
@@ -76,6 +78,8 @@ To omit a dependency, use option --without. Following line will package mingw_rt
 
 >>> pkgit --package mingw_rt --without mingw
 
+.. note:: Don't forget that a file formula.py in current directory is helpful for debugging.
+
 Create Windows installer
 ########################
 
@@ -90,11 +94,15 @@ It will create a windows installer with what is packaged in the local repository
 OpenAlea exemple
 ################
 
-We used pkgit to package OpenAlea the 10th january 2014. To have more details, please read:
+We used pkgit to package OpenAlea and VPlants the 10th january 2014. To have more details, please read:
 
 .. toctree::
 
     use.rst
+        
+.. toctree::
+
+    use_vplants_example.rst
         
 Extend pkgit: create a formula
 ########################################
@@ -297,11 +305,11 @@ Typical flags:
 ::
     DOWNLOAD = BDIST_EGG = True
 
-Extend pkgit: Specials methods
-#################################
+Specials methods
+----------------
 
 Patch a package
-----------------
+===============
 
 This is the case for ann, rpy2.
 
@@ -328,7 +336,7 @@ For example for rpy2:
     """
 
 Extend path
------------
+===========
 
 Overload method extra_path().
 
@@ -343,7 +351,7 @@ Exemple in SIP Formula:
             return self.sourcedir, path(self.sourcedir)/"sipgen"
 
 Extend python path
----------------------
+==================
 
 Overload method extra_python_paths().
 
