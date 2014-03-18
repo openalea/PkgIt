@@ -13,6 +13,25 @@ Installation
 
 >>> python setup.py install
 
+Quick Start
+-----------
+
+To package matplotlib:
+
+>>> pkgit --package matplotlib
+
+To see available formulas and corresponding versions:
+
+>>> pkgit --versions
+
+To see dependencies of a package:
+
+>>> pkgit --deps qt4
+
+To create a new formula:
+
+>>> pkgit --create mynewdependency
+
 Requirements
 ------------
 

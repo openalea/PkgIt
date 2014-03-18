@@ -27,8 +27,14 @@ import zipfile
 import tarfile
 import string
 import fnmatch
-from path import shutil, path, glob
-import requests
+try:
+    from path import shutil, path, glob
+except ImportError:
+    raise ImportError('Please install path.py. You can do it doing "pip install path.py"')
+try:
+    import requests
+except ImportError:
+    raise ImportError('Please install requests. You can do it doing "pip install requests"')
 from re import compile as re_compile
 from collections import defaultdict
 from .patch import fromfile, fromstring
