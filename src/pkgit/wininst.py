@@ -533,7 +533,7 @@ def wininst(project="openalea", srcDir=None, eggDir=None, outDir=None, tpp_eggDi
     ###appversion         = confDict["APPVERSION"]
     
     thirdPartyPackages = deps(project)
-    todelete = list()
+    todelete = [project]
     for dep in thirdPartyPackages:
         if "openalea" in dep:
             todelete.append(dep)
