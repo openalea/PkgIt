@@ -26,7 +26,7 @@ from pkgit.utils import sh, checkout
 from openalea.core.path import path
 
 class Alinea(Formula):
-    version = '1.1'
+    version = '1.0'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
     # download_url = "https://scm.gforge.inria.fr/svn/openaleapkg/branches/release_1_0"
     download_url = "https://scm.gforge.inria.fr/svn/openaleapkg/trunk"
