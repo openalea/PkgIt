@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+﻿# -*- coding: utf-8 -*- 
 # -*- python -*-
 #
 #       Formula file for pkgit
@@ -45,4 +45,4 @@ class Alinea(Formula):
         return checkout(self.download_url, self.eggdir)
 
     def bdist_egg(self):
-        return sh("python multisetup.py build bdist_egg -d %s"%(self.dist_dir,)) == 0
+        return sh("python multisetup.py clean build install bdist_egg -d %s"%(self.dist_dir,)) == 0
