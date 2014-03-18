@@ -171,9 +171,8 @@ def formulas():
 
     short_list = list()
     for formu in formula_list:
-        formu = formu.split("\\")[-1]
-        formu = formu.split(".py")[0]
-        formu = formu.split("formula")[0]
+        formu = path(formu).splitpath()[-1]
+        formu = path(formu).splitext()[0]
         short_list.append(str(formu))
         
     if short_list.count("__init__") > 0:
