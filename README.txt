@@ -3,16 +3,6 @@ Description
 
 The PkgIt package is a package to help packaging dependencies and so to create releases. 
 
-Download
-----------
-
->>> svn co https://scm.gforge.inria.fr/svn/openalea/trunk/pkgit pkgit
-
-Installation
-------------
-
->>> python setup.py install
-
 Quick Start
 -----------
 
@@ -31,6 +21,20 @@ To see dependencies of a package:
 To create a new formula:
 
 >>> pkgit --create mynewdependency
+
+To create a windows installer (after packaging):
+
+>>> pkgit --wininst openalea
+
+Download
+----------
+
+>>> svn co https://scm.gforge.inria.fr/svn/openalea/trunk/pkgit pkgit
+
+Installation
+------------
+
+>>> python setup.py install
 
 Requirements
 ------------
