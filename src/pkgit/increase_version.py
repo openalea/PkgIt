@@ -8,8 +8,7 @@
 import os
 from openalea.core.path import path
 
-di = os.listdir(".")
-di = [d for d in di if path(d).isdir()]
+di = [d for d in path(".").listdir() if d.isdir()]
 di.remove(".svn")
 
 filename = "metainfo.ini"
