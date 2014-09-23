@@ -78,7 +78,7 @@ To omit a dependency, use option --without. Following line will package mingw_rt
 
 >>> pkgit --package mingw_rt --without mingw
 
-.. note:: Don't forget that a file formula.py in current directory is helpful for debugging.
+.. note:: Don't forget that a file formula.log in current directory is helpful for debugging.
 
 Create Windows installer
 ########################
