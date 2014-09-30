@@ -4,7 +4,7 @@ Status in October 2014
 ===============  ===========  ===============================================  ===============================================================================================================================
   Formula         version      Status                                           Solution
 ===============  ===========  ===============================================  ===============================================================================================================================
-alinea            1.2          ok
+alinea            1.2          ok *
 ann               1.1.2        not working (PATCH part 2 pb)                    Please download https://gforge.inria.fr/frs/download.php/30729/ann-1.1.2-win32.egg
 bisonflex         2.4.1        ok
 boost             1.48.0       ok
@@ -14,15 +14,15 @@ configobj         4.7.2        ok
 dateutil          2.2          ok
 gnuplot           4.6.3        ok
 inno              5.5.3        ok
-ipython           1.2.1        ok
+ipython           2.2.0        ok *
 lpy               2.1.0        ok
 matplotlib        1.3.1        ok
-mingw             5.1.4_4c     ok
+mingw             5.1.4_4c     ok  but not add to PATH                         Add C:\MinGW\bin to PATH by hand...
 mingw_rt          5.1.4_4c     ok
 mtg               1.0          ok
 numpy             1.8.0        ok
 oalab             0.1          ok
-openalea          1.2          ok
+openalea          1.2          ok *
 opencv            2.1.8        ok
 pandas            0.13.0       ok
 pillow            2.1.0        ok
@@ -40,8 +40,8 @@ pyzmq             14.1.0       ok
 qglviewer         1.0          not working (cf qt4)                             
 qhull             2011.2       Version 2012 doesn't work with PlantGL.          Please download version 2003.1: https://gforge.inria.fr/frs/download.php/27630/qhull-2003.1-win32.egg
 qscintilla        2.6.2        ok
-qt4               4.8.5        not working                                      Please download https://gforge.inria.fr/frs/download.php/30725/qt4-4.7.4-py2.7-win32.egg
-qt4_dev           4.8.5        not working (cf qt4)                             Please download https://gforge.inria.fr/frs/download.php/30726/qt4_dev-4.7.4-py2.7-win32.egg
+qt4               4.8.6        not working *                                    Please download https://gforge.inria.fr/frs/download.php/30725/qt4-4.7.4-py2.7-win32.egg
+qt4_dev           4.8.6        not working (cf qt4)                             Please download https://gforge.inria.fr/frs/download.php/30726/qt4_dev-4.7.4-py2.7-win32.egg
 r                 2.15.3       ok
 rpy2              2.3.6        not working (problem with R_HOME?)               Please download https://gforge.inria.fr/frs/download.php/30731/rpy2-2.3.revf075a4291e9c-py2.7.egg  
 scipy             0.13.2       ok
@@ -51,5 +51,7 @@ sip               4.15.2       ok
 skimage           0.9.3        Can't find permanent link to Gohlke...
 sklearn           0.14.1       ok
 svn               1.8.5        ok
-vplants           1.2          ok
+vplants           1.2          ok *
 ===============  ===========  ===============================================  ===============================================================================================================================
+
+* new versions

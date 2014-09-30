@@ -5,8 +5,8 @@ Prepare your computer
 ---------------------
 
 * install Python, subversion and setuptools.
-* install path.py (>>>easy_install path.py)
-* install requests (>>>easy_install requests)
+* install path.py (>>>easy_install path.py). This is not necessary if you have openalea.core installed.
+* install requests (>>>easy_install requests).
 * download and install PkgIt (>>> python setup.py develop).
 * please check you can access to python and pkgit in cmd in launching >>> python and >>> pkgit -v . If not, please adapt your PATH (cf after).
 * create a temp repo. Here we create C:\\temp_pkgit. >>> mkdir C:\\temp_pkgit
@@ -38,7 +38,7 @@ If one package doesn't work, you can get old package from gforge and put it insi
     
     Indeed, you can download by hand Qhull, Qt4, Qt4_dev and pylsm, put them into C:\\temp_pkgit\\dist\\thirdpart and launch command:
     
-    >>> pkgit -p openalea --without qhull,qt4,qt4_dev,qscintilla,pyqscintilla,sip
+    >>> pkgit -p openalea --ignore qhull,qt4,qt4_dev,qscintilla,pyqscintilla,sip
     
     .. note::
         
@@ -52,9 +52,9 @@ If one package doesn't work, you can get old package from gforge and put it insi
 .. note::
 
     If you already have OpenAlea fully installed, maybe you don't want to download it.
-    In this case, add --without openalea:
+    In this case, add --ignore openalea:
 
-    >>> pkgit -p openalea --without openalea
+    >>> pkgit -p openalea --ignore openalea
 
     It will package only dependencies.
 
