@@ -321,8 +321,13 @@ This is the case for ann, rpy2.
 For example for rpy2:
 ::
     from pkgit.formula import Formula
-    from pkgit.utils apply_patch_from_string
-     
+    from pkgit.utils import apply_patch_from_string
+
+    PATCH = """
+    ...
+    ...
+    """
+    
     class rpy2(Formula):
        ...
      
@@ -330,11 +335,6 @@ For example for rpy2:
             apply_patch_from_string( PATCH ) 
             ...
      
-    PATCH = """
-    ...
-    ...
-    """
-
 Extend path
 ===========
 
@@ -345,8 +345,11 @@ Overload method extra_path().
 Exemple in SIP Formula:
 ::
     from path import path
-    ...
-     
+    from pkgit.formula import Formula
+    
+    class sip(Formula):
+        ...
+        
         def extra_paths(self):
             return self.sourcedir, path(self.sourcedir)/"sipgen"
 
@@ -360,8 +363,11 @@ Overload method extra_python_paths().
 Exemple in SIP Formula:
 ::
     from path import path
-    ...
-     
+    from pkgit.formula import Formula
+    
+    class sip(Formula):
+        ...
+        
         def extra_python_paths(self):
             return self.sourcedir, path(self.sourcedir)/"siplib"
 
