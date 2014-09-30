@@ -1,0 +1,5 @@
+ipython nbconvert --to slides --post serve PkgIt_presentation.ipynb
+
+
+# If Pandoc is missing, you can install it thanks to:
+# http://johnmacfarlane.net/pandoc/installing.html
