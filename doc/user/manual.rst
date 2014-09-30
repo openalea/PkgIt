@@ -74,9 +74,9 @@ Package everything you want:
 
 It will package all dependencies in the local repository ./dist
 
-To omit a dependency, use option --without. Following line will package mingw_rt without packaging mingw (use it if you laready packaged mingw earlier).
+To omit a dependency, use option --ignore. Following line will package mingw_rt without packaging mingw (use it if you laready packaged mingw earlier).
 
->>> pkgit --package mingw_rt --without mingw
+>>> pkgit --package mingw_rt --ignore mingw
 
 .. note:: Don't forget that a file formula.log in current directory is helpful for debugging.
 
@@ -86,8 +86,8 @@ Create Windows installer
 For some formulas, you can create windows installer (OpenAlea, VPlants and Alinea only for the moment):
 
 >>> pkgit --wininst openalea
->>> pkgit --wininst vplants --without openalea
->>> pkgit --wininst alinea --without vplants,openalea
+>>> pkgit --wininst vplants --ignore openalea
+>>> pkgit --wininst alinea --ignore vplants,openalea
 
 It will create a windows installer with what is packaged in the local repository ./dist
 

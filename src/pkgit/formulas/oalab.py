@@ -26,7 +26,7 @@ from pkgit.utils import checkout, sh
 from openalea.core.path import path
 
 """
-C:\temp_working_dir>pkgit -p oalab --without openalea,plantgl,lpy,mtg,setuptools,ipython --dry-run
+C:\temp_working_dir>pkgit -p oalab --ignore openalea,plantgl,lpy,mtg,setuptools,ipython --dry-run
 """
 
 

@@ -43,7 +43,7 @@ def parse():
     parser.add_argument('-w', '--wininst', help="Create Windows installer for formula WININST.")
     parser.add_argument('-c', '--create', help="Create a new formula named CREATE.")
     parser.add_argument('-y', '--packaged', help="Display if formula is yet packaged.")
-    parser.add_argument('--without', help="Omit to package WITHOUT and WITHOUT's dependencies. If you use '--without all' omit all dependencies. Works with --package")
+    parser.add_argument('--ignore', help="Omit to package IGNORE and IGNORE's dependencies. If you use '--ignore all' omit all dependencies. Works with --package")
     parser.add_argument('--deps', help="Display dependencies of formula named DISP_DEPS.")
     parser.add_argument('--versions', action="store_true", default=False, help="Display all formulas available and versions of packages.")
     
@@ -93,13 +93,13 @@ def main(argv=None):
     Transform str of deps into python list.
     ex: "mingw,qt4,ann" --> ["mingw", "qt4", "ann"]
     """
-    without = list()
-    if args.without is not None:    
-        without = list()
-        if len(str(args.without).split(",")) > 1:
-            for i in str(args.without).split(","):
-                without.insert(0,i)
-        else: without.insert(0,args.without)
+    ignore = list()
+    if args.ignore is not None:    
+        ignore = list()
+        if len(str(args.ignore).split(",")) > 1:
+            for i in str(args.ignore).split(","):
+                ignore.insert(0,i)
+        else: ignore.insert(0,args.ignore)
    
    
     # Package Process
@@ -112,7 +112,7 @@ def main(argv=None):
         if args.force:
             force = True
         
-        eggify_formulas(args.package, dest_dir=dest_dir, without=without, dry_run=dry_run, force=force)
+        eggify_formulas(args.package, dest_dir=dest_dir, without=ignore, dry_run=dry_run, force=force)
         if args.rm_tmp_all:
             remove_temp(args.package, True)
         elif args.rm_tmp:
