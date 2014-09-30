@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import checkout, sh
-from openalea.core.path import path
+from pkgit.path_solved import path
 
 class Plantgl(Formula):
     version         = "2.16.1"  	 # Version of the dependency (not of the formula)

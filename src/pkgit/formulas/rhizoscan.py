@@ -23,7 +23,7 @@ __revision__ = "$$Id: $$"
 
 from pkgit.formula import Formula
 from pkgit.utils import checkout, sh, StrictTemplate
-from openalea.core.path import path
+from pkgit.path_solved import path
 
 
 # NOT TESTED !

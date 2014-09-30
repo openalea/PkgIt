@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import recursive_copy, sh, Pattern
-from openalea.core.path import path
+from pkgit.path_solved import path
 
 class Qglviewer(Formula):
     download_url = "https://gforge.inria.fr/frs/download.php/30907/libQGLViewer-2.3.17-py.tgz"

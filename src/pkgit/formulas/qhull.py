@@ -22,7 +22,7 @@ from __future__ import absolute_import
 __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
-from openalea.core.path import path
+from pkgit.path_solved import path
 
 class Qhull(Formula):
     version         = "2011.2"

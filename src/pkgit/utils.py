@@ -28,7 +28,7 @@ import tarfile
 import string
 import fnmatch
 try:
-    from path import shutil, path, glob
+    from pkgit.path_solved import  shutil, path, glob
 except ImportError:
     raise ImportError('Please install path.py. You can do it doing "pip install path.py"')
 try:

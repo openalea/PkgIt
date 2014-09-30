@@ -6,7 +6,7 @@
 # 3) launch what is here:
 
 import os
-from openalea.core.path import path
+from pkgit.path_solved import path
 
 di = [d for d in path(".").listdir() if d.isdir()]
 di.remove(".svn")

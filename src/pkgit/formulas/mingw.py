@@ -54,7 +54,7 @@ from pkgit.formula import Formula
 from pkgit.utils import recursive_glob_as_dict, memoize, sh, makedirs, safe_rmdir
 import os, sys
 from re import compile as re_compile
-from openalea.core.path import path
+from pkgit.path_solved import path
 import subprocess
 import time
   

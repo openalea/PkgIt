@@ -57,7 +57,7 @@ class %s(Formula):
 """
 
 from pkgit import formula
-from openalea.core.path import path
+from pkgit.path_solved import  path
 import sys
 import warnings
 

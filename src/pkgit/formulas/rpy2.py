@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
 from pkgit.utils import sh, apply_patch_from_string, Pattern
-from openalea.core.path import path
+from pkgit.path_solved import path
 import sys
 
 class Rpy2(Formula):

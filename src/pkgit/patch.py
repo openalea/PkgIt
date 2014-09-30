@@ -22,7 +22,7 @@ import re
 # cStringIO doesn't support unicode in 2.5
 from StringIO import StringIO
 import urllib2
-from openalea.core.path import path
+from pkgit.path_solved import  path
 from os.path import exists, isfile, abspath
 import os
 import shutil
@@ -800,7 +800,7 @@ class PatchSet(object):
       filename = self.findfile(old, new)
 
       if not filename:
-          from openalea.core.path import path
+          from pkgit.path_solved import path
           warning("source/target file does not exist:\n  --- %s\n  +++ %s" % (str((path(old)).abspath()), str((path(new)).abspath())))
           errors += 1
           continue

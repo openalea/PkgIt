@@ -23,7 +23,7 @@ __revision__ = "$Id: $"
 from pkgit.utils import memoize, NullOutput, sh, \
 get_python_scripts_dirs, sys, into_subdir, url, unpack, os, glob, path
 from pkgit.formula import Formula
-from openalea.core.path import path
+from pkgit.path_solved import path
 import time
 import threading
 

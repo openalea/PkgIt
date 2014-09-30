@@ -29,7 +29,7 @@ Then install path.py >> easy_install path.py
 Then install request >> easy_install requests
 """
 
-from openalea.core.path import path
+from pkgit.path_solved import path
 import os
 from collections import OrderedDict, namedtuple
 from pkgit.utils import sh, install, checkout, url, logger

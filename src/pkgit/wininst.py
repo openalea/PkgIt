@@ -44,7 +44,7 @@ import string
 import sys
 import types
 import subprocess
-from openalea.core.path import path, glob, shutil
+from pkgit.path_solved import  path, glob, shutil
 
 from pkgit.utils import deps, mask, import_formula
 

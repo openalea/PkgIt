@@ -24,7 +24,7 @@ __revision__ = "$Id: $"
 from pkgit.formula import Formula
 from pkgit.utils import sh, ascii_file_replace, recursive_glob_as_dict, merge_list_dict, Pattern
 from pkgit.formulas.mingw_rt import Mingw_rt as mingw_rt
-from openalea.core.path import path
+from pkgit.path_solved import path
 import sys
 from re import compile as re_compile
 import re
