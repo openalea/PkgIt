@@ -232,15 +232,15 @@ class Formula(object):
                 cmd = ""
                 for e in exp.split(";"):
                     cmd = cmd + e + ";"
-                cmd = cmd + old_path + "\""            
+                #cmd = cmd + old_path + "\""            
                 
                 # set temp PATH
-                cmd1 = "SET PATH=\"" + cmd
+                cmd1 = "SET PATH=%PATH%;\"" + cmd
                 logger.debug( cmd1 )
                 sh(cmd1)
                 
                 # set permanent PATH
-                cmd2 = "SETX PATH \"" + cmd
+                cmd2 = "SETX PATH %PATH%;\"" + cmd
                 logger.debug( cmd2 )
                 sh(cmd2)
             
