@@ -4,10 +4,10 @@ Create a release: VPlants example
 Package dependencies and VPlants
 ---------------------------------
 
->>> pkgit -p vplants --without openalea
+>>> pkgit -p vplants --ignore openalea
 
 .. note::
-    If you already packaged OpenAlea and you don't want to do it again, so you can add option --without openalea.
+    If you already packaged OpenAlea and you don't want to do it again, so you can add option --ignore openalea.
     
 .. note::
     You need to install OpenAlea.misc before bdist_egg for VPlants
@@ -23,9 +23,9 @@ If one package doesn't work, you can get old package from gforge and put it insi
 .. note::
 
     If you already have VPlants fully installed, maybe you don't want to download it.
-    In this case, add --without vplants:
+    In this case, add --ignore vplants:
 
-    >>> pkgit -p vplants --without vplants
+    >>> pkgit -p vplants --ignore vplants
 
     It will package only dependencies.
 .
