@@ -102,12 +102,7 @@ class Mingw(Formula):
         return True 
 
     def extra_paths(self):
-        """
-        .. todo:: Replace "path set by hand" by "automatic path"
-        """
-        
-        bin_path = "C:\\MinGW\\bin"
-        return str(bin_path)
+        return self.get_bin_path()
         
     def setup(self):
         mingwbase = self.get_path()

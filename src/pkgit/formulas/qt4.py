@@ -78,13 +78,13 @@ import os
 from setuptools import find_packages
         
 class Qt4(Formula):
-    version = "4.8.5"
+    version = "4.8.6"
     ## with exe
     # download_url = "http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-win-opensource-4.8.5-mingw.exe"
     # download_name  = "qt4.exe"
     #DOWNLOAD = INSTALL = CONFIGURE = BDIST_EGG = True
     ## with zip
-    download_url = "http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.zip"
+    download_url = "http://download.qt-project.org/archive/qt/4.8/" + version + "/qt-everywhere-opensource-src-" + version + ".zip"
     download_name  = "qt4.zip"
     license = "General Public License V3"
     authors = "Riverbank Computing (Sip+PyQt4+QSCintilla) & Nokia (Qt4)"

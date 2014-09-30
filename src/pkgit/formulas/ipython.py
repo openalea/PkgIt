@@ -25,7 +25,7 @@ from pkgit.formula import Formula
 from pkgit.utils import sh, in_dir, try_except
 
 class Ipython(Formula):
-    version         = "1.2.1"  	 # Version of the dependency (not of the formula)
+    version         = "2.2.0"  	 # Version of the dependency (not of the formula)
     description     = "IPython: a System for Interactive Scientific Computing"     # Description of the dependency (not of the formula)
     homepage        = "http://ipython.org"     # Url of home-page of the dependency (not of the formula)
     license         = "BSD license"     # License of the dependency (not of the formula)
