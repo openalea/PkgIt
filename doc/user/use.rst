@@ -4,7 +4,8 @@ Create a release: OpenAlea example
 Prepare your computer
 ---------------------
 
-* install PkgIt and dependencies (Python, ...)
+* install Python and PkgIt.
+* install subversion.
 * please check you can access to python and pkgit in cmd in launching >>> python and >>> pkgit -v . If not, please adapt your PATH (cf after).
 * create a temp repo. Here we create C:\\temp_pkgit. >>> mkdir C:\\temp_pkgit
 * go inside temp repo. >>> cd C:\\temp_pkgit

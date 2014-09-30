@@ -1,12 +1,3 @@
-
-First
-#####
-
-* Add auto-detect if package is yet packaged
-
-Secondly
-########
-
 * Ubuntu support
 * Mac Os X support
 * MacPort support
