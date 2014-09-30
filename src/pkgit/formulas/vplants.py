@@ -26,10 +26,10 @@ from pkgit.utils import sh, checkout, StrictTemplate
 from openalea.core.path import path
 
 class Vplants(Formula):
-    version = '1.0'
+    version = '1.2'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
-    # download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/branches/release_1_0"
-    download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk"
+    download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/branches/release_1_2"
+    # download_url = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk"
     license = "Cecill-C License"
     authors = "Virtual Plants team (Inria)"
     description = "Set of packages to analyse, model and simulate plant architecture and its development at different scales (tissue, organ, axis and plant)"

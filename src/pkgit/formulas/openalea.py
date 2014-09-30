@@ -27,10 +27,10 @@ from openalea.core.path import path
 
 ## Name is openalea_formula and not openalea to avoid namespace conflict!
 class Openalea(Formula):
-    version = '1.0'
+    version = '1.2'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
-    # download_url = "https://scm.gforge.inria.fr/svn/openalea/branches/release_1_0"
-    download_url = "https://scm.gforge.inria.fr/svn/openalea/trunk"
+    download_url = "https://scm.gforge.inria.fr/svn/openalea/branches/release_1_2"
+    # download_url = "https://scm.gforge.inria.fr/svn/openalea/trunk"
     license = "Cecill-C License"
     authors = "Inria, INRA, CIRAD"
     description = "OpenAlea is an open source project primarily aimed at the plant research community."

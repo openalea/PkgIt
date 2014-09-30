@@ -26,10 +26,10 @@ from pkgit.utils import sh, checkout
 from openalea.core.path import path
 
 class Alinea(Formula):
-    version = '1.0'
+    version = '1.2'
     homepage = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"
-    # download_url = "https://scm.gforge.inria.fr/svn/openaleapkg/branches/release_1_0"
-    download_url = "https://scm.gforge.inria.fr/svn/openaleapkg/trunk"
+    download_url = "https://scm.gforge.inria.fr/svn/openaleapkg/branches/release_1_2"
+    # download_url = "https://scm.gforge.inria.fr/svn/openaleapkg/trunk"
     license = "Cecill-C License"
     authors = "INRA teams and Virtual Plants team (Inria)"
     description = "Set of packages to simulate ecophysiological and agronomical processes (crop 3D development, light distribution, interactions with diseasesâ¦)"
