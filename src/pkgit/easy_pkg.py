@@ -54,7 +54,7 @@ def parse():
     # parser.add_argument('--force-download', default="False", help="Download even if already downloaded.")
     # parser.add_argument('--force-install', default="False", help="Install even if already installed.")
     # parser.add_argument('--force-build', default="False", help="Build even if already built.")
-    parser.add_argument('--force', action="store_const", const=True, default=False, help="Force packaging. Works with --package")
+    parser.add_argument('--force', action="store_true", help="Force packaging. Works with --package")
     
     parser.add_argument('--dest-dir', default=None, help="copy result to DIR. Works with --package")
     # parser.add_argument('--download-dir', default="", help="download package to DIR")
@@ -62,10 +62,12 @@ def parse():
     # parser.add_argument('--src-dir', default="", help="unpack archive to DIR")
     # parser.add_argument('--build-dir', default="", help="build package to DIR")
     # parser.add_argument('-d', '--dir', default=".", help="Working DIR in which package will be download, installed, unpacked, built...")
-    parser.add_argument('--rm-tmp',action="store_const", const=True, default=False, help="Remove temporary files after packaging(except download). Works with --package")
-    parser.add_argument('--rm-tmp-all',action="store_const", const=True, default=False, help="Remove all temporary files after packaging. Works with --package")
+    parser.add_argument('--rm-tmp',action="store_true", help="Remove temporary files after packaging(except download). Works with --package")
+    parser.add_argument('--rm-tmp-all',action="store_true", help="Remove all temporary files after packaging. Works with --package")
     
-    parser.add_argument('--dry-run',action="store_const", const=True, default=False, help="Don't do anything. Works with --package")
+    parser.add_argument('--dry-run',action="store_true", help="Don't do anything. Works with --package")
+    parser.add_argument('--continue', action="store_true", dest="continue_", help="Continue packaging where it was stopped the last time. Works with --package.")   
+    
     return parser
     
 def main(argv=None):
@@ -107,12 +109,16 @@ def main(argv=None):
         dest_dir = args.dest_dir
         dry_run = False
         force = False
+        continue_ = False
+        skip = False
         if args.dry_run:
             dry_run = True
         if args.force:
             force = True
-        
-        eggify_formulas(args.package, dest_dir=dest_dir, without=ignore, dry_run=dry_run, force=force)
+        if args.continue_:
+            continue_ = True
+       
+        eggify_formulas(args.package, dest_dir=dest_dir, without=ignore, dry_run=dry_run, force=force, continue_=continue_)
         if args.rm_tmp_all:
             remove_temp(args.package, True)
         elif args.rm_tmp:

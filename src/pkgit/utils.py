@@ -40,8 +40,24 @@ from collections import defaultdict
 from .patch import fromfile, fromstring
 from setuptools.package_index import PackageIndex as pi
 import logging
+import pickle
 
-def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, force=False):
+
+def read_temp(filename="pkgit.state"):
+    try:
+        f = open(filename, "r")
+        obj = pickle.load(f)
+        return obj
+    except IOError:
+        return []
+
+def save_temp(filename="pkgit.state", obj=[]):
+    f = open(filename, "w")
+    obj = pickle.dump(obj, f)
+    f.close()
+   
+        
+def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, force=False, continue_=False):
     """
     Eggify formula and deps recursively
     :param formula_name: string name of the formula
@@ -52,6 +68,16 @@ def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, fo
         formula_list = [formula_name]
     else:
         formula_list = deps(formula_name, without=without)
+    
+    if continue_:     
+        # Load last state and ignore yet packaged formulas
+        formus = read_temp()    
+        if formus:
+            for formu in formus:
+                print formu
+                if formu in formula_list:
+                    formula_list.remove(formu)
+    
     logger.debug("----------------------------------------------")
     logger.debug("-----------Will eggify formulas %s-----------------"%str(formula_list))
     logger.debug("----------------------------------------------")
@@ -59,8 +85,18 @@ def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, fo
     ret = True
     
     if not dry_run:   
+        # reset state file
+        save_temp()
+    
         for formula in formula_list:
             formula, ret_ = eggify_formula(formula, dest_dir=dest_dir, dry_run=dry_run, force=force)
+            
+            if ret_:
+                # Save state if success
+                formus = read_temp()
+                formus.append(formula.name.lower())
+                save_temp(obj=formus)
+            
             ret = ret & ret_
             
         return ret
