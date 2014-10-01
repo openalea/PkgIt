@@ -23,7 +23,7 @@ mtg               1.0          ok
 numpy             1.8.0        ok
 oalab             0.1          ok
 openalea          1.2          ok *
-opencv            2.1.8        ok
+opencv            2.4.8        ok
 pandas            0.13.0       ok
 pillow            2.1.0        ok
 plantgl           2.16.1       ok
@@ -41,7 +41,7 @@ qglviewer         1.0          not working (cf qt4)
 qhull             2011.2       Version 2012 doesn't work with PlantGL.          Please download version 2003.1: https://gforge.inria.fr/frs/download.php/27630/qhull-2003.1-win32.egg
 qscintilla        2.6.2        ok
 qt4               4.8.6        not working *                                    Please download https://gforge.inria.fr/frs/download.php/30725/qt4-4.7.4-py2.7-win32.egg
-qt4_dev           4.8.6        not working (cf qt4)                             Please download https://gforge.inria.fr/frs/download.php/30726/qt4_dev-4.7.4-py2.7-win32.egg
+qt4_dev           4.8.6        not working (cf qt4) *                             Please download https://gforge.inria.fr/frs/download.php/30726/qt4_dev-4.7.4-py2.7-win32.egg
 r                 2.15.3       ok
 rpy2              2.3.6        not working (problem with R_HOME?)               Please download https://gforge.inria.fr/frs/download.php/30731/rpy2-2.3.revf075a4291e9c-py2.7.egg  
 scipy             0.13.2       ok
@@ -54,4 +54,4 @@ svn               1.8.5        ok
 vplants           1.2          ok *
 ===============  ===========  ===============================================  ===============================================================================================================================
 
-* new versions
+* new versions (since 2014-04)

@@ -55,7 +55,6 @@ def save_temp(filename="pkgit.state", obj=[]):
     f = open(filename, "w")
     obj = pickle.dump(obj, f)
     f.close()
-   
         
 def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, force=False, continue_=False):
     """
@@ -74,10 +73,11 @@ def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, fo
         formus = read_temp()    
         if formus:
             for formu in formus:
-                print formu
                 if formu in formula_list:
                     formula_list.remove(formu)
-    
+    else: 
+        save_temp()
+        
     logger.debug("----------------------------------------------")
     logger.debug("-----------Will eggify formulas %s-----------------"%str(formula_list))
     logger.debug("----------------------------------------------")
@@ -86,7 +86,6 @@ def eggify_formulas(formula_name, dest_dir=None, without=None, dry_run=False, fo
     
     if not dry_run:   
         # reset state file
-        save_temp()
     
         for formula in formula_list:
             formula, ret_ = eggify_formula(formula, dest_dir=dest_dir, dry_run=dry_run, force=force)
