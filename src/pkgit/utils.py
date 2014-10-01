@@ -799,17 +799,18 @@ def recursive_glob_as_dict(dir_, patterns=None, strip_dir_=False,
     dirlen = len(dir_)
     for f in files:
         # target_dir = split(f)[0]
-        target_dir = path(f).splitpath()[0]
+        target_dir = str(path(f).splitpath()[0])
         if strip_keys:
-            target_dir = target_dir[dirlen+1:]
+            target_dir = str(target_dir[dirlen+1:])
         if prefix_key:
-            target_dir = path(prefix_key)/target_dir
+            target_dir = str(path(prefix_key)/target_dir)
         if dirs:
             # f = os.path.split(f)[0]
-            f = path(f).splitpath()[0]
+            f = str(path(f).splitpath()[0])
             if f not in by_direct[target_dir]:
                 by_direct[target_dir].append(f)
         else:
+            f = str(f)
             by_direct[target_dir].append(f)
     return by_direct
     
