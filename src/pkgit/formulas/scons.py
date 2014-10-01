@@ -48,7 +48,7 @@ class Scons(Formula):
     homepage        = "http://scons.org/"
     download_url    = "http://downloads.sourceforge.net/project/scons/scons/2.3.0/scons-2.3.0.zip"
     download_name   = "scons.zip"
-    DOWNLOAD = UNPACK = MAKE = BDIST_EGG = True   
+    DOWNLOAD = UNPACK = MAKE = BDIST_EGG = POST_INSTALL = True   
 
     _packages = dict()
     _package_dir = dict()
