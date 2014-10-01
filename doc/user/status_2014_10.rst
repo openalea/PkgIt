@@ -12,6 +12,7 @@ cgal              4.2          ok
 cmake             2.8.11.2     ok
 configobj         4.7.2        ok
 dateutil          2.2          ok
+git               1.8.11.0     ?  *
 gnuplot           4.6.3        ok
 inno              5.5.3        ok
 ipython           2.2.0        ok *
