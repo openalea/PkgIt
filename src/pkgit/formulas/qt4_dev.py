@@ -40,7 +40,7 @@ class Qt4_dev(Formula):
         pyqt4_ = pyqt4()
         sip_   = sip()
         # binaries are the union of qt, pyqt and sip binaries 
-        bin_dirs = {"bin":qt4_.install_bin_dir}
+        bin_dirs = {"bin":str(qt4_.install_bin_dir)}
         # includes are recursive subdirectories and the union of qt and sip includes               
         incs = recursive_glob_as_dict( qt4_.install_inc_dir, Pattern.qtinc, strip_keys=True, prefix_key="include", dirs=True).items() + \
                recursive_glob_as_dict( sip_.install_inc_dir, Pattern.qtinc, strip_keys=True, prefix_key="include", dirs=True).items()
