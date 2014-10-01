@@ -71,6 +71,7 @@ from pkgit.formulas.mingw_rt import Mingw_rt as mingw_rt
 from pkgit.utils import uj, recursive_glob_as_dict, \
 recursive_copy, makedirs, Pattern, sh, eggify_formula
 from pkgit.path_solved import path, shutil
+from pkgit.path_solved import path as Path
 import subprocess
 import ConfigParser
 import time
@@ -256,12 +257,12 @@ examples
         # print extra_pyqt4_mods
         sip_mods = recursive_glob_as_dict(sip_.install_site_dir, Pattern.pyall, strip_keys=True, levels=1).items()
 
-        lib_dirs    = {"PyQt4": self.install_dll_dir}
-        package_dir = {"PyQt4": path(pyqt4_.install_site_dir)/"PyQt4"}
+        lib_dirs    = {"PyQt4": str(self.install_dll_dir)}
+        package_dir = {"PyQt4": str(path(pyqt4_.install_site_dir)/"PyQt4")}
         
         d  = dict( 
                     VERSION  = self.version,
-                    PACKAGES = find_packages(pyqt4_.install_site_dir, "PyQt4"),
+                    PACKAGES = find_packages(str(pyqt4_.install_site_dir), "PyQt4"),
                     PACKAGE_DIRS = package_dir,
                     PACKAGE_DATA = {'' : [Pattern.pyext]},
                     
