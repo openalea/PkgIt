@@ -653,6 +653,18 @@ def checkout(url, dir=None):
     cmd = "svn co %s %s " %(url, dir)
     return sh(cmd) == 0
     
+svn_checkout = checkout
+
+def git_clone(url, dir=None):
+    """
+    Clone a Git directory from *url* into directory *dir*.
+    """
+    if dir is None:
+        dir = '.'
+    dir = path(dir)
+    cmd = "git clone %s %s " %(url, dir)
+    return sh(cmd) == 0
+    
 def set_windows_env():
     """ Set window environment path
     """
