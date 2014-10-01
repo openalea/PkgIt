@@ -22,23 +22,19 @@ from __future__ import absolute_import
 __revision__ = "$Id: $"
 
 from pkgit.formula import Formula
-from pkgit.utils import checkout, sh
+from pkgit.utils import checkout, sh, git_clone
 from pkgit.path_solved import path
-
-"""
-C:\temp_working_dir>pkgit -p oalab --ignore openalea,plantgl,lpy,mtg,setuptools,ipython --dry-run
-"""
 
 
 class Oalab(Formula):
-    version         = "0.1"  	 # Version of the dependency (not of the formula)
+    version         = "0.2"  	 # Version of the dependency (not of the formula)
     description     = "OpenAlea is an open source project primarily aimed at the plant research community."     # Description of the dependency (not of the formula)
     homepage        = "http://openalea.gforge.inria.fr/dokuwiki/doku.php"     # Url of home-page of the dependency (not of the formula)
     license         = "Cecill-C License"     # License of the dependency (not of the formula)
     authors         = "Inria, INRA, CIRAD"     # Authors of the dependency (not of the formula)
-    dependencies    = ["ipython", "openalea", "plantgl", "lpy", "mtg", "configobj"]  ## +Pandas   # List of dependencies of the formula
-    download_name   = "oalab"     # Name of the local archive
-    download_url    = "https://scm.gforge.inria.fr/svn/vplants/vplants/trunk/oalab"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
+    dependencies    = ["git", "ipython", "configobj"]  ## +Pandas   # List of dependencies of the formula
+    download_name   = "openalea"     # Name of the local archive
+    download_url    = "https://github.com/openalea/openalea"   	 # Url where to download sources (feel only if "DOWNLOAD = True")
     DOWNLOAD = BDIST_EGG = True
     
     def __init__(self,**kwargs):
@@ -46,10 +42,10 @@ class Oalab(Formula):
         self.dist_dir = path(self._get_dist_path())/"openalea"
         
     def _download(self):
-        return checkout(self.download_url, self.eggdir)
+        return git_clone(self.download_url, self.eggdir)
 
     def bdist_egg(self):
-        cmd = "python setup.py build bdist_egg -d %s"%(self.dist_dir,)
+        cmd = "python multisetup.py build bdist_egg -d %s"%(self.dist_dir,)
         print cmd
         return sh(cmd) == 0
         

@@ -22,7 +22,7 @@ mingw             5.1.4_4c     ok  but not add to PATH                         A
 mingw_rt          5.1.4_4c     ok
 mtg               1.0          ok
 numpy             1.8.0        ok
-oalab             0.1          ok
+oalab             0.2          ok *
 openalea          1.2          ok *
 opencv            2.4.8        ok
 pandas            0.13.0       ok
