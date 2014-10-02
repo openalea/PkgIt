@@ -84,7 +84,7 @@ class Pyqglviewer(Formula):
         sips = recursive_glob_as_dict(self.install_sip_dir, Pattern.sipfiles, strip_keys=True, prefix_key="sip").items()
         # examples are recursive subdirectories of pyqglviewer examples installation directory contains various types of files
         exas = recursive_glob_as_dict(self.install_exa_dir, Pattern.any, strip_keys=True, prefix_key="examples").items()        
-        lib_dirs    = {"" : qglv_.install_dll_dir}
+        lib_dirs    = {"" : str(qglv_.install_dll_dir)}
         data_files  = exas+sips+libs+pyqgl_mods
         
         # Need an other shell ???
