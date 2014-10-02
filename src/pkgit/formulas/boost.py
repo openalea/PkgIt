@@ -36,7 +36,7 @@ class Boost(Formula):
     #download_url = "http://switch.dl.sourceforge.net/project/boost/boost/1.54.0/boost_1_54_0.zip"
     version = "1.48.0"
     download_url = "http://switch.dl.sourceforge.net/project/boost/boost/1.48.0/boost_1_48_0.zip"
-    
+    dependencies = ["six"]
     download_name  = "boost.zip"
     license = "Boost Software License 1.0"
     authors = "Boost contributors"
