@@ -28,6 +28,10 @@ Or
 
 >>> pkgit -p openalea
 
+.. note::
+    If packaging failed, to continue packaging later you can add option --continue:
+    >>> pkgit -p openalea --continue [--dry-run]
+
 If one package doesn't work, you can get old package from gforge and put it inside repository C:\\temp_pkgit\\dist\\thirdpart.
 
 .. warning::
