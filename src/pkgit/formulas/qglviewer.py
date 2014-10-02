@@ -26,7 +26,8 @@ from pkgit.utils import recursive_copy, sh, Pattern
 from pkgit.path_solved import path
 
 class Qglviewer(Formula):
-    download_url = "https://gforge.inria.fr/frs/download.php/30907/libQGLViewer-2.3.17-py.tgz"
+    version = "2.3.17"
+    download_url = "https://gforge.inria.fr/frs/download.php/30907/libQGLViewer-" + version + "-py.tgz"
     download_name  = "qglviewer.tgz"
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = True
 
@@ -56,4 +57,4 @@ class Qglviewer(Formula):
         return True
 
     def extra_paths(self):
-        return self.install_dll_dir
+        return str(self.install_dll_dir)
