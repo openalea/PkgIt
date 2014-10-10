@@ -35,7 +35,7 @@ class Openalea(Formula):
     authors = "Inria, INRA, CIRAD"
     description = "OpenAlea is an open source project primarily aimed at the plant research community."
     download_name  = "OpenAlea"
-    dependencies = ["python", "ipython", "setuptools", "pywin", "mingw", "mingw_rt", "qt4", "numpy", "scipy", "matplotlib", 
+    dependencies = ["python", "ipython", "setuptools", "pywin", "mingw_rt", "qt4", "numpy", "scipy", "matplotlib", 
                   "pyqscintilla", "pillow", "pylsm", "svn", "dateutil", "ipython", "inno"]#"pylibtiff", 
     DOWNLOAD = BDIST_EGG = True
 

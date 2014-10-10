@@ -19,6 +19,6 @@
 ###############################################################################
 
 try:
-    from pkgit.path_solved import path, glob, shutil
+    from openalea.core.path import path, glob, shutil
 except ImportError:
     from path import path, glob, shutil

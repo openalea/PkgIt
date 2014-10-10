@@ -33,28 +33,53 @@ class Ann(Formula):
     license = "GNU Lesser Public License"
     authors = "Copyright (c) 1997-2010 University of Maryland and Sunil Arya and David Mount"
     description = "Windows gcc libs and headers of ANN"
-    download_name  = "ann_" + version + ".zip"
-    DOWNLOAD = False
-    UNPACK = MAKE_INSTALL = BDIST_EGG = True
+    download_name  = "ann.zip"
+    # download_name  = "ann_" + version + ".zip"
+    DOWNLOAD = UNPACK = MAKE_INSTALL = BDIST_EGG = True
     
     def unpack(self):
         ret = super(Ann, self).unpack()
-        root = str(path(self.sourcedir)/"..")
+        root = str(self.sourcedir)
+        if str(self.sourcedir).endswith('ann_%s'%self.version):
+            root = str(path(self.sourcedir)/'..')
+            # self.sourcedir = path(self.sourcedir)/'ann_%s'%self.version
+        print(root)
+
         print "Apply PATCH part1"
         apply_patch_from_string(PATCH, root=root)
         print "Apply PATCH part2"
         apply_patch_from_string(PATCH2, root=root)
-        self.sourcedir = path(self.sourcedir)/'ann_%s'%self.version
+        
+        
+        if not str(self.sourcedir).endswith('ann_%s'%self.version):
+            self.sourcedir = path(self.sourcedir)/'ann_%s'%self.version
+
         return ret
 
     def make_install(self):
-        return sh("mingw32-make win32-g++") == 0
+        # import os
+        # from pkgit.utils import in_dir
+        sh("dir")
+        # os.chdir("cd ./ann_%s"%self.version)
+
+        # sh("dir")
+        
+        # dir = "ann_%s"%self.version
+        # @in_dir(dir)
+        def compile_():
+            return sh("mingw32-make win32-g++")
+        r = compile_()
+        
+        
+        # os.chdir("..")
+        
+        return r == 0
         
     def setup(self):
-        return dict(DATA_FILES = [('doc' , [str(path(self.sourcedir)/'doc'/'ANNmanual.pdf')] )],
-                    LIB_DIRS   = {'lib' : str(path(self.sourcedir)/'lib' )},
-                    INC_DIRS   = {'include' : str(path(self.sourcedir)/'include') },
-                    BIN_DIRS   = {'bin' : str(path(self.sourcedir)/'bin') },
+        return dict(DATA_FILES = [('doc' , [str(path(self.sourcedir)/('ann_%s'%self.version)/'doc'/'ANNmanual.pdf')] )],
+                    LIB_DIRS   = {'lib' : str(path(self.sourcedir)/('ann_%s'%self.version)/'lib' )},
+                    INC_DIRS   = {'include' : str(path(self.sourcedir)/('ann_%s'%self.version)/'include') },
+                    BIN_DIRS   = {'bin' : str(path(self.sourcedir)/('ann_%s'%self.version)/'bin') },
                     )
                     
 PATCH = """diff -abur ..\ann_1.1.2/ann2fig/Makefile ./ann_1.1.2/ann2fig/Makefile
@@ -170,13 +195,13 @@ diff -abur ..\ann_1.1.2/test/Makefile ./test/Makefile
  # configuration definitions
 
 """
-PATCH2 = """diff -abur ..\ann_1.1.2/Make-config ./Make-config
---- ..\ann_1.1.2/Make-config	2012-03-22 15:37:57.958217600 +0100
-+++ ./ann_1.1.2/Make-config	2012-03-23 12:11:46.820302300 +0100
-@@ -76,6 +76,15 @@
+PATCH2 = r"""diff -abur ..\ann_1.1.2/Make-config ./Make-config
+--- ..\ann_1.1.2/Make-config	Wed Oct 01 13:49:48 2014
++++ ./ann_1.1.2/Make-config Wed Oct 01 13:53:48 2014
+@@ -76,4 +76,13 @@
  	"MAKELIB = ar ruv" \
  	"RANLIB = true"
- 
++    
 +#					Win32 using g++
 +win32-g++:
 +	$(MAKE) targets \
@@ -185,8 +210,6 @@ PATCH2 = """diff -abur ..\ann_1.1.2/Make-config ./Make-config
 +	"CFLAGS = -O3 -DANN_NO_RANDOM" \
 +	"MAKELIB = ar ruv" \
 +	"RANLIB = ranlib"
-+
+ 
  #					Mac OS X using g++
- macosx-g++:
- 	$(MAKE) targets \
 """

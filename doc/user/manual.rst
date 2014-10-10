@@ -121,6 +121,7 @@ This command will create a file my_amazing_package.py, create the main class and
 
 File my_amazing_package.py:
 ::
+
     from pkgit.formula import Formula
     
     class My_amazing_package(Formula):
@@ -140,6 +141,7 @@ This is the case for Python, Numpy, Scipy, Matplotlib, Pillow, PyOpenGl, GnuPlot
 
 Example of formula:
 ::
+
     from pkgit.formula import Formula
      
     class Numpy(Formula):
@@ -154,6 +156,7 @@ Example of formula:
 
 Typical flags:
 ::
+
     DOWNLOAD = COPY_INSTALLER = True
 
 Case 2: install only
@@ -163,6 +166,7 @@ If installer exists and you need to install dependency without packaging it. (Th
 
 Example of formula:
 ::
+
     from pkgit.formula import Formula
      
     class Inno(Formula):
@@ -177,6 +181,7 @@ Example of formula:
 
 Typical flags:
 ::
+
     DOWNLOAD = INSTALL = True
 
 Case 3: compile only
@@ -189,6 +194,7 @@ This case is really particular one. You can watch the code for SIP, PyQt... but 
 
 Typical flags:
 ::
+
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = True
 
 Case 4: package only
@@ -198,6 +204,7 @@ This is the case for Qhull, Qt4_dev.
 
 Exemple of Formula:
 ::
+
     from pkgit.formula import Formula
      
     class Qhull(Formula):
@@ -211,6 +218,7 @@ Exemple of Formula:
 
 Typical flags:
 ::
+
     DOWNLOAD = UNPACK = BDIST_EGG = True
 
 Case 5: package and post-install
@@ -220,6 +228,7 @@ This is the case for Boost, CMake.
 
 Exemple of Formula:
 ::
+
     from pkgit.formula import Formula
      
     class CMake(Formula):
@@ -233,6 +242,7 @@ Exemple of Formula:
 
 Typical flags:
 ::
+
     DOWNLOAD = UNPACK = BDIST_EGG = INSTALL_EGG = True
 
 Case 6: "General case" compile and package
@@ -242,6 +252,7 @@ This is the case for PyQGLViewer, SCons, RPy2, Qt4.
 
 Exemple of Formula:
 ::
+
     import sys, os
     from pkgit.utils import sh
     from pkgit.formula import Formula
@@ -273,13 +284,15 @@ Exemple of Formula:
 
 Typical flags:
 ::
+
     DOWNLOAD = UNPACK = CONFIGURE = MAKE = MAKE_INSTALL = BDIST_EGG = True
 
 Case 7: Meta-packages hosted on gforge: openalea/vplants/alinea
---------------------------------
+---------------------------------------------------------------
 
 This is the case for OpenAlea, Vplants, Alinea.
 ::
+
     from pkgit.formula import Formula
     from pkgit.utils import sh, checkout
      
@@ -303,6 +316,7 @@ This is the case for OpenAlea, Vplants, Alinea.
 
 Typical flags:
 ::
+
     DOWNLOAD = BDIST_EGG = True
 
 Specials methods
@@ -320,6 +334,7 @@ This is the case for ann, rpy2.
 
 For example for rpy2:
 ::
+
     from pkgit.formula import Formula
     from pkgit.utils import apply_patch_from_string
 
@@ -344,6 +359,7 @@ Overload method extra_path().
 
 Exemple in SIP Formula:
 ::
+
     from path import path
     from pkgit.formula import Formula
     
@@ -362,6 +378,7 @@ Overload method extra_python_paths().
 
 Exemple in SIP Formula:
 ::
+
     from path import path
     from pkgit.formula import Formula
     
@@ -446,6 +463,7 @@ Parameters
 
 When you create a new formula, you have to fill some informations:
 ::
+
     version         = "1.0"  # Version of the dependency (not of the formula)
     description     = "This is a beautiful package"     # Description of the dependency (not of the formula)
     homepage        = "http://beautiful_package.com"     # Url of home-page of the dependency (not of the formula)

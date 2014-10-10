@@ -38,7 +38,9 @@ logger = logging.getLogger(__name__)
 
 debug = logger.debug
 info = logger.info
-warning = logger.warning
+def warn(obj):
+    print(obj)
+warning = warn
 
 class NullHandler(logging.Handler):
   """ Copied from Python 2.7 to avoid getting

@@ -30,10 +30,10 @@ from re import compile as re_compile
 import re
 
 class Boost(Formula):
-    ## 1.54.0 make an error during "make_install()" and seems to not work (ex : cgal)...
+    ## 1.56.0 make an error during "make_install()" and seems to not work (ex : cgal)...
     ## So use 1.48.0
-    #version = "1.54.0"
-    #download_url = "http://switch.dl.sourceforge.net/project/boost/boost/1.54.0/boost_1_54_0.zip"
+    #version = "1.56.0"
+    #download_url = "http://switch.dl.sourceforge.net/project/boost/boost/1.56.0/boost_1_56_0.zip"
     version = "1.48.0"
     download_url = "http://switch.dl.sourceforge.net/project/boost/boost/1.48.0/boost_1_48_0.zip"
     dependencies = ["six"]
@@ -59,7 +59,8 @@ class Boost(Formula):
             #mingw_path = r"c:/Python27/Lib/site-packages/mingw-5.2-py2.7-win32.egg/" 
             #mingw_path = r"c:/MinGW/" 
             #if sh("bootstrap.bat mingw --toolset-root=%s"%(mingw_path)) != 0:
-            if sh("bootstrap.bat mingw") != 0:
+            mingw_path = r"C:\Python27\Lib\site-packages\Mingw-5.1.4_4c-py2.7-win32.egg"
+            if sh("bootstrap.bat mingw --toolset-root=%s"%(mingw_path)) != 0:
                 return False
             else:
                 # The Bootstrapper top-level script ignores that gcc
